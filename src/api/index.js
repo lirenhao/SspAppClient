@@ -1,0 +1,174 @@
+import Vue from 'vue'
+import 'es6-promise/auto'
+import axios from 'axios'
+import {
+  base64
+} from 'vux'
+import store from '../vuex/store'
+import router from '../router'
+import urls from './urls'
+
+axios.interceptors.request.use(
+  config => {
+    store.commit('UPDATE_LOADING', true)
+    if (window.localStorage.token && config.url !== urls.token) config.headers.common['Authorization'] = 'bearer ' + window.localStorage.token
+    return config
+  },
+  err => {
+    console.log('request', err)
+    store.commit('UPDATE_LOADING', false)
+    return Promise.reject(err)
+  })
+
+axios.interceptors.response.use(
+  response => {
+    store.commit('UPDATE_LOADING', false)
+    return response
+  },
+  err => {
+    store.commit('UPDATE_LOADING', false)
+    if (err.response) {
+      switch (err.response.status) {
+        case 401:
+          router.push({
+            name: 'login'
+          })
+          break
+        case 403:
+          Vue.$vux.toast.show({
+            type: 'warn',
+            position: 'default',
+            text: err.response.data.respMsg
+          })
+          break
+        default:
+          console.log(err.response.status, err.response.data)
+      }
+    } else {
+      Vue.$vux.toast.show({
+        type: 'warn',
+        position: 'default',
+        text: '网络异常'
+      })
+    }
+    return Promise.reject(err)
+  })
+
+const login = (userName, passWord) => {
+  store.commit('UPDATE_LOADING', true)
+  return axios.post(urls.token, {}, {
+    headers: {
+      authorization: 'Basic ' + base64.encode(userName + ':' + passWord)
+    },
+    params: {
+      grant_type: 'client_credentials'
+    }
+  })
+    .then((resp) => {
+      if (resp.status === 200) {
+        window.localStorage.setItem('token', resp.data.access_token)
+        window.localStorage.setItem('merNo', userName.split('@')[0])
+        router.go(-1)
+      } else {
+        store.commit('UPDATE_LOADING', false)
+        Vue.$vux.toast.show({
+          type: 'warn',
+          position: 'default',
+          text: resp.status
+        })
+      }
+    })
+    .catch(err => {
+      store.commit('UPDATE_LOADING', false)
+      if (err.response && err.response.status === 401) {
+        Vue.$vux.toast.show({
+          type: 'warn',
+          position: 'default',
+          text: '用户名或密码错误'
+        })
+      } else {
+        Vue.$vux.toast.show({
+          type: 'warn',
+          position: 'default',
+          text: '登录异常'
+        })
+      }
+    })
+}
+
+const userInfo = () => {
+  store.commit('UPDATE_LOADING', true)
+  return axios.get(urls.userInfo)
+    .then(resp => {
+      if (resp.status === 200) {
+        return resp.data
+      } else {
+        store.commit('UPDATE_LOADING', false)
+        Vue.$vux.toast.show({
+          type: 'warn',
+          position: 'default',
+          text: resp.status
+        })
+      }
+    })
+}
+
+const userUpdatePwd = (oldPwd, newPwd) => {
+  store.commit('UPDATE_LOADING', true)
+  // TODO 密码加密
+  return axios.put(urls.userUpdatePwd, {oldPwd, newPwd})
+    .then(resp => {
+      if (resp.status === 200) {
+        return resp.data
+      } else {
+        store.commit('UPDATE_LOADING', false)
+        Vue.$vux.toast.show({
+          type: 'warn',
+          position: 'default',
+          text: resp.status
+        })
+      }
+    })
+}
+
+const subMer = () => {
+  store.commit('UPDATE_LOADING', true)
+  return axios.get(urls.subMer)
+    .then(resp => {
+      if (resp.status === 200) {
+        return resp.data
+      } else {
+        store.commit('UPDATE_LOADING', false)
+        Vue.$vux.toast.show({
+          type: 'warn',
+          position: 'default',
+          text: resp.status
+        })
+      }
+    })
+}
+
+const tranList = (merNo, tranDate) => {
+  store.commit('UPDATE_LOADING', true)
+  return axios.get(`${urls.tranList}/${merNo}`, {params: {tranDate}})
+    .then(resp => {
+      if (resp.status === 200) {
+        return resp.data
+      } else {
+        store.commit('UPDATE_LOADING', false)
+        Vue.$vux.toast.show({
+          type: 'warn',
+          position: 'default',
+          text: resp.status
+        })
+      }
+    })
+}
+
+export default {
+  login,
+  userInfo,
+  userUpdatePwd,
+  subMer,
+  tranList
+}

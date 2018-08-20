@@ -1,0 +1,65 @@
+import Vue from 'vue'
+
+export default {
+  // Application Constructor
+  initialize: function () {
+    document.addEventListener('deviceready', this.onDeviceReady.bind(this), false)
+  },
+
+  // deviceready Event Handler
+  //
+  // Bind any cordova events here. Common events are:
+  // 'pause', 'resume', etc.
+  onDeviceReady: function () {
+    this.receivedEvent('deviceready')
+  },
+
+  // Update DOM on a Received Event
+  receivedEvent: function (id) {
+    console.log('Received Event: ' + id)
+    const push = PushNotification.init({
+      android: {},
+      browser: {
+        pushServiceURL: 'http://push.api.phonegap.com/v1/push'
+      },
+      ios: {
+        alert: true,
+        badge: true,
+        sound: true
+      },
+      windows: {}
+    })
+
+    push.on('registration', (data) => {
+      // data.registrationId
+      console.log('registration', data)
+      Vue.$vux.alert.show({
+        title: 'registration',
+        content: data.registrationId
+      })
+    })
+
+    push.on('notification', (data) => {
+      // data.message,
+      // data.title,
+      // data.count,
+      // data.sound,
+      // data.image,
+      // data.additionalData
+      console.log('notification', data)
+      Vue.$vux.alert.show({
+        title: 'notification',
+        content: JSON.stringify(data)
+      })
+    })
+
+    push.on('error', (e) => {
+      // e.message
+      console.log('error', e)
+      Vue.$vux.alert.show({
+        title: 'error',
+        content: e.message
+      })
+    })
+  }
+}

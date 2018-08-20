@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "850507717323",
+    "firebase_url": "https://lirenhao0902.firebaseio.com",
+    "project_id": "lirenhao0902",
+    "storage_bucket": "lirenhao0902.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:850507717323:android:38c41105e2742797",
+        "android_client_info": {
+          "package_name": "com.yada.sg.ssp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "850507717323-c25m5oil14e07jrhm821ivki86n3tqmn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgjDH-tJh5dEtcEmQLspEKYyVd3X3c1Rs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

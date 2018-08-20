@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>850507717323-6fc31hjbnt4gi645d71mhimcuun7ohii.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.850507717323-6fc31hjbnt4gi645d71mhimcuun7ohii</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBQUpv4uHaSYbcTWBH7Ka-z9QBx2Xv03EU</string>
+	<key>GCM_SENDER_ID</key>
+	<string>850507717323</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.yada.sg.ssp</string>
+	<key>PROJECT_ID</key>
+	<string>lirenhao0902</string>
+	<key>STORAGE_BUCKET</key>
+	<string>lirenhao0902.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true></true>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<false></false>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:850507717323:ios:38c41105e2742797</string>
+	<key>DATABASE_URL</key>
+	<string>https://lirenhao0902.firebaseio.com</string>
+</dict>
+</plist>
