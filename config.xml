@@ -27,6 +27,7 @@
     </platform>
     <plugin name="cordova-plugin-device" spec="^2.0.2" />
     <plugin name="phonegap-plugin-push" spec="^2.2.3" />
-    <engine name="android" spec="~7.1.1" />
-    <engine name="ios" spec="~4.5.5" />
+    <plugin name="cordova-plugin-sqlite-2" spec="^1.0.5" />
+    <engine name="android" spec="^7.1.1" />
+    <engine name="ios" spec="^4.5.5" />
 </widget>

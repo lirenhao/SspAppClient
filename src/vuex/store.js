@@ -10,7 +10,8 @@ const state = {
     merNo: window.localStorage.merNo,
     tranDate: dateFormat(new Date(), 'YYYY-MM-DD')
   },
-  tranList: []
+  tranList: [],
+  pushList: []
 }
 
 export default new Vuex.Store({
@@ -24,6 +25,9 @@ export default new Vuex.Store({
     },
     UPDATE_TRAN_LIST (state, status) {
       state.tranList = [...status]
+    },
+    UPDATE_PUSH_LIST (state, status) {
+      state.pushList = status
     }
   }
 })
