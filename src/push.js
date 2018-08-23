@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import store from './vuex/store'
 
 export default {
   // Application Constructor
@@ -11,8 +12,6 @@ export default {
   // Bind any cordova events here. Common events are:
   // 'pause', 'resume', etc.
   onDeviceReady: function () {
-    // {"available":true,"platform":"Android","version":"7.0","uuid":"7605eaf2ebd482c7","cordova":"7.0.0","model":"Meizu S6","manufacturer":"Meizu","isVirtual":false,"serial":"712QKDS228JP2"}
-    console.log('device', device)
     this.receivedEvent('deviceready')
   },
 
@@ -30,12 +29,8 @@ export default {
     })
 
     push.on('registration', (data) => {
-      // data.registrationId
-      console.log('registration', data)
-      Vue.$vux.alert.show({
-        title: 'registration',
-        content: data.registrationId
-      })
+      // {"available":true,"platform":"Android","version":"7.0","uuid":"7605eaf2ebd482c7","cordova":"7.0.0","model":"Meizu S6","manufacturer":"Meizu","isVirtual":false,"serial":"712QKDS228JP2"}
+      window.localStorage.setItem('device', {...device, id: data.registrationId, type: data.registrationType})
     })
 
     push.on('notification', (data) => {
@@ -45,11 +40,11 @@ export default {
       // data.sound,
       // data.image,
       // data.additionalData
-      console.log('notification', data)
-      Vue.$vux.alert.show({
-        title: 'notification',
-        content: JSON.stringify(data)
-      })
+      const trans = window.localStorage.trans || []
+      trans.filter(tran => tran.tranDate === data.additionalData.tranDate)
+      window.localStorage.setItem('trans', [...trans, data.additionalData])
+      store.commit('UPDATE_PUSH_LIST', window.localStorage.trans)
+      window.localStorage.device.type === 'APNS' || push.finish()
     })
 
     push.on('error', (e) => {
