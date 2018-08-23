@@ -21,15 +21,12 @@ export default {
     console.log('Received Event: ' + id)
     const push = PushNotification.init({
       android: {},
-      browser: {
-        pushServiceURL: 'http://push.api.phonegap.com/v1/push'
-      },
       ios: {
         alert: true,
         badge: true,
-        sound: true
-      },
-      windows: {}
+        sound: true,
+        clearBadge: true
+      }
     })
 
     push.on('registration', (data) => {
