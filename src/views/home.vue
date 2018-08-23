@@ -16,6 +16,7 @@
           <cell title="个人中心" is-link></cell>
         </div>
       </group>
+      {{trans}}
     </div>
   </div>
 </template>
@@ -23,6 +24,7 @@
 import {XHeader, Group, Cell} from 'vux'
 import {dateFormat} from 'vux'
 import api from '../api'
+import localforage from '../localforage'
 
 export default {
   name: 'home',
@@ -34,6 +36,9 @@ export default {
   created: function() {
     if (!window.localStorage.token) {
       this.$router.push({name: 'login', params: {isClear: false}})
+    } else {
+      localforage(window.localStorage.merNo).getItem('trans')
+      .then(trans => this.trans = JSON.stringify(trans))
     }
   },
   data: function() {
@@ -41,6 +46,7 @@ export default {
       isShowNav: this.$route.meta.isShowNav,
       title: this.$route.meta.title,
       showBack: this.$route.meta.showBack,
+      trans: ""
     }
   },
   methods: {
