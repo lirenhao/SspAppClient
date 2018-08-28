@@ -4,23 +4,24 @@
               :title="$t(title)" :left-options="{showBack}">
     </x-header>
     <div>
-      <grid>
+      <grid class="home-content">
         <div @click="goSetAmt">
           <grid-item :label="$t('Collection code')">
-            <img slot="icon" src="../assets/vux_logo.png">
+            <img slot="icon" src="../assets/code-icon.png">
           </grid-item>
         </div>
-        <div @click="goTranSearch">
+        <div  @click="goTranSearch">
           <grid-item :label="$t('Transaction inquiry')">
-            <img slot="icon" src="../assets/vux_logo.png">
+            <img slot="icon" src="../assets/seach-icon.png">
           </grid-item>
         </div>
         <div @click="goUserInfo">
           <grid-item :label="$t('Personal center')">
-            <img slot="icon" src="../assets/vux_logo.png">
-          </grid-item>
+            <img slot="icon" src="../assets/user-icon.png">
+        </grid-item>
         </div>
       </grid>
+      {{trans}}
     </div>
   </div>
 </template>
@@ -93,5 +94,8 @@ export default {
 .logo {
   width: 100px;
   height: 100px;
+}
+.home-content .weui-grid:before {
+  border-right: none;
 }
 </style>
