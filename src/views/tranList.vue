@@ -2,11 +2,11 @@
   <div>
     <x-header style="width:100%;position:absolute;left:0;top:0;z-index:100;"
               :title="title" :left-options="{showBack}">
-      <div slot="right" @click="goTranSearch">筛选</div>
+      <div slot="right" @click="goTranSearch">{{$t('Tran search select')}}</div>
     </x-header>
     <group-title>{{tranDate + ';' + merNo}}</group-title>
     <div v-if="tranList.length === 0">
-      <divider>No query to data</divider>
+      <divider>{{$t('Tran no query to data')}}</divider>
     </div>
     <div v-else>
       <group v-for="(item, index) in tranList" @click.native="showInfo(item)"
@@ -16,6 +16,16 @@
     </div>
   </div>
 </template>
+
+<i18n>
+  Tran search select:
+    en: Select
+    zh-CN: 筛选
+  Tran no query to data:
+    en: No query to data
+    zh-CN: 没有查询到数据
+</i18n>
+
 <script>
 import {XHeader, GroupTitle, Divider, Group, CellFormPreview} from 'vux';
 import {mapState} from 'vuex'

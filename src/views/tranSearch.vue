@@ -1,16 +1,27 @@
 <template>
   <div>
     <x-header style="width:100%;position:absolute;left:0;top:0;z-index:100;"
-              :title="title" :left-options="{showBack}">
-      <div slot="right" @click="goTranList">确认</div>
+              :title="$t(title)" :left-options="{showBack}">
+      <div slot="right" @click="goTranList">{{$t('vux.calendar.confirm_text')}}</div>
     </x-header>
-    <group-title>Transaction data</group-title>
+    <group-title>{{$t('Transaction date')}}</group-title>
     <inline-calendar v-model="tranDate" disable-future>
+      <div solt="each-day">afda</div>
     </inline-calendar>
-    <group-title>Sub merchant</group-title>
+    <group-title>{{$t('Sub merchant')}}</group-title>
     <picker :data="[merList]" v-model="merNos"></picker>
   </div>
 </template>
+
+<i18n>
+  Transaction date:
+    en: Transaction date
+    zh-CN: 交易日期
+  Sub merchant:
+    en: Sub merchant
+    zh-CN: 子级商户
+</i18n>
+
 <script>
 import {XHeader, InlineCalendar, GroupTitle, Picker, Group, Radio, XButton} from 'vux';
 import api from '../api';
