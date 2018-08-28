@@ -28,7 +28,7 @@ export default new Router({
       props: true,
       meta: {
         isShowNav: true,
-        title: '首页',
+        title: 'home',
         showBack: false
       }
     },
@@ -39,7 +39,7 @@ export default new Router({
       props: true,
       meta: {
         isShowNav: true,
-        title: '个人中心',
+        title: 'userInfo',
         showBack: true
       }
     },
@@ -50,7 +50,7 @@ export default new Router({
       props: true,
       meta: {
         isShowNav: true,
-        title: '修改密码',
+        title: 'updatePwd',
         showBack: true
       }
     },
@@ -61,7 +61,7 @@ export default new Router({
       props: true,
       meta: {
         isShowNav: true,
-        title: '交易查询',
+        title: 'tranList',
         showBack: true
       }
     },
@@ -72,7 +72,7 @@ export default new Router({
       props: true,
       meta: {
         isShowNav: true,
-        title: '交易查询',
+        title: 'tranList',
         showBack: true
       }
     },
@@ -83,7 +83,7 @@ export default new Router({
       props: true,
       meta: {
         isShowNav: true,
-        title: '交易详情',
+        title: 'tranInfo',
         showBack: true
       }
     }

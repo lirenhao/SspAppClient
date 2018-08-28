@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import {dateFormat} from 'vux'
+import vuexI18n from 'vuex-i18n'
+import vuxLocales from '../locales/all.yml'
+import componentsLocales from '../locales/components.yml'
 
 Vue.use(Vuex)
 
@@ -14,7 +17,10 @@ const state = {
   pushList: []
 }
 
-export default new Vuex.Store({
+const store = new Vuex.Store({
+  modules: {
+    i18n: vuexI18n.store
+  },
   state,
   mutations: {
     UPDATE_LOADING (state, status) {
@@ -31,3 +37,16 @@ export default new Vuex.Store({
     }
   }
 })
+
+Vue.use(vuexI18n.plugin, store)
+
+const finalLocales = {
+  'en': {...vuxLocales['en'], ...componentsLocales['en']},
+  'zh-CN': {...vuxLocales['zh-CN'], ...componentsLocales['zh-CN']}
+}
+
+for (let i in finalLocales) {
+  Vue.i18n.add(i, finalLocales[i])
+}
+
+export default store

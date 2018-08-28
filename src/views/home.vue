@@ -1,7 +1,7 @@
 <template>
   <div>
     <x-header style="width:100%;position:absolute;left:0;top:0;z-index:100;"
-              :title="title" :left-options="{showBack}">
+              :title="$t(title)" :left-options="{showBack}">
     </x-header>
     <div>
       <grid>
@@ -16,24 +16,34 @@
         </grid-item>
       </grid>
       <div @click="goTranSearch">
-        <cell title="收款码"></cell>
+        <cell :title="$t('Collection code')"></cell>
       </div>
-        <div @click="goTranSearch">
-          <cell title="交易查询"></cell>
-        </div>
-        <div @click="goUserInfo">
-          <cell title="个人中心"></cell>
-        </div>
-      </group>
+      <div @click="goTranSearch">
+        <cell :title="$t('Transaction inquiry')"></cell>
+      </div>
+      <div @click="goUserInfo">
+        <cell :title="$t('Personal center')"></cell>
+      </div>
       {{trans}}
     </div>
   </div>
 </template>
+<i18n>
+  Collection code:
+    en: Collection code
+    zh-CN: 收款码
+  Transaction inquiry:
+    en: Transaction inquiry
+    zh-CN: 交易查询
+  Personal center:
+    en: Personal center
+    zh-CN: 个人中心
+</i18n>
 <script>
-import {XHeader, Group, Cell, Grid, GridItem, } from 'vux'
-import {dateFormat} from 'vux'
-import api from '../api'
-import localforage from '../localforage'
+import {XHeader, Group, Cell, Grid, GridItem} from 'vux';
+import {dateFormat} from 'vux';
+import api from '../api';
+import localforage from '../localforage';
 
 export default {
   name: 'home',
@@ -46,10 +56,11 @@ export default {
   },
   created: function() {
     if (!window.localStorage.token) {
-      this.$router.push({name: 'login', params: {isClear: false}})
+      this.$router.push({name: 'login', params: {isClear: false}});
     } else {
-      localforage(window.localStorage.merNo).getItem('trans')
-      .then(trans => this.trans = JSON.stringify(trans))
+      localforage(window.localStorage.merNo)
+        .getItem('trans')
+        .then(trans => (this.trans = JSON.stringify(trans)));
     }
   },
   data: function() {
@@ -57,21 +68,23 @@ export default {
       isShowNav: this.$route.meta.isShowNav,
       title: this.$route.meta.title,
       showBack: this.$route.meta.showBack,
-      trans: ""
-    }
+      trans: '',
+    };
   },
   methods: {
     goTranSearch() {
-      this.$store.commit('UPDATE_TRAN_QUERY', {tranDate: dateFormat(new Date(), 'YYYY-MM-DD')})
-      this.$router.push('/tranSearch')
+      this.$store.commit('UPDATE_TRAN_QUERY', {
+        tranDate: dateFormat(new Date(), 'YYYY-MM-DD'),
+      });
+      this.$router.push('/tranSearch');
     },
     goUserInfo() {
       api.userInfo().then(data => {
-        this.$router.push('/userInfo')
-      })
+        this.$router.push('/userInfo');
+      });
     },
   },
-}
+};
 </script>
 
 <style scoped>

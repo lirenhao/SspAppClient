@@ -45,6 +45,10 @@ let webpackConfig = {
         options: vueLoaderConfig
       },
       {
+        test: /\.(yaml|yml)$/,
+        loader: 'js-yaml-loader'
+      },
+      {
         test: /\.js$/,
         loader: 'babel-loader',
         include: [resolve('src'), resolve('test')]
@@ -85,6 +89,13 @@ module.exports = vuxLoader.merge(webpackConfig, {
     {
       name: 'less-theme',
       path: 'src/styles/theme.less' // 相对项目根目录路径
+    },
+    {
+      name: 'i18n',
+      vuxStaticReplace: false,
+      staticReplace: false,
+      extractToFiles: 'src/locales/components.yml',
+      localeList: ['en', 'zh-CN']
     },
     {
       name: 'duplicate-style',
