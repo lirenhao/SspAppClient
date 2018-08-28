@@ -5,26 +5,22 @@
     </x-header>
     <div>
       <grid>
-        <grid-item label="Grid">
-          <img slot="icon" src="../assets/vux_logo.png">
-        </grid-item>
-        <grid-item label="Grid">
-          <img slot="icon" src="../assets/vux_logo.png">
-        </grid-item>
-        <grid-item label="Grid">
-          <img slot="icon" src="../assets/vux_logo.png">
-        </grid-item>
+        <div @click="goSetAmt">
+          <grid-item :label="$t('Collection code')">
+            <img slot="icon" src="../assets/vux_logo.png">
+          </grid-item>
+        </div>
+        <div @click="goTranSearch">
+          <grid-item :label="$t('Transaction inquiry')">
+            <img slot="icon" src="../assets/vux_logo.png">
+          </grid-item>
+        </div>
+        <div @click="goUserInfo">
+          <grid-item :label="$t('Personal center')">
+            <img slot="icon" src="../assets/vux_logo.png">
+          </grid-item>
+        </div>
       </grid>
-      <div @click="goTranSearch">
-        <cell :title="$t('Collection code')"></cell>
-      </div>
-      <div @click="goTranSearch">
-        <cell :title="$t('Transaction inquiry')"></cell>
-      </div>
-      <div @click="goUserInfo">
-        <cell :title="$t('Personal center')"></cell>
-      </div>
-      {{trans}}
     </div>
   </div>
 </template>
@@ -72,6 +68,9 @@ export default {
     };
   },
   methods: {
+    goSetAmt() {
+      this.$router.push('/setAmt');
+    },
     goTranSearch() {
       this.$store.commit('UPDATE_TRAN_QUERY', {
         tranDate: dateFormat(new Date(), 'YYYY-MM-DD'),

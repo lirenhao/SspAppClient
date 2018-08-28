@@ -7,6 +7,7 @@ import UpdatePwd from '../views/updatePwd'
 import TranSearch from '../views/tranSearch'
 import TranList from '../views/tranList'
 import TranInfo from '../views/tranInfo'
+import SetAmt from '../views/setAmt'
 
 Vue.use(Router)
 
@@ -84,6 +85,17 @@ export default new Router({
       meta: {
         isShowNav: true,
         title: 'tranInfo',
+        showBack: true
+      }
+    },
+    {
+      path: '/setAmt',
+      name: 'setAmt',
+      component: SetAmt,
+      props: true,
+      meta: {
+        isShowNav: true,
+        title: 'setAmt',
         showBack: true
       }
     }
