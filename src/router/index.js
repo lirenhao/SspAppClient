@@ -8,6 +8,7 @@ import TranSearch from '../views/tranSearch'
 import TranList from '../views/tranList'
 import TranInfo from '../views/tranInfo'
 import SetAmt from '../views/setAmt'
+import CreateCode from '../views/createCode'
 
 Vue.use(Router)
 
@@ -96,6 +97,17 @@ export default new Router({
       meta: {
         isShowNav: true,
         title: 'setAmt',
+        showBack: true
+      }
+    },
+    {
+      path: '/createCode',
+      name: 'createCode',
+      component: CreateCode,
+      props: true,
+      meta: {
+        isShowNav: true,
+        title: 'createCode',
         showBack: true
       }
     }

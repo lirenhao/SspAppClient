@@ -6,6 +6,7 @@ en:
   tranList: Transaction inquiry
   tranInfo: Transaction Details
   setAmt: Set amount
+  createCode: Collection code
   Collection code: Collection code
   Transaction inquiry: Transaction inquiry
   Personal center: Personal center
@@ -20,6 +21,7 @@ zh-CN:
   tranList: 交易查询
   tranInfo: 交易详情
   setAmt: 设置金额
+  createCode: 收款码
   Collection code: 收款码
   Transaction inquiry: 交易查询
   Personal center: 个人中心

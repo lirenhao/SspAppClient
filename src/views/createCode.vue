@@ -3,12 +3,10 @@
     <x-header style="width:100%;position:absolute;left:0;top:0;z-index:100;"
               :title="$t(title)" :left-options="{showBack}">
     </x-header>
-    <group :title="$t('Payment amount')">
-      <x-input :placeholder="$t('Please enter the payment amount')">
-        <div slot="label">￥</div>
-      </x-input>
-      <x-button type="primary" @click.native="goCreateCode">{{$t('Generate QR code')}}</x-button>
-    </group>
+    <div style="text-align:center;margin-top:15px;">
+      <qrcode value="afdkajf;lakd;lkafd;lak;lf" type="img"></qrcode>
+      <span>订单提交成功,等待用户扫描...</span>
+    </div>
   </div>
 </template>
 <i18n>
@@ -23,14 +21,14 @@
     zh-CN: 生成二维码
 </i18n>
 <script>
-import {XHeader, Group, XInput, XButton} from 'vux';
+import {XHeader, Qrcode, XInput, XButton} from 'vux';
 import api from '../api';
 
 export default {
-  name: 'setAmt',
+  name: 'createCode',
   components: {
     XHeader,
-    Group,
+    Qrcode,
     XInput,
     XButton
   },
@@ -41,14 +39,6 @@ export default {
       },
       set (value) {
         this.$store.commit('UPDATE_TRAN_QUERY', {merNo: value[0]})
-      }
-    },
-    tranDate: {
-      get () {
-        return this.$store.state.tranQuery.tranDate
-      },
-      set (value) {
-        this.$store.commit('UPDATE_TRAN_QUERY', {tranDate: value})
       }
     }
   },
@@ -68,7 +58,7 @@ export default {
   },
   methods: {
     goCreateCode() {
-      this.$router.push('/createCode');
+    
     },
   },
 };
