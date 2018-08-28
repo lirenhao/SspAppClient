@@ -2,23 +2,37 @@
   <div>
     <x-header style="width:100%;position:absolute;left:0;top:0;z-index:100;"
               :title="title" :left-options="{showBack}">
-      <div slot="right" @click="goUpdatePwd">确认</div>
     </x-header>
     <div>
       <group title="原密码">
-        <x-input v-model="oldPwd" type="password" placeholder="填写原密码" required></x-input>
+        <x-input v-model="oldPwd" type="password" :placeholder="$t('Fill in the old password')" required></x-input>
       </group>
       <group title="新密码">
-        <x-input v-model="newPwd" type="password" placeholder="填写新密码" required></x-input>
+        <x-input v-model="newPwd" type="password" :placeholder="$t('Fill in the new password')" required></x-input>
       </group>
       <group title="确认密码">
-        <x-input v-model="valiPwd" type="password" placeholder="再次填写确认" required></x-input>
+        <x-input v-model="valiPwd" type="password" :placeholder="$t('Fill in again to confirm')" required></x-input>
       </group>
+      <x-button type="primary" @click.native="goUpdatePwd">{{$t('Confirm the changes')}}</x-button>
     </div>
   </div>
 </template>
+<i18n>
+  Fill in the old password:
+    en: Fill in the old password
+    zh-CN: 填写原密码
+  Fill in the new password:
+    en: Fill in the new password
+    zh-CN: 填写新密码
+  Fill in again to confirm:
+    en: Fill in again to confirm
+    zh-CN: 再次填写确认
+  Confirm the changes:
+    en: Confirm the changes
+    zh-CN: 确认修改
+</i18n>
 <script>
-import {XHeader, Group, XInput} from 'vux';
+import {XHeader, Group, XInput, XButton} from 'vux';
 import api from '../api';
 
 export default {
@@ -27,6 +41,7 @@ export default {
     XHeader,
     Group,
     XInput,
+    XButton,
   },
   created: function() {
     if (!window.localStorage.token) {
