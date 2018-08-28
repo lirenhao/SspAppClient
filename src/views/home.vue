@@ -4,16 +4,25 @@
               :title="title" :left-options="{showBack}">
     </x-header>
     <div>
-      <div class="vux-demo">
-        <img class="logo" src="../assets/vux_logo.png">
-        <h1>SSP</h1>
+      <grid>
+        <grid-item label="Grid">
+          <img slot="icon" src="../assets/vux_logo.png">
+        </grid-item>
+        <grid-item label="Grid">
+          <img slot="icon" src="../assets/vux_logo.png">
+        </grid-item>
+        <grid-item label="Grid">
+          <img slot="icon" src="../assets/vux_logo.png">
+        </grid-item>
+      </grid>
+      <div @click="goTranSearch">
+        <cell title="收款码"></cell>
       </div>
-      <group>
         <div @click="goTranSearch">
-          <cell title="交易查询" is-link></cell>
+          <cell title="交易查询"></cell>
         </div>
         <div @click="goUserInfo">
-          <cell title="个人中心" is-link></cell>
+          <cell title="个人中心"></cell>
         </div>
       </group>
       {{trans}}
@@ -21,7 +30,7 @@
   </div>
 </template>
 <script>
-import {XHeader, Group, Cell} from 'vux'
+import {XHeader, Group, Cell, Grid, GridItem, } from 'vux'
 import {dateFormat} from 'vux'
 import api from '../api'
 import localforage from '../localforage'
@@ -32,6 +41,8 @@ export default {
     XHeader,
     Group,
     Cell,
+    Grid,
+    GridItem,
   },
   created: function() {
     if (!window.localStorage.token) {

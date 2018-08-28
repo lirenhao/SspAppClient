@@ -40,6 +40,6 @@
   @import '~vux/src/styles/reset.less';
 
   body {
-    background-color: #fbf9fe;
+    background-color: #f9f9f9;
   }
 </style>
