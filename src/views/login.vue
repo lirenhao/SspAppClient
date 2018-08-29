@@ -3,12 +3,12 @@
     <img slot="icon" src="../assets/logo.png" class="logo">
     <div class="login-box">
       <div class="login-input">
-        <x-input class="text-box" title="交易号" v-model="userName" placeholder="请输入交易号">
+        <x-input class="text-box" title="商户号" v-model="merNo" placeholder="请输入商户号">
           <x-icon style="fill: #fff;" slot="label" type="compose" />
         </x-input>
       </div>
       <div class="login-input">
-        <x-input class="text-box" title="用户" v-model="userName" placeholder="请输入用户名">
+        <x-input class="text-box" title="用户" v-model="loginName" placeholder="请输入用户名">
           <x-icon style="fill: #fff;" slot="label" type="person" />
         </x-input>
       </div>
@@ -43,16 +43,18 @@
     },
     data: function () {
       return {
-        userName: '',
+        merNo: '',
+        loginName: '',
         passWord: ''
       }
     },
     methods: {
       click() {
-        const userName = this.$data.userName
+        const merNo = this.$data.merNo
+        const loginName = this.$data.loginName
         const passWord = this.$data.passWord
-        if (userName !== '' && passWord !== '') {
-          api.login(userName, passWord)
+        if (merNo !== '' && loginName !== '' && passWord !== '') {
+          api.login(`${merNo}@${loginName}`, passWord)
         } else {
           this.$vux.toast.show({
             type: 'warn',
