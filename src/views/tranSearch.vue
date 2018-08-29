@@ -4,7 +4,7 @@
               :title="$t(title)" :left-options="{showBack}">
       <div slot="right" @click="goTranList">{{$t('vux.calendar.confirm_text')}}</div>
     </x-header>
-    <group-title>{{$t('Transaction date')}}</group-title>
+    <!--<group-title>{{$t('Transaction date')}}</group-title>-->
     <inline-calendar v-model="tranDate" disable-future>
       <div solt="each-day">afda</div>
     </inline-calendar>
@@ -59,7 +59,7 @@ export default {
     if (!window.localStorage.token) {
       this.$router.push({name: 'login', params: {isClear: false}});
     } else {
-      api.subMer().then(data => { 
+      api.subMer().then(data => {
         this.merList = Object.keys(data).map(key => ({value: key, name: data[key]}))
       }).catch(() => {this.merList = this.merNos});
     }
@@ -84,4 +84,14 @@ export default {
 </script>
 
 <style scoped>
+.vux-picker {
+  width: 100%;
+  position: absolute !important;
+  bottom: 0 !important;
+}
+.weui-cells__title {
+  position: absolute;
+  bottom: 240px;
+  font-size: 12px;
+  }
 </style>

@@ -5,10 +5,15 @@
     </x-header>
     <div>
       <div class="vux-demo">
-        <img class="logo" src="../assets/vux_logo.png">
-        <h1>SSP</h1>
+        <img slot="icon" src="../assets/mine.png" class="mine">
+        <img slot="icon" src="../assets/user.png" class="user">
+        <h4>summer</h4>
+        <p>104220948230412</p>
       </div>
-      <group>
+      <group class="mine-list">
+        <div @click="updatePwd">
+          <cell title="商户名称"></cell>
+        </div>
         <div @click="updatePwd">
           <cell title="修改密码" is-link></cell>
         </div>
@@ -58,8 +63,17 @@ export default {
 .vux-demo {
   text-align: center;
 }
-.logo {
-  width: 100px;
-  height: 100px;
+.mine {
+  width: 100%;
 }
+  .user {
+    width: 28%;
+    margin-top: -86px;
+    border: 3px solid #fff;
+    border-radius: 60px;
+  }
+  .vux-demo p {
+    font-size: 12px;
+    color: #999;
+  }
 </style>
