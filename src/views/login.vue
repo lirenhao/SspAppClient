@@ -1,19 +1,25 @@
 <template>
   <div class="login-bg">
-    <div>
+    <img slot="icon" src="../assets/logo.png" class="logo">
+    <div class="login-box">
+      <div class="login-input">
+        <x-input class="text-box" title="交易号" v-model="userName" placeholder="请输入交易号">
+          <x-icon style="fill: #fff;" slot="label" type="compose" />
+        </x-input>
+      </div>
       <div class="login-input">
         <x-input class="text-box" title="用户" v-model="userName" placeholder="请输入用户名">
-          <x-icon slot="label" type="person" />
+          <x-icon style="fill: #fff;" slot="label" type="person" />
         </x-input>
       </div>
       <div class="login-input">
         <x-input class="text-box" title="密码" v-model="passWord" placeholder="请输入密码" type="password">
-          <x-icon slot="label" type="ios-locked" />
+          <x-icon style="fill: #fff;" slot="label" type="android-lock" />
         </x-input>
       </div>
       <x-button class="login-btn" @click.native="click" text="登 录"/>
       <div class="close-btn" v-if="isClear">
-        <x-icon style="fill: #Ffff; position: fixed; top: 20px; right: 20px; " @click.native="clear" type="close"></x-icon>
+        <x-icon style="fill: rgba(255,255,255,0.31); position: fixed; top: 20px; right: 20px; " @click.native="clear" type="android-close"></x-icon>
       </div>
     </div>
   </div>
@@ -69,7 +75,7 @@
     width: 100%;
     height: 100%;
     background-size: cover;
-
+    background-image: url("../assets/login-bg.jpg");
   }
 
   /*登陆页logo*/
@@ -81,31 +87,38 @@
   }
 
   .login-input {
-    width: 80%;
-    margin-left: 10%;
-    background: #fff;
+    width: 74%;
+    margin-left: 13%;
+    background: none;
+    border-bottom: 1px solid #fff;
     height: 42px;
     margin-top: 20px;
-    border-radius: 28px;
   }
+
 
   /*登录页输入框宽度调整*/
   .text-box {
     font-size: 13px;
-    padding: 8px 15px !important;
+    padding: 8px 0 !important;
     text-indent: .3em;
+    color: #fff;
   }
   /*登录按钮*/
   .login-btn {
-    width: 66%;
+    width: 74%;
     height: 42px;
-    margin-left: 17%;
-    background: #dd3623;
+    margin-left: 13%;
+    background: none;
     color: #fff;
+    border: 1px solid #fff;
     font-size: 16px;
-    font-weight: 500;
     margin-top: 56px;
-    border-radius: 28px;
+    border-radius: 2px;
     text-align: center;
   }
+  .weui-btn:after {
+    border: none;
+  }
+
+
 </style>

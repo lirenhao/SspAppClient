@@ -95,7 +95,22 @@ export default {
   width: 100px;
   height: 100px;
 }
-.home-content .weui-grid:before {
-  border-right: none;
+
+.weui-grids:before, .weui-grids:after,
+.home-content .weui-grid:before,
+.home-content .weui-grid:after {
+  border: none;
 }
+
+.home-content {
+  top: 20px;
+  background: #fff;
+  border: none;
+}
+
+.weui-grid__icon + .weui-grid__label {
+  font-size: 12px !important;
+  color: red;
+}
+
 </style>
