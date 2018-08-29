@@ -38,7 +38,7 @@ axios.interceptors.response.use(
           Vue.$vux.toast.show({
             type: 'warn',
             position: 'default',
-            text: err.response.data.respMsg
+            text: Vue.i18n.translate('Access is denied')
           })
           break
         default:
@@ -125,7 +125,7 @@ const userUpdatePwd = (oldPwd, newPwd) => {
         Vue.$vux.toast.show({
           type: 'warn',
           position: 'default',
-          text: resp.status
+          text: Vue.i18n.translate('Password change failed')
         })
       }
     })
@@ -142,7 +142,7 @@ const subMer = () => {
         Vue.$vux.toast.show({
           type: 'warn',
           position: 'default',
-          text: resp.status
+          text: Vue.i18n.translate('Sub merchant get failed')
         })
       }
     })
@@ -159,8 +159,34 @@ const tranList = (merNo, tranDate) => {
         Vue.$vux.toast.show({
           type: 'warn',
           position: 'default',
-          text: resp.status
+          text: Vue.i18n.translate('Transaction query failed')
         })
+      }
+    })
+}
+
+const qrCodeCreate = (amt) => {
+  store.commit('UPDATE_LOADING', true)
+  return axios.post(`${urls.qrCodeCreate}`, amt)
+    .then(resp => {
+      if (resp.status === 200) {
+        return resp.data
+      } else {
+        store.commit('UPDATE_LOADING', false)
+        Vue.$vux.toast.show({
+          type: 'warn',
+          position: 'default',
+          text: Vue.i18n.translate('QrCode create failed')
+        })
+      }
+    })
+}
+
+const qrCodeQuery = (queryNo) => {
+  return axios.get(`${urls.qrCodeQuery}/${queryNo}`)
+    .then(resp => {
+      if (resp.status === 200) {
+        return resp.data
       }
     })
 }
@@ -170,5 +196,7 @@ export default {
   userInfo,
   userUpdatePwd,
   subMer,
-  tranList
+  tranList,
+  qrCodeCreate,
+  qrCodeQuery
 }

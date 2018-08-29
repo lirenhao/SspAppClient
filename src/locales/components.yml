@@ -1,90 +1,4 @@
 en:
-  '0': '0'
-  '1': '1'
-  '2': '2'
-  '3': '3'
-  '4': '4'
-  '5': '5'
-  '6': '6'
-  '7': '7'
-  '8': '8'
-  '9': '9'
-  '10': '10'
-  '11': '11'
-  '12': '12'
-  '13': '13'
-  '14': '14'
-  '15': '15'
-  '16': '16'
-  '17': '17'
-  '18': '18'
-  '19': '19'
-  '20': '20'
-  '21': '21'
-  '22': '22'
-  '23': '23'
-  '24': '24'
-  '25': '25'
-  '26': '26'
-  '27': '27'
-  '28': '28'
-  '29': '29'
-  '30': '30'
-  '31': '31'
-  '32': '32'
-  '33': '33'
-  '34': '34'
-  '35': '35'
-  '36': '36'
-  '37': '37'
-  '38': '38'
-  '39': '39'
-  '40': '40'
-  '41': '41'
-  '42': '42'
-  '43': '43'
-  '44': '44'
-  '45': '45'
-  '46': '46'
-  '47': '47'
-  '48': '48'
-  '49': '49'
-  '50': '50'
-  '51': '51'
-  '52': '52'
-  '53': '53'
-  '54': '54'
-  '55': '55'
-  '56': '56'
-  '57': '57'
-  '58': '58'
-  '59': '59'
-  '60': '60'
-  '61': '61'
-  '62': '62'
-  '63': '63'
-  '64': '64'
-  '65': '65'
-  '66': '66'
-  '67': '67'
-  '68': '68'
-  '69': '69'
-  '70': '70'
-  '71': '71'
-  '72': '72'
-  '73': '73'
-  '74': '74'
-  '75': '75'
-  '76': '76'
-  '77': '77'
-  '78': '78'
-  '79': '79'
-  '80': '80'
-  '81': '81'
-  '82': '82'
-  '83': '83'
-  '84': '84'
-  '85': '85'
   home: Home
   userInfo: Personal center
   updatePwd: Change Password
@@ -96,6 +10,11 @@ en:
   Network anomaly: Network anomaly
   Login validation failed: Login validation failed
   Login exception: Login exception
+  Access is denied: Access is denied
+  Password change failed: Password change failed
+  Sub merchant get failed: Hold merchant get failed
+  Transaction query failed: Transaction query failed
+  QrCode create failed: QrCode create failed
   Collection code: Collection code
   Transaction inquiry: Transaction inquiry
   Personal center: Personal center
@@ -113,94 +32,11 @@ en:
   Fill in the old password: Fill in the old password
   Fill in again to confirm: Fill in again to confirm
   Confirm the changes: Confirm the changes
-  Username: Username
+  Please enter merchant number: Please enter merchant number
+  Please enter login name: Please enter login name
+  Please enter password: Please enter login name
+  Login: Login
 zh-CN:
-  '0': '0'
-  '1': '1'
-  '2': '2'
-  '3': '3'
-  '4': '4'
-  '5': '5'
-  '6': '6'
-  '7': '7'
-  '8': '8'
-  '9': '9'
-  '10': '10'
-  '11': '11'
-  '12': '12'
-  '13': '13'
-  '14': '14'
-  '15': '15'
-  '16': '16'
-  '17': '17'
-  '18': '18'
-  '19': '19'
-  '20': '20'
-  '21': '21'
-  '22': '22'
-  '23': '23'
-  '24': '24'
-  '25': '25'
-  '26': '26'
-  '27': '27'
-  '28': '28'
-  '29': '29'
-  '30': '30'
-  '31': '31'
-  '32': '32'
-  '33': '33'
-  '34': '34'
-  '35': '35'
-  '36': '36'
-  '37': '37'
-  '38': '38'
-  '39': '39'
-  '40': '40'
-  '41': '41'
-  '42': '42'
-  '43': '43'
-  '44': '44'
-  '45': '45'
-  '46': '46'
-  '47': '47'
-  '48': '48'
-  '49': '49'
-  '50': '50'
-  '51': '51'
-  '52': '52'
-  '53': '53'
-  '54': '54'
-  '55': '55'
-  '56': '56'
-  '57': '57'
-  '58': '58'
-  '59': '59'
-  '60': '60'
-  '61': '61'
-  '62': '62'
-  '63': '63'
-  '64': '64'
-  '65': '65'
-  '66': '66'
-  '67': '67'
-  '68': '68'
-  '69': '69'
-  '70': '70'
-  '71': '71'
-  '72': '72'
-  '73': '73'
-  '74': '74'
-  '75': '75'
-  '76': '76'
-  '77': '77'
-  '78': '78'
-  '79': '79'
-  '80': '80'
-  '81': '81'
-  '82': '82'
-  '83': '83'
-  '84': '84'
-  '85': '85'
   home: 首页
   userInfo: 个人中心
   updatePwd: 修改密码
@@ -212,6 +48,10 @@ zh-CN:
   Network anomaly: 网络异常
   Login validation failed: 用户名或密码错误
   Login exception: 登录异常
+  Access is denied: 访问被拒绝
+  Password change failed: 密码修改失败
+  Transaction query failed: 交易查询失败
+  QrCode create failed: 二维码创建失败
   Collection code: 收款码
   Transaction inquiry: 交易查询
   Personal center: 个人中心
@@ -229,4 +69,7 @@ zh-CN:
   Fill in the old password: 填写原密码
   Fill in again to confirm: 再次填写确认
   Confirm the changes: 确认修改
-  Username: 用户
+  Please enter merchant number: 请输入商户号
+  Please enter login name: 请输入登录名
+  Please enter password: 请输入密码
+  Login: 登 录

@@ -3,27 +3,42 @@
     <img slot="icon" src="../assets/logo.png" class="logo">
     <div class="login-box">
       <div class="login-input">
-        <x-input class="text-box" title="商户号" v-model="merNo" placeholder="请输入商户号">
+        <x-input class="text-box" v-model="merNo" :placeholder="$t('Please enter merchant number')">
           <x-icon style="fill: #fff;" slot="label" type="compose" />
         </x-input>
       </div>
       <div class="login-input">
-        <x-input class="text-box" title="用户" v-model="loginName" placeholder="请输入用户名">
+        <x-input class="text-box" v-model="loginName" :placeholder="$t('Please enter login name')">
           <x-icon style="fill: #fff;" slot="label" type="person" />
         </x-input>
       </div>
       <div class="login-input">
-        <x-input class="text-box" title="密码" v-model="passWord" placeholder="请输入密码" type="password">
+        <x-input class="text-box" v-model="passWord" :placeholder="$t('Please enter login name')" type="password">
           <x-icon style="fill: #fff;" slot="label" type="android-lock" />
         </x-input>
       </div>
-      <x-button class="login-btn" @click.native="click" text="登 录"/>
+      <x-button class="login-btn" @click.native="click" :text="$t('Login')"/>
       <div class="close-btn" v-if="isClear">
         <x-icon style="fill: rgba(255,255,255,0.31); position: fixed; top: 20px; right: 20px; " @click.native="clear" type="android-close"></x-icon>
       </div>
     </div>
   </div>
 </template>
+
+<i18n>
+  Please enter merchant number:
+    en: Please enter merchant number
+    zh-CN: 请输入商户号
+  Please enter login name:
+    en: Please enter login name
+    zh-CN: 请输入登录名
+  Please enter password:
+    en: Please enter login name
+    zh-CN: 请输入密码
+  Login:
+    en: Login
+    zh-CN: 登 录
+</i18n>
 
 <script>
   import {XButton, XInput} from 'vux'

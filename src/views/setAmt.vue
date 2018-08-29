@@ -55,8 +55,6 @@ export default {
   created: function() {
     if (!window.localStorage.token) {
       this.$router.push({name: 'login', params: {isClear: false}});
-    } else {
-    
     }
   },
   data: function() {
