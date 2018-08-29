@@ -48,7 +48,7 @@ axios.interceptors.response.use(
       Vue.$vux.toast.show({
         type: 'warn',
         position: 'default',
-        text: '网络异常'
+        text: Vue.i18n.translate('Network anomaly')
       })
     }
     return Promise.reject(err)
@@ -84,13 +84,13 @@ const login = (userName, passWord) => {
         Vue.$vux.toast.show({
           type: 'warn',
           position: 'default',
-          text: '用户名或密码错误'
+          text: Vue.i18n.translate('Login validation failed')
         })
       } else {
         Vue.$vux.toast.show({
           type: 'warn',
           position: 'default',
-          text: '登录异常'
+          text: Vue.i18n.translate('Login exception')
         })
       }
     })

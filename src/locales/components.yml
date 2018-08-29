@@ -1,4 +1,90 @@
 en:
+  '0': '0'
+  '1': '1'
+  '2': '2'
+  '3': '3'
+  '4': '4'
+  '5': '5'
+  '6': '6'
+  '7': '7'
+  '8': '8'
+  '9': '9'
+  '10': '10'
+  '11': '11'
+  '12': '12'
+  '13': '13'
+  '14': '14'
+  '15': '15'
+  '16': '16'
+  '17': '17'
+  '18': '18'
+  '19': '19'
+  '20': '20'
+  '21': '21'
+  '22': '22'
+  '23': '23'
+  '24': '24'
+  '25': '25'
+  '26': '26'
+  '27': '27'
+  '28': '28'
+  '29': '29'
+  '30': '30'
+  '31': '31'
+  '32': '32'
+  '33': '33'
+  '34': '34'
+  '35': '35'
+  '36': '36'
+  '37': '37'
+  '38': '38'
+  '39': '39'
+  '40': '40'
+  '41': '41'
+  '42': '42'
+  '43': '43'
+  '44': '44'
+  '45': '45'
+  '46': '46'
+  '47': '47'
+  '48': '48'
+  '49': '49'
+  '50': '50'
+  '51': '51'
+  '52': '52'
+  '53': '53'
+  '54': '54'
+  '55': '55'
+  '56': '56'
+  '57': '57'
+  '58': '58'
+  '59': '59'
+  '60': '60'
+  '61': '61'
+  '62': '62'
+  '63': '63'
+  '64': '64'
+  '65': '65'
+  '66': '66'
+  '67': '67'
+  '68': '68'
+  '69': '69'
+  '70': '70'
+  '71': '71'
+  '72': '72'
+  '73': '73'
+  '74': '74'
+  '75': '75'
+  '76': '76'
+  '77': '77'
+  '78': '78'
+  '79': '79'
+  '80': '80'
+  '81': '81'
+  '82': '82'
+  '83': '83'
+  '84': '84'
+  '85': '85'
   home: Home
   userInfo: Personal center
   updatePwd: Change Password
@@ -7,6 +93,9 @@ en:
   tranInfo: Transaction Details
   setAmt: Set amount
   createCode: Collection code
+  Network anomaly: Network anomaly
+  Login validation failed: Login validation failed
+  Login exception: Login exception
   Collection code: Collection code
   Transaction inquiry: Transaction inquiry
   Personal center: Personal center
@@ -16,9 +105,6 @@ en:
   Transaction data: Transaction data
   Transaction date: Transaction date
   Sub merchant: Sub merchant
-  select: Select
-  Select: Select
-  Tran sSelect: Select
   Tran search select: Select
   Tran no query to data: No query to data
   Fill in the original password: Fill in the original password
@@ -27,7 +113,94 @@ en:
   Fill in the old password: Fill in the old password
   Fill in again to confirm: Fill in again to confirm
   Confirm the changes: Confirm the changes
+  Username: Username
 zh-CN:
+  '0': '0'
+  '1': '1'
+  '2': '2'
+  '3': '3'
+  '4': '4'
+  '5': '5'
+  '6': '6'
+  '7': '7'
+  '8': '8'
+  '9': '9'
+  '10': '10'
+  '11': '11'
+  '12': '12'
+  '13': '13'
+  '14': '14'
+  '15': '15'
+  '16': '16'
+  '17': '17'
+  '18': '18'
+  '19': '19'
+  '20': '20'
+  '21': '21'
+  '22': '22'
+  '23': '23'
+  '24': '24'
+  '25': '25'
+  '26': '26'
+  '27': '27'
+  '28': '28'
+  '29': '29'
+  '30': '30'
+  '31': '31'
+  '32': '32'
+  '33': '33'
+  '34': '34'
+  '35': '35'
+  '36': '36'
+  '37': '37'
+  '38': '38'
+  '39': '39'
+  '40': '40'
+  '41': '41'
+  '42': '42'
+  '43': '43'
+  '44': '44'
+  '45': '45'
+  '46': '46'
+  '47': '47'
+  '48': '48'
+  '49': '49'
+  '50': '50'
+  '51': '51'
+  '52': '52'
+  '53': '53'
+  '54': '54'
+  '55': '55'
+  '56': '56'
+  '57': '57'
+  '58': '58'
+  '59': '59'
+  '60': '60'
+  '61': '61'
+  '62': '62'
+  '63': '63'
+  '64': '64'
+  '65': '65'
+  '66': '66'
+  '67': '67'
+  '68': '68'
+  '69': '69'
+  '70': '70'
+  '71': '71'
+  '72': '72'
+  '73': '73'
+  '74': '74'
+  '75': '75'
+  '76': '76'
+  '77': '77'
+  '78': '78'
+  '79': '79'
+  '80': '80'
+  '81': '81'
+  '82': '82'
+  '83': '83'
+  '84': '84'
+  '85': '85'
   home: 首页
   userInfo: 个人中心
   updatePwd: 修改密码
@@ -36,6 +209,9 @@ zh-CN:
   tranInfo: 交易详情
   setAmt: 设置金额
   createCode: 收款码
+  Network anomaly: 网络异常
+  Login validation failed: 用户名或密码错误
+  Login exception: 登录异常
   Collection code: 收款码
   Transaction inquiry: 交易查询
   Personal center: 个人中心
@@ -45,9 +221,6 @@ zh-CN:
   Transaction data: 交易日期
   Transaction date: 交易日期
   Sub merchant: 子级商户
-  select: 筛选
-  Select: 筛选
-  Tran sSelect: 筛选
   Tran search select: 筛选
   Tran no query to data: 没有查询到数据
   Fill in the original password: 填写原密码
@@ -56,3 +229,4 @@ zh-CN:
   Fill in the old password: 填写原密码
   Fill in again to confirm: 再次填写确认
   Confirm the changes: 确认修改
+  Username: 用户
