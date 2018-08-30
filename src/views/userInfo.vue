@@ -10,24 +10,38 @@
         <h4>summer</h4>
         <p>104220948230412</p>
       </div>
-      <group>
-        <div class="mine-list" @click="updatePwd">
+      <div>
+        <div class="mine-list marginT">
           <cell title="商户名称" >
-            <x-icon style="fill: #67A2F9; margin-right: 8px; margin-left: -16px" slot="icon" type="ios-home" />
+            <x-icon style="fill: #8ed8fa; margin-right: 8px; margin-left: -16px" slot="icon" type="ios-home" />
             <span>summer</span>
           </cell>
         </div>
+        <div class="mine-list">
+          <cell title="终端号" >
+            <x-icon style="fill: #ca9ac6; margin-right: 9px; margin-left: -14px; width: 22px;" slot="icon" type="android-desktop" />
+            <span>10439849</span>
+          </cell>
+        </div>
+        <div class="mine-list">
+          <cell title="币种" >
+            <x-icon style="fill: #8dd531; margin-right: 8px; margin-left: -16px;" slot="icon" type="social-usd" />
+            <span>SGD</span>
+          </cell>
+        </div>
         <div class="mine-list" @click="updatePwd">
-          <cell title="修改密码" is-link>
-            <x-icon style="fill: #FFC331; margin-right: 8px; margin-left: -16px" slot="icon" type="android-lock" />
+          <cell title="修改密码">
+            <x-icon style="fill: #f8d743; margin-right: 8px; margin-left: -16px;" slot="icon" type="android-lock" />
+            <span> > </span>
           </cell>
         </div>
         <div class="mine-list" @click="logout">
-          <cell title="切换用户" is-link>
-            <x-icon style="fill: #F04C50; margin-right: 8px; margin-left: -16px" slot="icon" type="person" />
+          <cell title="切换用户">
+            <x-icon style="fill: #f06474; margin-right: 8px; margin-left: -16px;" slot="icon" type="person" />
+            <span> > </span>
           </cell>
         </div>
-      </group>
+      </div>
     </div>
   </div>
 </template>
@@ -82,6 +96,9 @@ export default {
   .vux-demo p {
     font-size: 12px;
     color: #999;
+  }
+  .marginT {
+    margin-top: 30px;
   }
   .mine-list {
     font-size: 14px;

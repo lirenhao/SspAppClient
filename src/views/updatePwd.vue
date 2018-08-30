@@ -3,17 +3,18 @@
     <x-header style="width:100%;position:absolute;left:0;top:0;z-index:100;"
               :title="title" :left-options="{showBack}">
     </x-header>
-    <div>
-      <group title="原密码">
-        <x-input v-model="oldPwd" type="password" :placeholder="$t('Fill in the old password')" required></x-input>
-      </group>
-      <group title="新密码">
-        <x-input v-model="newPwd" type="password" :placeholder="$t('Fill in the new password')" required></x-input>
-      </group>
-      <group title="确认密码">
-        <x-input v-model="valiPwd" type="password" :placeholder="$t('Fill in again to confirm')" required></x-input>
-      </group>
-      <x-button type="primary" @click.native="goUpdatePwd">{{$t('Confirm the changes')}}</x-button>
+    <div class="Change-password">
+        <x-input v-model="oldPwd" type="password" :placeholder="$t('Fill in the old password')" required>
+          <x-icon style="fill: #999; margin: 1px 4px 0 0" slot="label" type="android-lock" />
+        </x-input>
+        <x-input v-model="newPwd" type="password" :placeholder="$t('Fill in the new password')" required>
+          <x-icon style="fill: #999; margin: 1px 4px 0 0"" slot="label" type="android-lock" />
+        </x-input>
+        <x-input v-model="valiPwd" type="password" :placeholder="$t('Fill in again to confirm')" required>
+          <x-icon style="fill: #999; margin: 1px 4px 0 0"" slot="label" type="android-lock" />
+        </x-input>
+        <x-input> </x-input>
+        <x-button class="general-btn" type="primary" @click.native="goUpdatePwd">{{$t('Confirm the changes')}}</x-button>
     </div>
   </div>
 </template>
@@ -98,4 +99,27 @@ export default {
 </script>
 
 <style scoped>
+  .general-btn {
+    width: 66%;
+    height: 38px;
+    margin-left: 17%;
+    background: #67A2F9;
+    color: #fff;
+    border: none;
+    font-size: 15px;
+    margin-top: 56px;
+    border-radius: 4px;
+    text-align: center;
+  }
+  .weui-btn:after {
+    border: none !important;
+  }
+  .Change-password .weui-cell {
+    font-size: 13px;
+    padding: 6px 15px;
+  }
+  .weui-input {
+    height: 2.411765em !important;
+  }
+
 </style>

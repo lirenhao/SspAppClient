@@ -3,12 +3,13 @@
     <x-header style="width:100%;position:absolute;left:0;top:0;z-index:100;"
               :title="$t(title)" :left-options="{showBack}">
     </x-header>
-    <group :title="$t('Payment amount')">
+    <group class="money-title" :title="$t('Payment amount')"></group>
+    <div class="money-box">
       <x-input class="money-input" v-model="amt" :placeholder="$t('Please enter the payment amount')">
         <div class="money" slot="label">￥</div>
       </x-input>
-      <x-button class="general-btn" type="primary" @click.native="goCreateCode">{{$t('Generate QR code')}}</x-button>
-    </group>
+     </div>
+    <x-button class="general-btn" type="primary" @click.native="goCreateCode">{{$t('Generate QR code')}}</x-button>
   </div>
 </template>
 <i18n>
@@ -66,6 +67,22 @@ export default {
 </script>
 
 <style scoped>
+  .money-box {
+    width: 80%;
+    height: 60px;
+    margin-left: 10%;
+    border-bottom: 1px solid #d9d9d9;
+  }
+  .weui-cell {
+    padding-left: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  .money-title {
+    margin-left: 30px;
+    margin-top: 50px;
+  }
+
   .general-btn {
       width: 66%;
       height: 38px;
@@ -74,11 +91,14 @@ export default {
       color: #fff;
       border: none;
       font-size: 15px;
-      margin-top: 56px;
+      margin-top: 96px;
       border-radius: 4px;
       text-align: center;
   }
 
+  .weui-btn:after {
+    border: none !important;
+  }
   .money{
     font-size: 38px;
     margin-bottom: 12px;
