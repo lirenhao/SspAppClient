@@ -7,26 +7,25 @@
       <div class="vux-demo">
         <img slot="icon" src="../assets/mine.png" class="mine">
         <img slot="icon" src="../assets/user.png" class="user">
-        <h4>summer</h4>
-        <p>104220948230412</p>
+        <h4>{{userName}}</h4>
       </div>
       <div>
         <div class="mine-list marginT">
-          <cell :title="$t('Merchant name')" >
+          <cell :title="$t('Merchant number')" >
             <x-icon style="fill: #8ed8fa; margin-right: 8px; margin-left: -16px" slot="icon" type="ios-home" />
-            <span>summer</span>
+            <span>{{merNo}}</span>
           </cell>
         </div>
         <div class="mine-list">
           <cell :title="$t('Terminal number')" >
             <x-icon style="fill: #ca9ac6; margin-right: 9px; margin-left: -14px; width: 22px;" slot="icon" type="android-desktop" />
-            <span>10439849</span>
+            <span>{{termNo}}</span>
           </cell>
         </div>
         <div class="mine-list">
           <cell :title="$t('Tran currency')" >
             <x-icon style="fill: #8dd531; margin-right: 8px; margin-left: -16px;" slot="icon" type="social-usd" />
-            <span>SGD</span>
+            <span>{{cry}}</span>
           </cell>
         </div>
         <div class="mine-list" @click="updatePwd">
@@ -44,11 +43,11 @@
   </div>
 </template>
 <i18n>
-  Merchant name:
-    en: Merchant name
-    zh-CN: 商户名称
+  Merchant number:
+    en: Merchant No.
+    zh-CN: 商 户 号
   Terminal number:
-    en: Terminal number
+    en: Terminal No.
     zh-CN: 终 端 号
   Tran currency:
     en: Tran currency
@@ -73,6 +72,12 @@ export default {
     XHeader,
     Group,
     Cell,
+  },
+  props: {
+    merNo: String,
+    userName: String,
+    termNo: String,
+    cry: String
   },
   created: function() {
     if (!window.localStorage.token) {

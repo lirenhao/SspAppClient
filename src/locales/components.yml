@@ -38,8 +38,8 @@ en:
   Login: Login
   Tran push no data: Tran push no data
   Pay the wait: 'Order submitted successfully,waiting for user scan'
-  Merchant name: Merchant name
-  Terminal number: Terminal number
+  Merchant number: Merchant No.
+  Terminal number: Terminal No.
   Tran currency: Tran currency
   Login out: Login out
   Change password: Change password
@@ -83,7 +83,7 @@ zh-CN:
   Login: 登 录
   Tran push no data: 没有交易通知
   Pay the wait: '订单提交成功,等待用户扫描'
-  Merchant name: 商户名称
+  Merchant number: 商 户 号
   Terminal number: 终 端 号
   Tran currency: 交易币种
   Login out: 退出登录

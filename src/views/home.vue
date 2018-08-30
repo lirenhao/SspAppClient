@@ -100,7 +100,7 @@ export default {
     },
     goUserInfo() {
       api.userInfo().then(data => {
-        this.$router.push('/userInfo');
+        this.$router.push({name: 'userInfo', params: data});
       });
     },
   },
