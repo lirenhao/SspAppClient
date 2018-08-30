@@ -1,7 +1,7 @@
 <template>
   <div>
     <x-header style="width:100%;position:absolute;left:0;top:0;z-index:100;"
-              :title="title" :left-options="{showBack}">
+              :title="$t(title)" :left-options="{showBack}">
     </x-header>
     <div>
       <div class="vux-demo">
@@ -12,39 +12,51 @@
       </div>
       <div>
         <div class="mine-list marginT">
-          <cell title="商户名称" >
+          <cell :title="$('Merchant name')" >
             <x-icon style="fill: #8ed8fa; margin-right: 8px; margin-left: -16px" slot="icon" type="ios-home" />
             <span>summer</span>
           </cell>
         </div>
         <div class="mine-list">
-          <cell title="终端号" >
+          <cell :title="$('Terminal number')" >
             <x-icon style="fill: #ca9ac6; margin-right: 9px; margin-left: -14px; width: 22px;" slot="icon" type="android-desktop" />
             <span>10439849</span>
           </cell>
         </div>
         <div class="mine-list">
-          <cell title="币种" >
+          <cell :title="$('Currency')" >
             <x-icon style="fill: #8dd531; margin-right: 8px; margin-left: -16px;" slot="icon" type="social-usd" />
             <span>SGD</span>
           </cell>
         </div>
         <div class="mine-list" @click="updatePwd">
-          <cell title="修改密码">
+          <cell title="修改密码" is-link>
             <x-icon style="fill: #f8d743; margin-right: 8px; margin-left: -16px;" slot="icon" type="android-lock" />
-            <span> > </span>
           </cell>
         </div>
         <div class="mine-list" @click="logout">
-          <cell title="切换用户">
+          <cell :title="$('Login out')" is-link>
             <x-icon style="fill: #f06474; margin-right: 8px; margin-left: -16px;" slot="icon" type="person" />
-            <span> > </span>
           </cell>
         </div>
       </div>
     </div>
   </div>
 </template>
+<i18n>
+  Merchant name:
+    en: Merchant name
+    zh-CN: 商户名称
+  Terminal number:
+    en: Terminal number
+    zh-CN: 终端号
+  Currency:
+    en: Currency
+    zh-CN: 币种
+  Login out: 
+    en: Login out
+    zh-CN: 退出登录
+</i18n>
 <script>
 import {XHeader, Group, Cell} from 'vux';
 import api from '../api';
@@ -63,7 +75,6 @@ export default {
   },
   data: function() {
     return {
-      isManager: false,
       isShowNav: this.$route.meta.isShowNav,
       title: this.$route.meta.title,
       showBack: this.$route.meta.showBack,
@@ -71,6 +82,7 @@ export default {
   },
   methods: {
     logout() {
+      // TODO 解除设备绑定
       this.$router.push({name: 'login'});
     },
     updatePwd() {

@@ -5,7 +5,7 @@
     </x-header>
     <div style="text-align:center;margin-top:15px;">
       <qrcode :value="qrCode" type="img"></qrcode>
-      <span>{{timecunt}}订单提交成功,等待用户扫描...</span>
+      <span>{{timecunt}}{{$t('Pay the wait')}}...</span>
     </div>
   </div>
 </template>
@@ -19,6 +19,9 @@
   Generate QR code:
     en: Generate QR code
     zh-CN: 生成二维码
+  Pay the wait:
+    en: Order submitted successfully,waiting for user scan
+    zh-CN: 订单提交成功,等待用户扫描
 </i18n>
 <script>
 import {XHeader, Qrcode, XInput, XButton} from 'vux';
@@ -41,15 +44,15 @@ export default {
   },
   created: function() {
     if (!window.localStorage.token) {
-      this.$router.push({name: 'login', params: {isClear: false}})
+      this.$router.push({name: 'login', params: {isClear: false}});
     } else {
       this.timer = setInterval(() => {
-        if(this.timecunt > 0) {
-          this.timecunt --
+        if (this.timecunt > 0) {
+          this.timecunt--;
         } else {
-          clearInterval(this.timer)
+          clearInterval(this.timer);
         }
-      }, 1000)
+      }, 1000);
     }
   },
   data: function() {
@@ -64,22 +67,21 @@ export default {
     goCreateCode() {},
   },
   watch: {
-    timecunt: function(newValue, oldValue){
-      console.log('timecunt', newValue, (this.timeout - newValue)%5 === 0)
-      if((this.timeout - newValue)%5 === 0){
-        api.qrCodeQuery(this.queryNo)
-        .then(data => {
-          if(data && data.respCode === '00'){
-            this.$router.replace({name: 'payResult', params: {result: true}})
+    timecunt: function(newValue, oldValue) {
+      console.log('timecunt', newValue, (this.timeout - newValue) % 5 === 0);
+      if ((this.timeout - newValue) % 5 === 0) {
+        api.qrCodeQuery(this.queryNo).then(data => {
+          if (data && data.respCode === '00') {
+            this.$router.replace({name: 'payResult', params: {result: true}});
           }
         })
       }
-    }
+    },
   },
-  destroyed: function () {
-    clearInterval(this.timer)
-  }
-};
+  destroyed: function() {
+    clearInterval(this.timer);
+  },
+}
 </script>
 
 <style scoped>
