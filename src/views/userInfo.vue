@@ -10,17 +10,22 @@
         <h4>summer</h4>
         <p>104220948230412</p>
       </div>
-      <group class="mine-list">
-        <div @click="updatePwd">
+      <group>
+        <div class="mine-list" @click="updatePwd">
           <cell title="商户名称" >
-            <x-icon style="fill: red;" slot="icon" type="person" />
+            <x-icon style="fill: #67A2F9; margin-right: 8px; margin-left: -16px" slot="icon" type="ios-home" />
+            <span>summer</span>
           </cell>
         </div>
-        <div @click="updatePwd">
-          <cell title="修改密码" is-link></cell>
+        <div class="mine-list" @click="updatePwd">
+          <cell title="修改密码" is-link>
+            <x-icon style="fill: #FFC331; margin-right: 8px; margin-left: -16px" slot="icon" type="android-lock" />
+          </cell>
         </div>
-        <div @click="logout">
-          <cell title="切换用户" is-link></cell>
+        <div class="mine-list" @click="logout">
+          <cell title="切换用户" is-link>
+            <x-icon style="fill: #F04C50; margin-right: 8px; margin-left: -16px" slot="icon" type="person" />
+          </cell>
         </div>
       </group>
     </div>
@@ -75,6 +80,15 @@ export default {
     border-radius: 60px;
   }
   .vux-demo p {
+    font-size: 12px;
+    color: #999;
+  }
+  .mine-list {
+    font-size: 14px;
+    margin-left: 16px;
+    border-bottom: 1px solid #eee;
+  }
+  .mine-list span {
     font-size: 12px;
     color: #999;
   }

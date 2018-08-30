@@ -4,8 +4,8 @@
               :title="$t(title)" :left-options="{showBack}">
     </x-header>
     <group :title="$t('Payment amount')">
-      <x-input v-model="amt" :placeholder="$t('Please enter the payment amount')">
-        <div slot="label">￥</div>
+      <x-input class="money-input" v-model="amt" :placeholder="$t('Please enter the payment amount')">
+        <div class="money" slot="label">￥</div>
       </x-input>
       <x-button class="general-btn" type="primary" @click.native="goCreateCode">{{$t('Generate QR code')}}</x-button>
     </group>
@@ -78,12 +78,13 @@ export default {
       border-radius: 4px;
       text-align: center;
   }
-  .weui-btn:after {
-    border: none;
-  }
 
-  .weui-cells__title + .weui-cells {
-    background: none !important;
+  .money{
+    font-size: 38px;
+    margin-bottom: 12px;
+  }
+  .money-input {
+    font-size: 14px;
   }
 
 </style>
