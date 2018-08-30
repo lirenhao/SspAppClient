@@ -9,6 +9,7 @@ import TranList from '../views/tranList'
 import TranInfo from '../views/tranInfo'
 import SetAmt from '../views/setAmt'
 import CreateCode from '../views/createCode'
+import PayResult from '../views/payResult'
 
 Vue.use(Router)
 
@@ -109,6 +110,17 @@ export default new Router({
         isShowNav: true,
         title: 'createCode',
         showBack: true
+      }
+    },
+    {
+      path: '/payResult',
+      name: 'payResult',
+      component: PayResult,
+      props: true,
+      meta: {
+        isShowNav: true,
+        title: 'payResult',
+        showBack: false
       }
     }
   ]

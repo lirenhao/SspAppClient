@@ -52,7 +52,7 @@ export default {
       api.qrCodeCreate(this.amt).then(data => {
         if(data){
           if(data.respCode && data.respCode === '00'){
-            this.$router.push({name: 'createCode', params: data});
+            this.$router.replace({name: 'createCode', params: data});
           } else {
 
           }
