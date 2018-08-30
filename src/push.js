@@ -31,9 +31,9 @@ export default {
 
     push.on('registration', (data) => {
       // {"available":true,"platform":"Android","version":"7.0","uuid":"7605eaf2ebd482c7","cordova":"7.0.0","model":"Meizu S6","manufacturer":"Meizu","isVirtual":false,"serial":"712QKDS228JP2"}
-      window.localStorage.setItem('deviceId', data.registrationId)
-      window.localStorage.setItem('deviceType', data.registrationType)
-      window.localStorage.setItem('devicePlatform', device.platform)
+      window.localStorage.setItem('deviceNo', data.registrationId)
+      window.localStorage.setItem('pushType', data.registrationType)
+      window.localStorage.setItem('platform', device.platform)
     })
 
     push.on('notification', (data) => {

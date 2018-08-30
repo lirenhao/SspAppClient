@@ -36,6 +36,7 @@ en:
   Please enter login name: Please enter login name
   Please enter password: Please enter login name
   Login: Login
+  Tran push no data: Tran push no data
 zh-CN:
   home: 首页
   userInfo: 个人中心
@@ -73,3 +74,4 @@ zh-CN:
   Please enter login name: 请输入登录名
   Please enter password: 请输入密码
   Login: 登 录
+  Tran push no data: 没有交易通知

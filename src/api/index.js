@@ -70,6 +70,7 @@ const login = (userName, passWord) => {
         window.localStorage.setItem('token', resp.data.access_token)
         window.localStorage.setItem('merNo', userName.split('@')[0])
         router.go(-1)
+        // TODO 登录后绑定设备
       } else {
         store.commit('UPDATE_LOADING', false)
         Vue.$vux.toast.show({
@@ -112,6 +113,18 @@ const userInfo = () => {
         })
       }
     })
+}
+
+const bindPush = (pushType, deviceNo, platform) => {
+  const params = new URLSearchParams()
+  params.append('pushType', pushType)
+  params.append('deviceNo', deviceNo)
+  params.append('platform', platform)
+  return axios.post(urls.bindPush, params)
+}
+
+const unBindPush = () => {
+  return axios.delete(urls.unBindPush)
 }
 
 const userUpdatePwd = (oldPwd, newPwd) => {
@@ -197,6 +210,8 @@ const qrCodeQuery = (queryNo) => {
 export default {
   login,
   userInfo,
+  bindPush,
+  unBindPush,
   userUpdatePwd,
   subMer,
   tranList,

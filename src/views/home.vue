@@ -21,7 +21,15 @@
         </grid-item>
         </div>
       </grid>
-      {{trans}}
+      <div v-if="pushList.length === 0">
+        <divider>{{$t('Tran push no data')}}</divider>
+      </div>
+      <div v-else>
+        <group v-for="(item, index) in pushList" @click.native="showInfo(item)"
+              :title="item.termNo" :key="index">
+          <cell-form-preview :list="getView(item)"></cell-form-preview>
+        </group>
+      </div>
     </div>
   </div>
 </template>
@@ -35,9 +43,13 @@
   Personal center:
     en: Personal center
     zh-CN: 个人中心
+  Tran push no data:
+    en: Tran push no data
+    zh-CN: 没有交易通知
 </i18n>
 <script>
-import {XHeader, Group, Cell, Grid, GridItem} from 'vux';
+import {XHeader, Group, Cell, Grid, GridItem, Divider, CellFormPreview} from 'vux';
+import {mapState} from 'vuex'
 import {dateFormat} from 'vux';
 import api from '../api';
 import localforage from '../localforage';
@@ -50,14 +62,22 @@ export default {
     Cell,
     Grid,
     GridItem,
+    Divider,
+    CellFormPreview
+  },
+   computed: {
+    ...mapState({
+      pushList: state => state.pushList
+    }),
   },
   created: function() {
     if (!window.localStorage.token) {
       this.$router.push({name: 'login', params: {isClear: false}});
     } else {
+      // TODO 存储的与store如何一致
       localforage(window.localStorage.merNo)
         .getItem('trans')
-        .then(trans => (this.trans = JSON.stringify(trans)));
+        .then(trans => trans ? this.trans = trans : null);
     }
   },
   data: function() {
@@ -65,7 +85,7 @@ export default {
       isShowNav: this.$route.meta.isShowNav,
       title: this.$route.meta.title,
       showBack: this.$route.meta.showBack,
-      trans: '',
+      trans: [],
     };
   },
   methods: {
