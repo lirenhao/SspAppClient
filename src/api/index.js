@@ -31,7 +31,8 @@ axios.interceptors.response.use(
       switch (err.response.status) {
         case 401:
           router.push({
-            name: 'login'
+            name: 'login',
+            params: {isClear: false}
           })
           break
         case 403:
