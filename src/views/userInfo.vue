@@ -12,30 +12,30 @@
       </div>
       <div>
         <div class="mine-list marginT">
-          <cell :title="$('Merchant name')" >
+          <cell :title="$t('Merchant name')" >
             <x-icon style="fill: #8ed8fa; margin-right: 8px; margin-left: -16px" slot="icon" type="ios-home" />
             <span>summer</span>
           </cell>
         </div>
         <div class="mine-list">
-          <cell :title="$('Terminal number')" >
+          <cell :title="$t('Terminal number')" >
             <x-icon style="fill: #ca9ac6; margin-right: 9px; margin-left: -14px; width: 22px;" slot="icon" type="android-desktop" />
             <span>10439849</span>
           </cell>
         </div>
         <div class="mine-list">
-          <cell :title="$('Currency')" >
+          <cell :title="$t('Currency')" >
             <x-icon style="fill: #8dd531; margin-right: 8px; margin-left: -16px;" slot="icon" type="social-usd" />
             <span>SGD</span>
           </cell>
         </div>
         <div class="mine-list" @click="updatePwd">
-          <cell title="修改密码" is-link>
+          <cell :title="$t('Change password')" is-link>
             <x-icon style="fill: #f8d743; margin-right: 8px; margin-left: -16px;" slot="icon" type="android-lock" />
           </cell>
         </div>
         <div class="mine-list" @click="logout">
-          <cell :title="$('Login out')" is-link>
+          <cell :title="$t('Login out')" is-link>
             <x-icon style="fill: #f06474; margin-right: 8px; margin-left: -16px;" slot="icon" type="person" />
           </cell>
         </div>
@@ -53,6 +53,9 @@
   Currency:
     en: Currency
     zh-CN: 币种
+  Change password:
+    en: Change password
+    zh-CN: 修改密码
   Login out: 
     en: Login out
     zh-CN: 退出登录

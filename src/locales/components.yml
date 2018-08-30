@@ -42,6 +42,7 @@ en:
   Terminal number: Terminal number
   Currency: Currency
   Login out: Login out
+  Change password: Change password
 zh-CN:
   home: 首页
   userInfo: 个人中心
@@ -85,3 +86,4 @@ zh-CN:
   Terminal number: 终端号
   Currency: 币种
   Login out: 退出登录
+  Change password: 修改密码
