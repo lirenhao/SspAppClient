@@ -40,7 +40,7 @@ en:
   Pay the wait: 'Order submitted successfully,waiting for user scan'
   Merchant name: Merchant name
   Terminal number: Terminal number
-  Currency: Currency
+  Tran currency: Tran currency
   Login out: Login out
   Change password: Change password
   Login out faild: Login out faild
@@ -84,8 +84,8 @@ zh-CN:
   Tran push no data: 没有交易通知
   Pay the wait: '订单提交成功,等待用户扫描'
   Merchant name: 商户名称
-  Terminal number: 终端号
-  Currency: 币种
+  Terminal number: 终 端 号
+  Tran currency: 交易币种
   Login out: 退出登录
   Change password: 修改密码
   Login out faild: 退出失败

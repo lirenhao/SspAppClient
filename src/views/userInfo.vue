@@ -24,7 +24,7 @@
           </cell>
         </div>
         <div class="mine-list">
-          <cell :title="$t('Currency')" >
+          <cell :title="$t('Tran currency')" >
             <x-icon style="fill: #8dd531; margin-right: 8px; margin-left: -16px;" slot="icon" type="social-usd" />
             <span>SGD</span>
           </cell>
@@ -49,10 +49,10 @@
     zh-CN: 商户名称
   Terminal number:
     en: Terminal number
-    zh-CN: 终端号
-  Currency:
-    en: Currency
-    zh-CN: 币种
+    zh-CN: 终 端 号
+  Tran currency:
+    en: Tran currency
+    zh-CN: 交易币种
   Change password:
     en: Change password
     zh-CN: 修改密码
