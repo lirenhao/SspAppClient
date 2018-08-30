@@ -12,7 +12,9 @@
       </div>
       <group class="mine-list">
         <div @click="updatePwd">
-          <cell title="商户名称"></cell>
+          <cell title="商户名称" >
+            <x-icon style="fill: red;" slot="icon" type="person" />
+          </cell>
         </div>
         <div @click="updatePwd">
           <cell title="修改密码" is-link></cell>
