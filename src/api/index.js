@@ -168,7 +168,9 @@ const tranList = (merNo, tranDate) => {
 
 const qrCodeCreate = (amt) => {
   store.commit('UPDATE_LOADING', true)
-  return axios.post(`${urls.qrCodeCreate}`, amt)
+  const params = new URLSearchParams()
+  params.append('amt', amt)
+  return axios.post(`${urls.qrCodeCreate}`, params)
     .then(resp => {
       if (resp.status === 200) {
         return resp.data

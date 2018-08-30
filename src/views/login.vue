@@ -13,7 +13,7 @@
         </x-input>
       </div>
       <div class="login-input">
-        <x-input class="text-box" v-model="passWord" :placeholder="$t('Please enter login name')" type="password">
+        <x-input class="text-box" v-model="passWord" :placeholder="$t('Please enter password')" type="password">
           <x-icon style="fill: #fff;" slot="label" type="android-lock" />
         </x-input>
       </div>

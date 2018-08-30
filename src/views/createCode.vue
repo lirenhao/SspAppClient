@@ -4,7 +4,7 @@
               :title="$t(title)" :left-options="{showBack}">
     </x-header>
     <div style="text-align:center;margin-top:15px;">
-      <qrcode value="afdkajf;lakd;lkafd;lak;lf" type="img"></qrcode>
+      <qrcode :value="qrCode" type="img"></qrcode>
       <span>订单提交成功,等待用户扫描...</span>
     </div>
   </div>
@@ -30,23 +30,20 @@ export default {
     XHeader,
     Qrcode,
     XInput,
-    XButton
+    XButton,
   },
-  computed: {
-    amt: {
-      get () {
-        return [this.$store.state.tranQuery.merNo]
-      },
-      set (value) {
-        this.$store.commit('UPDATE_TRAN_QUERY', {merNo: value[0]})
-      }
-    }
+  props: {
+    qrCode: String,
+    queryNo: String,
+    tranAmt: String,
+    tranCry: String,
+    timeout: Number,
   },
   created: function() {
     if (!window.localStorage.token) {
       this.$router.push({name: 'login', params: {isClear: false}});
     } else {
-    
+
     }
   },
   data: function() {
@@ -57,9 +54,7 @@ export default {
     };
   },
   methods: {
-    goCreateCode() {
-    
-    },
+    goCreateCode() {},
   },
 };
 </script>

@@ -4,7 +4,7 @@
               :title="$t(title)" :left-options="{showBack}">
     </x-header>
     <group :title="$t('Payment amount')">
-      <x-input :placeholder="$t('Please enter the payment amount')">
+      <x-input v-model="amt" :placeholder="$t('Please enter the payment amount')">
         <div slot="label">￥</div>
       </x-input>
       <x-button type="primary" @click.native="goCreateCode">{{$t('Generate QR code')}}</x-button>
@@ -32,25 +32,7 @@ export default {
     XHeader,
     Group,
     XInput,
-    XButton
-  },
-  computed: {
-    amt: {
-      get () {
-        return [this.$store.state.tranQuery.merNo]
-      },
-      set (value) {
-        this.$store.commit('UPDATE_TRAN_QUERY', {merNo: value[0]})
-      }
-    },
-    tranDate: {
-      get () {
-        return this.$store.state.tranQuery.tranDate
-      },
-      set (value) {
-        this.$store.commit('UPDATE_TRAN_QUERY', {tranDate: value})
-      }
-    }
+    XButton,
   },
   created: function() {
     if (!window.localStorage.token) {
@@ -62,11 +44,22 @@ export default {
       isShowNav: this.$route.meta.isShowNav,
       title: this.$route.meta.title,
       showBack: this.$route.meta.showBack,
+      amt: '',
     };
   },
   methods: {
     goCreateCode() {
-      this.$router.push('/createCode');
+      api.qrCodeCreate(this.amt).then(data => {
+        if(data){
+          if(data.respCode && data.respCode === '00'){
+            this.$router.push({name: 'createCode', params: data});
+          } else {
+            
+          }
+        } else {
+          
+        }
+      });
     },
   },
 };
