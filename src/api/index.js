@@ -130,7 +130,10 @@ const unBindPush = () => {
 const userUpdatePwd = (oldPwd, newPwd) => {
   store.commit('UPDATE_LOADING', true)
   // TODO 密码加密
-  return axios.put(urls.userUpdatePwd, {oldPwd, newPwd})
+  const params = new URLSearchParams()
+  params.append('oldPwd', oldPwd)
+  params.append('newPwd', newPwd)
+  return axios.put(urls.userUpdatePwd, params)
     .then(resp => {
       if (resp.status === 200) {
         return resp.data

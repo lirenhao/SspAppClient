@@ -43,6 +43,7 @@ en:
   Currency: Currency
   Login out: Login out
   Change password: Change password
+  Login out faild: Login out faild
 zh-CN:
   home: 首页
   userInfo: 个人中心
@@ -87,3 +88,4 @@ zh-CN:
   Currency: 币种
   Login out: 退出登录
   Change password: 修改密码
+  Login out faild: 退出失败

@@ -59,6 +59,9 @@
   Login out: 
     en: Login out
     zh-CN: 退出登录
+  Login out faild:
+    en: Login out faild
+    zh-CN: 退出失败
 </i18n>
 <script>
 import {XHeader, Group, Cell} from 'vux';
@@ -85,8 +88,25 @@ export default {
   },
   methods: {
     logout() {
-      // TODO 解除设备绑定
-      this.$router.push({name: 'login'});
+      // 解除设备绑定
+      api.unBindPush().then(data => {
+        if(data) {
+          window.localStorage.removeItem('token')
+          this.$router.replace({name: 'login', params: {isClear: false}});
+        } else {
+          this.$vux.toast.show({
+            type: 'warn',
+            position: 'default',
+            text: this.$t('Login out faild')
+          })
+        }
+      }).catch(e => {
+        this.$vux.toast.show({
+            type: 'warn',
+            position: 'default',
+            text: this.$t('Login out faild')
+          })
+      })
     },
     updatePwd() {
       this.$router.push({name: 'updatePwd'});
