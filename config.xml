@@ -19,7 +19,7 @@
     <platform name="android">
         <allow-intent href="market:*" />
         <resource-file src="google-services.json" target="app/google-services.json" />
-        <preference name="android-minSdkVersion" value="16" />
+        <preference name="android-minSdkVersion" value="19" />
         <icon density="ldpi" src="res/icon/android/logoAndroidIcon_36pt.png" />
         <icon density="mdpi" src="res/icon/android/logoAndroidIcon_36pt@1.3x.png" />
         <icon density="hdpi" src="res/icon/android/logoAndroidIcon_36pt@2x.png" />
