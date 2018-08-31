@@ -14,7 +14,48 @@ const state = {
     tranDate: dateFormat(new Date(), 'YYYY-MM-DD')
   },
   tranList: [],
-  pushList: []
+  pushList: [
+    {
+      merNo: window.localStorage.merNo,
+      tranDate: '20180831084733',
+      tranType: '扫码支付',
+      channel: '刷卡交易',
+      tranAmt: '100.00',
+      tranCry: '$',
+      tranNo: '201808310847330001',
+      rrn: '00000001'
+    },
+    {
+      merNo: window.localStorage.merNo,
+      tranDate: '20180831084733',
+      tranType: '微信支付',
+      channel: '扫码交易',
+      tranAmt: '100.00',
+      tranCry: '$',
+      tranNo: '201808310847330001',
+      rrn: '00000002'
+    },
+    {
+      merNo: window.localStorage.merNo,
+      tranDate: '20180831084733',
+      tranType: '扫码支付',
+      channel: '刷卡交易',
+      tranAmt: '100.00',
+      tranCry: '$',
+      tranNo: '201808310847330003',
+      rrn: '00000003'
+    },
+    {
+      merNo: window.localStorage.merNo,
+      tranDate: '20180831084733',
+      tranType: '微信支付',
+      channel: '扫码交易',
+      tranAmt: '100.00',
+      tranCry: '$',
+      tranNo: '201808310847330004',
+      rrn: '00000004'
+    }
+  ]
 }
 
 const store = new Vuex.Store({

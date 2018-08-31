@@ -25,10 +25,9 @@
         <divider>{{$t('Tran push no data')}}</divider>
       </div>
       <div v-else>
-        <group v-for="(item, index) in pushList" @click.native="showInfo(item)"
-              :title="item.termNo" :key="index">
-          <cell-form-preview :list="getView(item)"></cell-form-preview>
-        </group>
+        <div v-for="(item, index) in pushList" :key="index">
+          {{item.tranDate}} {{item.tranAmt}} {{item.channel}}
+        </div>
       </div>
     </div>
   </div>
