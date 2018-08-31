@@ -17,42 +17,42 @@ const state = {
   pushList: [
     {
       merNo: window.localStorage.merNo,
-      tranDate: '20180831084733',
+      tranDate: '08-31 15:23',
       tranType: '扫码支付',
       channel: '刷卡交易',
-      tranAmt: '100.00',
+      tranAmt: '$ 12.80',
       tranCry: '$',
-      tranNo: '201808310847330001',
+      tranNo: '08-31 15:23',
       rrn: '00000001'
     },
     {
       merNo: window.localStorage.merNo,
-      tranDate: '20180831084733',
-      tranType: '微信支付',
-      channel: '扫码交易',
-      tranAmt: '100.00',
+      tranDate: '08-31 10:12',
+      tranType: '扫码支付',
+      channel: '刷卡交易',
+      tranAmt: '$ 89.60',
       tranCry: '$',
-      tranNo: '201808310847330001',
+      tranNo: '08-31 15:23',
       rrn: '00000002'
     },
     {
       merNo: window.localStorage.merNo,
-      tranDate: '20180831084733',
+      tranDate: '08-30 14:56',
       tranType: '扫码支付',
       channel: '刷卡交易',
-      tranAmt: '100.00',
+      tranAmt: '$ 99.99',
       tranCry: '$',
-      tranNo: '201808310847330003',
+      tranNo: '08-31 15:23',
       rrn: '00000003'
     },
     {
       merNo: window.localStorage.merNo,
-      tranDate: '20180831084733',
-      tranType: '微信支付',
-      channel: '扫码交易',
-      tranAmt: '100.00',
+      tranDate: '08-30 15:23',
+      tranType: '扫码支付',
+      channel: '刷卡交易',
+      tranAmt: '$ 92.80',
       tranCry: '$',
-      tranNo: '201808310847330004',
+      tranNo: '08-31 15:23',
       rrn: '00000004'
     }
   ]

@@ -24,8 +24,10 @@
       <div v-if="pushList.length === 0">
         <divider>{{$t('Tran push no data')}}</divider>
       </div>
-      <div v-else>
-        <div v-for="(item, index) in pushList" :key="index">
+      <div class="trading-box" v-else>
+        <div class="home-notice" v-for="(item, index) in pushList" :key="index">
+          <x-icon style="fill: #999; margin: 1px 4px 0 0" slot="label" type="android-notifications" />
+          <span>交易提醒</span>
           {{item.tranDate}} {{item.tranAmt}} {{item.channel}}
         </div>
       </div>
@@ -131,5 +133,13 @@ export default {
   font-size: 12px !important;
   color: red;
 }
+  .trading-box {
+    width: 92%;
+    margin-left: 4%;
+    background: #fff;
+  }
+  .home-notice span {
+
+  }
 
 </style>
