@@ -10,6 +10,7 @@ import TranInfo from '../views/tranInfo'
 import SetAmt from '../views/setAmt'
 import CreateCode from '../views/createCode'
 import PayResult from '../views/payResult'
+import PushList from '../views/pushList'
 
 Vue.use(Router)
 
@@ -120,6 +121,17 @@ export default new Router({
       meta: {
         isShowNav: true,
         title: 'payResult',
+        showBack: false
+      }
+    },
+    {
+      path: '/pushList',
+      name: 'pushList',
+      component: PushList,
+      props: true,
+      meta: {
+        isShowNav: true,
+        title: 'pushList',
         showBack: false
       }
     }
