@@ -27,7 +27,7 @@
       <div v-else>
         <group v-for="(item, index) in pushList" :key="index">
           <cell>
-            <x-icon slot="icon" type="android-notifications"/>
+            <x-icon style="fill: #999; margin: 1px 4px 0 0" slot="icon" type="android-notifications"/>
             <div slot="title">交易提醒</div>
             <div>{{getDateFormat(item.tranDate)}}</div>
           </cell>
@@ -131,8 +131,7 @@ export default {
   height: 100px;
 }
 
-.weui-grids:before,
-.weui-grids:after,
+.weui-grids:before, .weui-grids:after,
 .home-content .weui-grid:before,
 .home-content .weui-grid:after {
   border: none;
@@ -148,6 +147,15 @@ export default {
   font-size: 12px !important;
   color: red;
 }
+  .trading-box {
+    width: 92%;
+    margin-left: 4%;
+    background: #fff;
+  }
+  .home-notice span {
+
+  }
+
 .weui-cell:before {
   border: none;
 }
