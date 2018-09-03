@@ -30,12 +30,15 @@ export default {
       this.$router.push({name: 'login', params: {isClear: false}});
     }
   },
+  props: {
+    tranAmt: String
+  },
   data: function() {
     return {
       isShowNav: this.$route.meta.isShowNav,
       title: this.$route.meta.title,
       showBack: this.$route.meta.showBack,
-      amt: '',
+      amt: this.tranAmt ? this.tranAmt : '',
     };
   },
   methods: {
