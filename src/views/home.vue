@@ -24,15 +24,15 @@
       <div v-if="pushList.length === 0">
         <divider>{{$t('Tran push no data')}}</divider>
       </div>
-      <div v-else>
-        <group v-for="(item, index) in pushList" :key="index">
-          <cell>
-            <x-icon style="fill: #999; margin: 1px 4px 0 0" slot="icon" type="android-notifications"/>
+      <div class="Notification-list" v-else>
+        <group class="Notification-list-item" v-for="(item, index) in pushList" :key="index">
+          <cell class="change-cell">
+            <x-icon style="fill: #999; width: 20px; margin: 1px 2px 0 0" slot="icon" type="android-notifications"/>
             <div slot="title">交易提醒</div>
             <div>{{getDateFormat(item.tranDate)}}</div>
           </cell>
-          <cell>
-            <div slot="title">{{item.tranAmt}}</div>
+          <cell class="changes-cell" >
+            <div class="price" slot="title">{{item.tranAmt}}</div>
             <div>{{item.channel}}</div>
           </cell>
         </group>
@@ -138,7 +138,7 @@ export default {
 }
 
 .home-content {
-  top: 20px;
+  top: 14px;
   background: #fff;
   border: none;
 }
@@ -156,7 +156,34 @@ export default {
 
   }
 
-.weui-cell:before {
-  border: none;
+  .weui-cell:before {
+    border: none;
+  }
+  .Notification-list {
+    margin-top: 28px;
+  }
+
+  .Notification-list .weui-cell {
+    font-size: 12px;
+    color: #999;
+  }
+
+  .Notification-list-item .weui-cells {
+    width: 92%;
+    margin-left: 4%;
+    border-radius: 6px;
+  }
+
+  .price {
+    font-size: 24px;
+    color: red;
+  }
+  .change-cell {
+    padding-bottom: 0;
+    border-top: 1px solid #fff;
+  }
+.changes-cell {
+  z-index: 99;
+  border-bottom: 1px solid #fff;
 }
 </style>
