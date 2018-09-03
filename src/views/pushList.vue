@@ -3,22 +3,40 @@
     <x-header style="width:100%;position:absolute;left:0;top:0;z-index:100;"
               :title="$t(title)" :left-options="{showBack}">
     </x-header>
-    <div>
-      <div v-if="pushList.length === 0">
-        <divider>{{$t('Tran push no data')}}</divider>
-      </div>
-      <div v-else>
-        <div v-for="(item, index) in pushList" :key="index">
-          {{item.tranDate}} {{item.tranAmt}} {{item.channel}}
-        </div>
-      </div>
-    </div>
+    <group v-for="(item, index) in pushList" :key="index">
+      <div>交易提醒</div>
+      <div>{{getDateFormat(item.tranDate)}}</div>
+      <div>交易金额</div>
+      <div>{{item.tranAmt}}</div>
+      <cell-form-preview :list="[
+        {
+          label: '支付方式',
+          value: item.channel
+        },
+        {
+          label: '交易时间',
+          value: item.tranDate
+        },
+        {
+          label: '所属分店',
+          value: '分店'
+        }
+      ]"></cell-form-preview>
+    </group>
   </div>
 </template>
 <script>
-import {XHeader, Group, Cell, Grid, GridItem, Divider, CellFormPreview} from 'vux'
-import {mapState} from 'vuex'
-import {dateFormat} from 'vux'
+import {
+  XHeader,
+  Group,
+  Cell,
+  Grid,
+  GridItem,
+  Divider,
+  CellFormPreview,
+} from 'vux';
+import {mapState} from 'vuex';
+import {dateFormat} from 'vux';
 
 export default {
   name: 'pushList',
@@ -29,11 +47,11 @@ export default {
     Grid,
     GridItem,
     Divider,
-    CellFormPreview
+    CellFormPreview,
   },
-   computed: {
+  computed: {
     ...mapState({
-      pushList: state => state.pushList
+      pushList: state => state.pushList,
     }),
   },
   data: function() {
@@ -44,12 +62,21 @@ export default {
     };
   },
   methods: {
-    goPushInfo() {
-      
+    getDateFormat(date) {
+      if (date && date.length === 14)
+        return dateFormat(
+          new Date(moment(date, 'YYYYMMDDHHmmss')),
+          'YYYY-MM-DD HH:mm:ss'
+        );
+      else return dateFormat(new Date(), 'YYYY-MM-DD HH:mm:ss');
     },
+    goPushInfo() {},
   },
 };
 </script>
 
 <style scoped>
+.weui-cell:before {
+  border: none;
+}
 </style>

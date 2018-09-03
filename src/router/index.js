@@ -132,7 +132,7 @@ export default new Router({
       meta: {
         isShowNav: true,
         title: 'pushList',
-        showBack: false
+        showBack: true
       }
     }
   ]
