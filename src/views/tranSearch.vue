@@ -12,16 +12,6 @@
     <picker :data="[merList]" v-model="merNos"></picker>
   </div>
 </template>
-
-<i18n>
-  Transaction date:
-    en: Transaction date
-    zh-CN: 交易日期
-  Sub merchant:
-    en: Sub merchant
-    zh-CN: 子级商户
-</i18n>
-
 <script>
 import {XHeader, InlineCalendar, GroupTitle, Picker, Group, Radio, XButton} from 'vux';
 import api from '../api';

@@ -13,20 +13,6 @@
     <x-button class="general-btn" type="primary" @click.native="goCreateCode">{{$t('Generate QR code')}}</x-button>
   </div>
 </template>
-<i18n>
-  Payment amount:
-    en: Payment amount
-    zh-CN: 付款金额
-  Please enter the payment amount:
-    en: Please enter the payment amount
-    zh-CN: 请输入付款金额
-  Generate QR code:
-    en: Generate QR code
-    zh-CN: 生成二维码
-  Amount input error: 
-    en: Amount input error
-    zh-CN: 金额输入错误
-</i18n>
 <script>
 import {XHeader, Group, XInput, XButton} from 'vux';
 import api from '../api';

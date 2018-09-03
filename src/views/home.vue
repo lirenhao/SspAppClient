@@ -29,7 +29,7 @@
           @click.native="goTranInfo(item.merNo, item.tranNo)">
           <cell class="change-cell">
             <x-icon style="fill: #999; width: 20px; margin: 1px 2px 0 0" slot="icon" type="android-notifications"/>
-            <div slot="title">交易提醒</div>
+            <div slot="title">{{$t('Transaction reminder')}}</div>
             <div>{{getDateFormat(item.tranDate)}}</div>
           </cell>
           <cell class="changes-cell" >
@@ -37,25 +37,11 @@
             <div>{{item.channel}}</div>
           </cell>
         </group>
-        <div v-if="pushList.length === 3" @click="goPushList">加载更多</div>
+        <div v-if="pushList.length === 3" @click="goPushList">{{$t('Load more')}}</div>
       </div>
     </div>
   </div>
 </template>
-<i18n>
-  Collection code:
-    en: Collection code
-    zh-CN: 收款码
-  Transaction inquiry:
-    en: Transaction inquiry
-    zh-CN: 交易查询
-  Personal center:
-    en: Personal center
-    zh-CN: 个人中心
-  Tran push no data:
-    en: Tran push no data
-    zh-CN: 没有交易通知
-</i18n>
 <script>
 import {XHeader, Group, Cell, Grid, GridItem, Divider} from 'vux';
 import {mapState} from 'vuex';

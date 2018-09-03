@@ -16,16 +16,6 @@
     </div>
   </div>
 </template>
-
-<i18n>
-  Tran search select:
-    en: Select
-    zh-CN: 筛选
-  Tran no query to data:
-    en: No query to data
-    zh-CN: 没有查询到数据
-</i18n>
-
 <script>
 import {XHeader, GroupTitle, Divider, Group, CellFormPreview} from 'vux';
 import {mapState} from 'vuex'

@@ -18,26 +18,6 @@
     </div>
   </div>
 </template>
-<i18n>
-  Payment amount:
-    en: Payment amount
-    zh-CN: 付款金额
-  Please enter the payment amount:
-    en: Please enter the payment amount
-    zh-CN: 请输入付款金额
-  Generate QR code:
-    en: Generate QR code
-    zh-CN: 生成二维码
-  Pay the wait:
-    en: Order submitted successfully,waiting for user scan
-    zh-CN: 订单提交成功,等待用户扫描
-  Collecting money from customers:
-    en: Collecting money from customers
-    zh-CN: 向客户收款
-  Countdown: 
-    en: Countdown
-    zh-CN: 倒计时
-</i18n>
 <script>
 import {XHeader, Qrcode, XInput, XButton} from 'vux';
 import api from '../api';

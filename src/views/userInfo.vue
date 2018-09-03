@@ -42,26 +42,6 @@
     </div>
   </div>
 </template>
-<i18n>
-  Merchant number:
-    en: Merchant No.
-    zh-CN: 商 户 号
-  Terminal number:
-    en: Terminal No.
-    zh-CN: 终 端 号
-  Tran currency:
-    en: Tran currency
-    zh-CN: 交易币种
-  Change password:
-    en: Change password
-    zh-CN: 修改密码
-  Login out: 
-    en: Login out
-    zh-CN: 退出登录
-  Login out faild:
-    en: Login out faild
-    zh-CN: 退出失败
-</i18n>
 <script>
 import {XHeader, Group, Cell} from 'vux';
 import api from '../api';

@@ -18,20 +18,6 @@
     </div>
   </div>
 </template>
-<i18n>
-  Fill in the old password:
-    en: Fill in the old password
-    zh-CN: 填写原密码
-  Fill in the new password:
-    en: Fill in the new password
-    zh-CN: 填写新密码
-  Fill in again to confirm:
-    en: Fill in again to confirm
-    zh-CN: 再次填写确认
-  Confirm the changes:
-    en: Confirm the changes
-    zh-CN: 确认修改
-</i18n>
 <script>
 import {XHeader, Group, XInput, XButton} from 'vux';
 import api from '../api';

@@ -24,22 +24,6 @@
     </div>
   </div>
 </template>
-
-<i18n>
-  Please enter merchant number:
-    en: Please enter merchant number
-    zh-CN: 请输入商户号
-  Please enter login name:
-    en: Please enter login name
-    zh-CN: 请输入登录名
-  Please enter password:
-    en: Please enter login name
-    zh-CN: 请输入密码
-  Login:
-    en: Login
-    zh-CN: 登 录
-</i18n>
-
 <script>
   import {XButton, XInput} from 'vux'
   import api from '../api'
