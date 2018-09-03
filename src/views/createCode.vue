@@ -1,11 +1,19 @@
 <template>
-  <div>
+  <div class="blue-bg">
     <x-header style="width:100%;position:absolute;left:0;top:0;z-index:100;"
               :title="$t(title)" :left-options="{showBack}">
     </x-header>
-    <div style="text-align:center;margin-top:15px;">
-      <qrcode :value="qrCode" type="img"></qrcode>
-      <span>{{timecunt}}{{$t('Pay the wait')}}...</span>
+    <div class="code-show">
+      <div class="show-title">
+        <p>向商户收款</p>
+        <div class="code-time">
+          <span>
+            <em>倒计时</em> {{timecunt}} <em>S</em>
+          </span>
+        </div>
+      </div>
+      <qrcode :value="qrCode" type="img" class="code-img"></qrcode>
+      <span class="code-prompt">{{$t('Pay the wait')}}...</span>
     </div>
   </div>
 </template>
@@ -85,4 +93,54 @@ export default {
 </script>
 
 <style scoped>
+  .blue-bg {
+    margin-top: -46px;
+    padding-top: 80px;
+    padding-bottom: 20px;
+    width: 100%;
+    height: 100%;
+    background: #67A2F9;
+  }
+
+  .code-show {
+    width: 80%;
+    margin-left: 10%;
+    text-align: center;
+    background: #fff;
+    border-radius: 8px;
+  }
+
+  .show-title {
+    width: 100%;
+    height: 40px;
+    background: #E3EAF4;
+    border-radius: 8px 8px 0 0;
+    text-align: left;
+    font-size: 14px;
+    color: #5799F9;
+  }
+  .show-title p {
+    padding: 10px 0 0 16px;
+  }
+  .code-img {
+    margin: 20px 0;
+  }
+  .code-prompt {
+    display: block;
+    font-size: 12px;
+    color: #999;
+    height: 30px;
+  }
+  .code-time {
+    float: right;
+    font-size: 16px;
+    color: red;
+    margin: -22px 12px 0 0;
+  }
+
+  .code-time em {
+    font-style: normal;
+    font-size: 12px;
+    color: #999;
+  }
 </style>
