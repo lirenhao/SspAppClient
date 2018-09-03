@@ -35,6 +35,7 @@
             <div class="price" slot="title">{{item.tranAmt}}</div>
             <div>{{item.channel}}</div>
           </cell>
+          <div v-if="index === 2" @click="goPushList">加载更多</div>
         </group>
       </div>
     </div>
@@ -74,7 +75,8 @@ export default {
   },
   computed: {
     ...mapState({
-      pushList: state => state.pushList,
+      // 只显示3条
+      pushList: state => state.pushList.filter((item, index) => index < 3),
     }),
   },
   created: function() {
@@ -118,6 +120,9 @@ export default {
         this.$router.push({name: 'userInfo', params: data});
       });
     },
+    goPushList() {
+      this.$router.push('/pushList');
+    }
   },
 };
 </script>
@@ -131,7 +136,8 @@ export default {
   height: 100px;
 }
 
-.weui-grids:before, .weui-grids:after,
+.weui-grids:before,
+.weui-grids:after,
 .home-content .weui-grid:before,
 .home-content .weui-grid:after {
   border: none;
@@ -147,41 +153,38 @@ export default {
   font-size: 12px !important;
   color: red;
 }
-  .trading-box {
-    width: 92%;
-    margin-left: 4%;
-    background: #fff;
-  }
-  .home-notice span {
+.trading-box {
+  width: 92%;
+  margin-left: 4%;
+  background: #fff;
+}
 
-  }
+.weui-cell:before {
+  border: none;
+}
+.Notification-list {
+  margin-top: 28px;
+}
 
-  .weui-cell:before {
-    border: none;
-  }
-  .Notification-list {
-    margin-top: 28px;
-  }
+.Notification-list .weui-cell {
+  font-size: 12px;
+  color: #999;
+}
 
-  .Notification-list .weui-cell {
-    font-size: 12px;
-    color: #999;
-  }
+.Notification-list-item .weui-cells {
+  width: 92%;
+  margin-left: 4%;
+  border-radius: 6px;
+}
 
-  .Notification-list-item .weui-cells {
-    width: 92%;
-    margin-left: 4%;
-    border-radius: 6px;
-  }
-
-  .price {
-    font-size: 24px;
-    color: red;
-  }
-  .change-cell {
-    padding-bottom: 0;
-    border-top: 1px solid #fff;
-  }
+.price {
+  font-size: 24px;
+  color: red;
+}
+.change-cell {
+  padding-bottom: 0;
+  border-top: 1px solid #fff;
+}
 .changes-cell {
   z-index: 99;
   border-bottom: 1px solid #fff;
