@@ -5,14 +5,14 @@
     </x-header>
     <div class="code-show">
       <div class="show-title">
-        <p>向商户收款</p>
+        <p>{{$t('Collecting money from customers')}}</p>
         <div class="code-time">
           <span>
-            <em>倒计时</em> {{timecunt}} <em>S</em>
+            <em>{{$t('Countdown')}}</em> {{timecunt}} <em>S</em>
           </span>
         </div>
       </div>
-      <p class="code-price">￥100.00</p>
+      <p class="code-price">￥{{tranAmt}}</p>
       <qrcode :value="qrCode" type="img" class="code-img"></qrcode>
       <span class="code-prompt">{{$t('Pay the wait')}}...</span>
     </div>
@@ -31,6 +31,12 @@
   Pay the wait:
     en: Order submitted successfully,waiting for user scan
     zh-CN: 订单提交成功,等待用户扫描
+  Collecting money from customers:
+    en: Collecting money from customers
+    zh-CN: 向客户收款
+  Countdown: 
+    en: Countdown
+    zh-CN: 倒计时
 </i18n>
 <script>
 import {XHeader, Qrcode, XInput, XButton} from 'vux';

@@ -45,6 +45,8 @@ en:
   Login out: Login out
   Change password: Change password
   Login out faild: Login out faild
+  Collecting money from customers: Collecting money from customers
+  Countdown: Countdown
 zh-CN:
   home: 首页
   userInfo: 个人中心
@@ -91,3 +93,5 @@ zh-CN:
   Login out: 退出登录
   Change password: 修改密码
   Login out faild: 退出失败
+  Collecting money from customers: 向客户收款
+  Countdown: 倒计时
