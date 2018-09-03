@@ -25,9 +25,17 @@
         <divider>{{$t('Tran push no data')}}</divider>
       </div>
       <div v-else>
-        <div v-for="(item, index) in pushList" :key="index">
-          {{item.tranDate}} {{item.tranAmt}} {{item.channel}}
-        </div>
+        <group v-for="(item, index) in pushList" :key="index">
+          <cell>
+            <x-icon slot="icon" type="android-notifications"/>
+            <div slot="title">交易提醒</div>
+            <div>{{getDateFormat(item.tranDate)}}</div>
+          </cell>
+          <cell>
+            <div slot="title">{{item.tranAmt}}</div>
+            <div>{{item.channel}}</div>
+          </cell>
+        </group>
       </div>
     </div>
   </div>
@@ -47,9 +55,10 @@
     zh-CN: 没有交易通知
 </i18n>
 <script>
-import {XHeader, Group, Cell, Grid, GridItem, Divider, CellFormPreview} from 'vux';
-import {mapState} from 'vuex'
+import {XHeader, Group, Cell, Grid, GridItem, Divider} from 'vux';
+import {mapState} from 'vuex';
 import {dateFormat} from 'vux';
+import moment from 'moment';
 import api from '../api';
 import localforage from '../localforage';
 
@@ -62,11 +71,10 @@ export default {
     Grid,
     GridItem,
     Divider,
-    CellFormPreview
   },
-   computed: {
+  computed: {
     ...mapState({
-      pushList: state => state.pushList
+      pushList: state => state.pushList,
     }),
   },
   created: function() {
@@ -76,7 +84,7 @@ export default {
       // TODO 存储的与store如何一致
       localforage(window.localStorage.merNo)
         .getItem('trans')
-        .then(trans => trans ? this.trans = trans : null);
+        .then(trans => (trans ? (this.trans = trans) : null));
     }
   },
   data: function() {
@@ -88,6 +96,14 @@ export default {
     };
   },
   methods: {
+    getDateFormat(date) {
+      if (date && date.length === 14)
+        return dateFormat(
+          new Date(moment(date, 'YYYYMMDDHHmmss')),
+          'YYYY-MM-DD HH:mm:ss'
+        );
+      else return dateFormat(new Date(), 'YYYY-MM-DD HH:mm:ss');
+    },
     goSetAmt() {
       this.$router.push('/setAmt');
     },
@@ -115,7 +131,8 @@ export default {
   height: 100px;
 }
 
-.weui-grids:before, .weui-grids:after,
+.weui-grids:before,
+.weui-grids:after,
 .home-content .weui-grid:before,
 .home-content .weui-grid:after {
   border: none;
@@ -131,5 +148,7 @@ export default {
   font-size: 12px !important;
   color: red;
 }
-
+.weui-cell:before {
+  border: none;
+}
 </style>

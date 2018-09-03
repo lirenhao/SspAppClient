@@ -70,7 +70,8 @@ const login = (userName, passWord) => {
         window.localStorage.setItem('token', resp.data.access_token)
         window.localStorage.setItem('merNo', userName.split('@')[0])
         router.go(-1)
-        // TODO 登录后绑定设备
+        // TODO 如何保证登录成功
+        return bindPush()
       } else {
         store.commit('UPDATE_LOADING', false)
         Vue.$vux.toast.show({
@@ -115,11 +116,11 @@ const userInfo = () => {
     })
 }
 
-const bindPush = (pushType, deviceNo, platform) => {
+const bindPush = () => {
   const params = new URLSearchParams()
-  params.append('pushType', pushType)
-  params.append('deviceNo', deviceNo)
-  params.append('platform', platform)
+  params.append('pushType', window.localStorage.pushType)
+  params.append('deviceNo', window.localStorage.deviceNo)
+  params.append('platform', window.localStorage.platform)
   return axios.post(urls.bindPush, params)
 }
 
@@ -129,7 +130,6 @@ const unBindPush = () => {
 
 const userUpdatePwd = (oldPwd, newPwd) => {
   store.commit('UPDATE_LOADING', true)
-  // TODO 密码加密
   const params = new URLSearchParams()
   params.append('oldPwd', oldPwd)
   params.append('newPwd', newPwd)
