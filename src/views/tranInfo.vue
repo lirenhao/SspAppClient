@@ -1,20 +1,29 @@
 <template>
   <div>
     <x-header style="width:100%;position:absolute;left:0;top:0;z-index:100;"
-              :title="title" :left-options="{showBack}">
+              :title="$t(title)" :left-options="{showBack}">
     </x-header>
-    <form-preview header-label="商户号" :header-value="info.merNo" :body-items="parserItem(info)"/>
+    <group>
+      <div>{{info.tranAmt}}</div>
+      <cell-form-preview :list="parserItem(info)"></cell-form-preview>
+      <div>
+        <x-icon type="android-notifications"/>
+        交易成功
+      </div>
+    </group>
   </div>
 </template>
 <script>
-import {XHeader, FormPreview} from 'vux';
+import {XHeader, Group, Cell, CellFormPreview,} from 'vux';
 import api from '../api';
 
 export default {
   name: 'tranInfo',
   components: {
     XHeader,
-    FormPreview,
+    Group,
+    Cell,
+    CellFormPreview,
   },
   props: {
     info: {
@@ -37,16 +46,14 @@ export default {
   methods: {
     parserItem(item) {
       const body = []
-      body.push({label: '工单号', value: item.workId})
       body.push({label: '商户号', value: item.merNo})
-      body.push({label: '派工人', value: item.jobOffer})
-      body.push({label: '执行人', value: item.executor})
-      body.push({label: '回执状态', value: item.receiptStatus})
-      body.push({label: '复核状态', value: item.reviewStatus})
-      body.push({label: '派工时间', value: item.dispatchingDate})
-      body.push({label: '终端联系人', value: item.businessContacts})
-      body.push({label: '终端联系电话', value: item.businessContactsPhone})
-      body.push({label: '终端地址', value: item.addr})
+      body.push({label: '终端号', value: item.termNo})
+      body.push({label: '交易类型', value: item.tranType})
+      body.push({label: '参考号', value: item.rrn})
+      body.push({label: '商户单号', value: item.tranNo})
+      body.push({label: '支付方式', value: item.channel})
+      body.push({label: '交易时间', value: item.tranDate})
+      body.push({label: '交易金额', value: item.tranAmt})
       return body
     },
   },
@@ -54,11 +61,4 @@ export default {
 </script>
 
 <style scoped>
-.vux-demo {
-  text-align: center;
-}
-.logo {
-  width: 100px;
-  height: 100px
-}
 </style>
