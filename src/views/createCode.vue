@@ -12,6 +12,7 @@
           </span>
         </div>
       </div>
+      <p class="code-price">￥100.00</p>
       <qrcode :value="qrCode" type="img" class="code-img"></qrcode>
       <span class="code-prompt">{{$t('Pay the wait')}}...</span>
     </div>
@@ -142,5 +143,11 @@ export default {
     font-style: normal;
     font-size: 12px;
     color: #999;
+  }
+
+  .code-price {
+    font-size: 18px;
+    font-weight: 500;
+    margin: 20px 0 -8px 0;
   }
 </style>
