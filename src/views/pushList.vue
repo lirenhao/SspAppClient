@@ -3,7 +3,7 @@
     <x-header style="width:100%;position:absolute;left:0;top:0;z-index:100;"
               :title="$t(title)" :left-options="{showBack}">
     </x-header>
-    <group v-for="(item, index) in pushList" :key="index">
+    <group v-for="(item, index) in pushList" :key="index" @click.native="goTranInfo(item.merNo, item.tranNo)">
       <div>交易提醒</div>
       <div>{{getDateFormat(item.tranDate)}}</div>
       <div>交易金额</div>
@@ -70,7 +70,23 @@ export default {
         );
       else return dateFormat(new Date(), 'YYYY-MM-DD HH:mm:ss');
     },
-    goPushInfo() {},
+    goTranInfo(merNo, tranNo) {
+      this.$router.push({
+        name: 'tranInfo',
+        params: {
+          info: {
+            merNo: '104000100010001',
+            termNo: '12345678',
+            tranType: '刷卡交易',
+            rrn: '12345',
+            tranNo: '201809031639580001',
+            channel: '微信支付',
+            tranDate: '20180903163958',
+            tranAmt: '100',
+          },
+        },
+      });
+    },
   },
 };
 </script>
