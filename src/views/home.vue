@@ -25,7 +25,8 @@
         <divider>{{$t('Tran push no data')}}</divider>
       </div>
       <div class="Notification-list" v-else>
-        <group class="Notification-list-item" v-for="(item, index) in pushList" :key="index">
+        <group class="Notification-list-item" v-for="(item, index) in pushList" :key="index"
+          @click.native="goTranInfo(item.merNo, item.tranNo)">
           <cell class="change-cell">
             <x-icon style="fill: #999; width: 20px; margin: 1px 2px 0 0" slot="icon" type="android-notifications"/>
             <div slot="title">交易提醒</div>
@@ -35,8 +36,8 @@
             <div class="price" slot="title">{{item.tranAmt}}</div>
             <div>{{item.channel}}</div>
           </cell>
-          <div v-if="index === 2" @click="goPushList">加载更多</div>
         </group>
+        <div v-if="pushList.length === 3" @click="goPushList">加载更多</div>
       </div>
     </div>
   </div>
@@ -120,9 +121,26 @@ export default {
         this.$router.push({name: 'userInfo', params: data});
       });
     },
+    goTranInfo(merNo, tranNo) {
+      this.$router.push({
+        name: 'tranInfo',
+        params: {
+          info: {
+            merNo: '104000100010001',
+            termNo: '12345678',
+            tranType: '刷卡交易',
+            rrn: '12345',
+            tranNo: '201809031639580001',
+            channel: '微信支付',
+            tranDate: '20180903163958',
+            tranAmt: '100',
+          },
+        },
+      });
+    },
     goPushList() {
       this.$router.push('/pushList');
-    }
+    },
   },
 };
 </script>
