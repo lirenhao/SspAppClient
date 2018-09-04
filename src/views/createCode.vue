@@ -67,6 +67,7 @@ export default {
       showBack: this.$route.meta.showBack,
       timecunt: this.timeout,
       showTimeout: false,
+      request: true,
     };
   },
   methods: {
@@ -82,12 +83,15 @@ export default {
         this.showTimeout = true;
         // TODO 弹出提示框
       } else {
-        if ((this.timeout - newValue) % 5 === 0) {
+        if ((this.timeout - newValue) % 5 === 0 && this.request) {
+          this.request = false
           api.qrCodeQuery(this.queryNo).then(data => {
             if (data && data.respCode === '00') {
               this.$router.replace({name: 'payResult', params: {result: true}});
+            } else {
+              this.$router.replace({name: 'payResult', params: {result: false}});
             }
-          });
+          }).catch(() => this.request = true);
         }
       }
     },
