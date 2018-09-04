@@ -4,9 +4,12 @@
               :title="$t(title)" :left-options="{showBack}">
     </x-header>
     <group>
-      <div>{{info.tranAmt}}</div>
+      <div class="TI-money">
+        {{info.tranAmt}}
+      <p>COCO奶茶店</p>
+      </div>
       <cell-form-preview :list="parserItem(info)"></cell-form-preview>
-      <div>
+      <div class="state">
         <x-icon type="android-notifications"/>
         交易成功
       </div>
@@ -61,4 +64,25 @@ export default {
 </script>
 
 <style scoped>
+  .TI-money{
+    text-align: center;
+    font-size: 18px;
+    color: #5799F9;
+    padding: 30px 0 20px 0;
+  }
+
+  .TI-money p {
+    font-size: 12px;
+    color: #999;
+  }
+
+  .weui-cell {
+    font-size: 12px;
+    border-bottom: 1px dotted #ccc;
+  }
+  .state {
+    padding: 10px;
+    font-size: 14px;
+    text-align: center;
+  }
 </style>

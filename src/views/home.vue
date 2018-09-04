@@ -37,7 +37,7 @@
             <div>{{item.channel}}</div>
           </cell>
         </group>
-        <div v-if="pushList.length === 3" @click="goPushList">{{$t('Load more')}}</div>
+        <div class="load-more" v-if="pushList.length === 3" @click="goPushList">{{$t('Load more')}}</div>
       </div>
     </div>
   </div>
@@ -193,4 +193,15 @@ export default {
   z-index: 99;
   border-bottom: 1px solid #fff;
 }
+
+  /*加载更多*/
+  .load-more {
+    padding: 10px 0;
+    font-size: 12px;
+    color: #5799F9;
+    text-align: center;
+    background: #fff;
+    border-top: 1px solid #eee;
+  }
+
 </style>

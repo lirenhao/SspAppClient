@@ -4,10 +4,12 @@
               :title="$t(title)" :left-options="{showBack}">
     </x-header>
     <group v-for="(item, index) in pushList" :key="index" @click.native="goTranInfo(item.merNo, item.tranNo)">
-      <div>交易提醒</div>
-      <div>{{getDateFormat(item.tranDate)}}</div>
-      <div>交易金额</div>
-      <div>{{item.tranAmt}}</div>
+      <div class="PL-title">交易提醒</div>
+      <div class="PL-titme">{{getDateFormat(item.tranDate)}}</div>
+      <div class="PL-money" >
+        交易金额
+        <p>{{item.tranAmt}}</p>
+      </div>
       <cell-form-preview :list="[
         {
           label: '支付方式',
@@ -93,6 +95,35 @@ export default {
 
 <style scoped>
 .weui-cell:before {
-  border: none;
+  border-top: 1px dotted #ccc;
+ }
+  .PL-title {
+    font-size: 16px;
+    margin: 12px 0 0 14px;
+  }
+  .PL-titme {
+    font-size: 12px;
+    color: #ccc;
+    margin: 4px 0 0 14px;
+  }
+  .PL-money {
+    text-align: center;
+    font-size: 12px;
+    color: #CCC;
+    margin-top: 30px;
+  }
+.PL-money p {
+  font-size: 18px;
+  color: #5799F9;
+  margin-bottom: 20px;
 }
+
+  .weui-cell {
+    margin-right: 14px;
+    padding-right: 0 !important;
+    font-size: 12px;
+  }
+ .weui-form-preview__label {
+  color: #ccc !important;
+ }
 </style>
