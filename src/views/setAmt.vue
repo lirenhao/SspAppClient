@@ -5,7 +5,7 @@
     </x-header>
     <group class="money-title" :title="$t('Payment amount')"></group>
     <div class="money-box">
-      <x-input class="money-input" v-model="amt" type="number" step="0.01"
+      <x-input class="money-input" v-model="amt" type="tel" step="0.01"
         :placeholder="$t('Please enter the payment amount')" :is-type="validAmount">
         <div class="money" slot="label">￥</div>
       </x-input>
