@@ -25,13 +25,21 @@
   </div>
 </template>
 <script>
-import {XHeader, Qrcode, XInput, XButton, XDialog, TransferDomDirective as TransferDom} from 'vux';
+import {
+  XHeader,
+  Qrcode,
+  XInput,
+  XButton,
+  XDialog,
+  TransferDomDirective as TransferDom,
+} from 'vux';
 import api from '../api';
+import urls from '../api/urls';
 
 export default {
   name: 'createCode',
   directives: {
-    TransferDom
+    TransferDom,
   },
   components: {
     XHeader,
@@ -73,25 +81,38 @@ export default {
   methods: {
     goSetAmt() {
       this.$router.replace({name: 'setAmt', params: {tranAmt: this.tranAmt}});
-    }
+    },
   },
   watch: {
     timecunt: function(newValue, oldValue) {
-      console.log('timecunt', newValue, (this.timeout - newValue) % 5 === 0);
       if (newValue === 0) {
         clearInterval(this.timer);
         this.showTimeout = true;
-        // TODO 弹出提示框
       } else {
         if ((this.timeout - newValue) % 5 === 0 && this.request) {
-          this.request = false
-          api.qrCodeQuery(this.queryNo).then(data => {
-            if (data && data.respCode === '00') {
-              this.$router.replace({name: 'payResult', params: {result: true}});
-            } else {
-              this.$router.replace({name: 'payResult', params: {result: false}});
-            }
-          }).catch(() => this.request = true);
+          this.request = false;
+          this.$http
+            .get(`${urls.qrCodeQuery}/${this.queryNo}`, {
+              headers: {Authorization: `bearer ${window.localStorage.token}`},
+            })
+            .then(resp => {
+              if (resp.status === 200) {
+                if (resp.data && resp.data.respCode === '00') {
+                  this.$router.replace({
+                    name: 'payResult',
+                    params: {result: true},
+                  });
+                } else {
+                  this.$router.replace({
+                    name: 'payResult',
+                    params: {result: false},
+                  });
+                }
+              } else {
+                this.request = true;
+              }
+            })
+            .catch(() => (this.request = true));
         }
       }
     },
