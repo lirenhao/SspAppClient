@@ -8,128 +8,129 @@
       {{tranDate}}
       <span class="Merchants">{{merNo}}</span>
     </group-title>
-    <div class="tranlist">
-      <form-preview :header-label="$t('扫码收款')" header-value="+39.99" :body-items="list"
-                    :footer-buttons="buttons1"></form-preview>
-      <form-preview :header-label="$t('扫码收款')" header-value="+45.00" :body-items="list"
-                    :footer-buttons="buttons1"></form-preview>
-      <form-preview :header-label="$t('扫码收款')" header-value="+12.56" :body-items="list"
-                    :footer-buttons="buttons1"></form-preview>
-      <form-preview class="list-failure" :header-label="$t('扫码收款')" header-value="-9.99" :body-items="list"
-                    :footer-buttons="buttons1"></form-preview>
+    <div v-if="tranList.length === 0">
+      <divider>{{$t('Tran no query to data')}}</divider>
+    </div>
+    <div v-else class="tranlist">
+      <form-preview v-for="(item, index) in tranList" :key="index" @click.native="showInfo(item)"
+        :class="item.respCode === '00' ? '' : 'list-failure'"
+        :header-value="item.respCode === '00' ? '+' + item.tranAmt : '-' + item.tranAmt" 
+        :header-label="item.channel" :body-items="getView(item)">
+      </form-preview>
     </div>
   </div>
 </template>
 <script>
-  import {XHeader, GroupTitle, Divider, FormPreview} from 'vux';
-  import {mapState} from 'vuex'
-  import api from '../api';
+import {XHeader, GroupTitle, Divider, FormPreview} from 'vux';
+import {mapState} from 'vuex';
+import {dateFormat} from 'vux';
+import moment from 'moment';
 
-  export default {
-    name: 'tranList',
-    components: {
-      XHeader,
-      GroupTitle,
-      Divider,
-      FormPreview,
-    },
-    computed: {
-      ...mapState({
-        tranList: state => state.tranList,
-        tranDate: state => state.tranQuery.tranDate,
-        merNo: state => state.tranQuery.merNo
-      }),
-    },
-    created: function () {
-      if (!window.localStorage.token) {
-        this.$router.push({name: 'login', params: {isClear: false}});
-      }
-    },
-    data: function () {
-      return {
-        isShowNav: this.$route.meta.isShowNav,
-        title: this.$route.meta.title,
-        showBack: this.$route.meta.showBack,
-        list: [{
-          label: '2018-09-06 13:34:52',
-          value: '成功'
-        }
-        ]
-      };
-    },
+export default {
+  name: 'tranList',
+  components: {
+    XHeader,
+    GroupTitle,
+    Divider,
+    FormPreview,
+  },
+  computed: {
+    ...mapState({
+      tranList: state => state.tranList,
+      tranDate: state => state.tranQuery.tranDate,
+      merNo: state => state.tranQuery.merNo,
+    }),
+  },
+  created: function() {
+    if (!window.localStorage.token) {
+      this.$router.push({name: 'login', params: {isClear: false}});
+    }
+  },
+  data: function() {
+    return {
+      isShowNav: this.$route.meta.isShowNav,
+      title: this.$route.meta.title,
+      showBack: this.$route.meta.showBack,
+    };
+  },
 
-    methods: {
-      getView (value) {
-        return [
-          {label: '商户号', value: value.merNo},
-          {label: '终端号', value: value.termNo},
-          {label: '金  额', value: value.tranAmt},
-        ]
-      },
-      showInfo(value) {
-        this.$router.push({name: 'tranInfo', params: {info: value}});
-      },
-      goTranSearch() {
-        this.$router.replace({name: 'tranSearch', params: {merNo: this.merNo, tranDate: this.tranDate}});
-      },
+  methods: {
+    getView(item) {
+      return [
+        {
+          label: dateFormat(
+            new Date(moment(item.tranDate, 'YYYYMMDDHHmmss')),
+            'YYYY-MM-DD'
+          ),
+          value: item.respCode === '00' ? '成功' : '失败',
+        },
+      ];
     },
-  };
+    showInfo(value) {
+      this.$router.push({name: 'tranInfo', params: {info: value}});
+    },
+    goTranSearch() {
+      this.$router.replace({
+        name: 'tranSearch',
+        params: {merNo: this.merNo, tranDate: this.tranDate},
+      });
+    },
+  },
+};
 </script>
 
 <style>
+/*title*/
+.Merchant {
+  font-size: 12px;
+  background: #e9e9e9;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
 
-  /*title*/
-  .Merchant {
-    font-size: 12px;
-    background: #e9e9e9;
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-    padding-top: 8px;
-    padding-bottom: 8px;
-  }
+/*title  右侧文字*/
+.Merchants {
+  float: right;
+}
 
-  /*title  右侧文字*/
-  .Merchants {
-    float: right;
-  }
+/*去掉上边框*/
+.tranlist .weui-form-preview:before {
+  border-top: none !important;
+}
 
-  /*去掉上边框*/
-  .tranlist .weui-form-preview:before {
-    border-top: none !important;
-  }
+/*去掉下边框*/
+.tranlist .weui-form-preview__hd:after {
+  border-bottom: none !important;
+}
 
-  /*去掉下边框*/
-  .tranlist .weui-form-preview__hd:after {
-    border-bottom: none !important;
-  }
+/*上半边样式*/
+.tranlist .weui-form-preview__hd {
+  font-size: 14px;
+  color: #101010;
+  padding-bottom: 0 !important;
+}
 
-  /*上半边样式*/
-  .tranlist .weui-form-preview__hd {
-    font-size: 14px;
-    color: #101010;
-    padding-bottom: 0 !important;
-  }
+/*右半边样式*/
+.tranlist .weui-form-preview__hd .weui-form-preview__label {
+  color: #101010;
+}
 
-  /*右半边样式*/
-  .tranlist .weui-form-preview__hd .weui-form-preview__label {
-    color: #101010;
-  }
+/*下半边样式*/
+.tranlist .weui-form-preview__bd {
+  font-size: 12px !important;
+  padding-top: 0 !important;
+  line-height: 1 !important;
+}
 
-  /*下半边样式*/
-  .tranlist .weui-form-preview__bd {
-    font-size: 12px !important;
-    padding-top: 0 !important;
-    line-height: 1 !important;
-  }
+/*收入资金*/
+.tranlist .weui-form-preview__hd .weui-form-preview__value {
+  font-size: 18px !important;
+}
 
-  /*收入资金*/
-  .tranlist .weui-form-preview__hd .weui-form-preview__value {
-    font-size: 18px !important;
-  }
-
-  /*交易失败样式*/
-  .tranlist .list-failure .weui-form-preview__value {
-    color: #F04C50;
-  }
-
+/*交易失败样式*/
+.tranlist .list-failure .weui-form-preview__value {
+  color: #f04c50;
+}
 </style>
