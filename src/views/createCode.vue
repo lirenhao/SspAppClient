@@ -18,7 +18,7 @@
     </div>
     <div v-transfer-dom>
       <x-dialog v-model="showTimeout">
-        <img src=../assets/clock.png">
+        <img src="../assets/clock.png">
         <div>付款码超时了...</div>
         <x-button @click.native="goSetAmt">重新生成</x-button>
       </x-dialog>
@@ -97,21 +97,20 @@ export default {
               headers: {Authorization: `bearer ${window.localStorage.token}`},
             })
             .then(resp => {
-              if (resp.status === 200) {
-                if (resp.data && resp.data.respCode === '00') {
-                  this.$router.replace({
+              if (resp.status === 200 && resp.data && resp.data.respCode) {
+                if (resp.data.respCode === '00') {
+                  return this.$router.replace({
                     name: 'payResult',
                     params: {result: true},
                   });
                 } else {
-                  this.$router.replace({
+                  return this.$router.replace({
                     name: 'payResult',
                     params: {result: false},
                   });
                 }
-              } else {
-                this.request = true;
               }
+              return Promise.reject();
             })
             .catch(() => (this.request = true));
         }
