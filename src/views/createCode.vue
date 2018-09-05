@@ -18,6 +18,7 @@
     </div>
     <div v-transfer-dom>
       <x-dialog v-model="showTimeout">
+        <img src=../assets/clock.png">
         <div>付款码超时了...</div>
         <x-button @click.native="goSetAmt">重新生成</x-button>
       </x-dialog>
@@ -74,7 +75,7 @@ export default {
       title: this.$route.meta.title,
       showBack: this.$route.meta.showBack,
       timecunt: this.timeout,
-      showTimeout: false,
+      showTimeout: true,
       request: true,
     };
   },

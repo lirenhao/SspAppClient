@@ -10,8 +10,10 @@
       </div>
       <cell-form-preview :list="parserItem(info)"></cell-form-preview>
       <div class="state">
-        <x-icon type="android-notifications"/>
-        交易成功
+        <!--<x-icon style="margin-bottom: -7px; fill: #0BB20C; " type="android-checkmark-circle"/>-->
+        <!--交易成功-->
+        <x-icon style="margin: 0 4px -7px 0; fill: red; " type="close-circled"/>
+        交易失败
       </div>
     </group>
   </div>
