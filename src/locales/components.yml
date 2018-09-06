@@ -7,6 +7,7 @@ en:
   tranInfo: Transaction Details
   setAmt: Set amount
   createCode: Collection code
+  payResult: Pay result
   pushList: Transaction notification
   Network anomaly: Network anomaly
   Login validation failed: Login validation failed
@@ -52,8 +53,11 @@ en:
   Load more: Load more
   Success: Success
   Failed: Failed
+  Done: Done
   The payment code has expired: The payment code has expired
   New generation again: New generation again
+  Payment is successful: Payment is successful
+  Payment is failed: Payment is failed
 zh-CN:
   home: 首页
   userInfo: 个人中心
@@ -63,6 +67,7 @@ zh-CN:
   tranInfo: 交易详情
   setAmt: 设置金额
   createCode: 收款码
+  payResult: 收款结果
   pushList: 交易通知
   Network anomaly: 网络异常
   Login validation failed: 用户名或密码错误
@@ -107,5 +112,8 @@ zh-CN:
   Load more: 加载更多
   Success: 成功
   Failed: 失败
+  Done: 确认
   The payment code has expired: 付款码超时了
   New generation again: 重新生成
+  Payment is successful: 支付成功
+  Payment is failed: 支付失败

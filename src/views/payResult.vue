@@ -3,10 +3,15 @@
     <x-header style="width:100%;position:absolute;left:0;top:0;z-index:100;"
               :title="$t(title)" :left-options="{showBack}">
     </x-header>
-    <div class="pay-result">
+    <div class="pay-result" v-if="result">
       <img slot="icon" src="../assets/success.png" >
-      <p>{{result}} 恭喜！支付成功！</p>
-      <x-button @click.native="goBack">确定</x-button>
+      <p>{{$t('Payment is successful')}}</p>
+      <x-button @click.native="goBack">{{$t('Done')}}</x-button>
+    </div>
+    <div class="pay-result" v-else>
+      <img slot="icon" src="../assets/failure.png" >
+      <p>{{$t('Payment is failed')}}</p>
+      <x-button @click.native="goBack">{{$t('Done')}}</x-button>
     </div>
   </div>
 </template>
