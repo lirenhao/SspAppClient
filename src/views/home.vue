@@ -3,7 +3,7 @@
     <x-header style="width:100%;position:absolute;left:0;top:0;z-index:100;"
               :title="$t(title)" :left-options="{showBack}">
     </x-header>
-    <div>
+    <div class="home-page">
       <grid class="home-content">
         <div @click="goSetAmt">
           <grid-item :label="$t('Collection code')">
@@ -25,14 +25,14 @@
         <divider>{{$t('Tran push no data')}}</divider>
       </div>
       <div class="Notification-list" v-else>
-        <group class="Notification-list-item" v-for="(item, index) in pushList" :key="index"
+        <group v-for="(item, index) in pushList" :key="index"
                @click.native="goTranInfo(item.merNo, item.tranNo)">
           <cell class="change-cell">
             <x-icon style="fill: #999; width: 20px; margin: 1px 2px 0 0" slot="icon" type="android-notifications"/>
             <div slot="title">{{$t('Transaction reminder')}}</div>
             <div>{{getDateFormat(item.tranDate)}}</div>
           </cell>
-          <cell class="changes-cell">
+          <cell>
             <div class="price" slot="title">{{item.tranAmt}}</div>
             <div>{{item.channel}}</div>
           </cell>
@@ -131,75 +131,75 @@
   };
 </script>
 
-<style scoped>
+<style>
+  /*首页导航栏*/
+  .home-content {
+    top: 8px;
+    background: #fff;
+    border: none;
+    margin-bottom: 28px;
+  }
 
   /*首页导航按钮边框删除*/
-  .weui-grids:before,
-  .weui-grids:after,
+  .home-page .weui-grids:before,
+  .home-page .weui-grids:after,
   .home-content .weui-grid:before,
   .home-content .weui-grid:after {
     border: none;
   }
 
-  .home-content {
-    top: 14px;
-    background: #fff;
-    border: none;
+  /*首页导航按文字大小设置*/
+  .home-content .weui-grid__icon + .weui-grid__label {
+    font-size: 13px !important;
   }
 
-  .weui-grid__icon + .weui-grid__label {
-    font-size: 12px !important;
-    color: red;
-  }
-
-  .trading-box {
+  /*交易通知 宽度 圆角设置*/
+  .Notification-list .weui-cells {
     width: 92%;
     margin-left: 4%;
-    background: #fff;
+    border-radius: 12px;
   }
 
-  .weui-cell:before {
-    border: none;
-  }
-
-  .Notification-list {
-    margin-top: 28px;
-  }
-
+  /*交易通知字体 颜色设置*/
   .Notification-list .weui-cell {
     font-size: 12px;
     color: #999;
+    padding-top: 0;
   }
 
-  .Notification-list-item .weui-cells {
-    width: 92%;
-    margin-left: 4%;
-    border-radius: 6px;
+  /*边距调整*/
+  .change-cell {
+    padding-top: 10px !important;
   }
-
+  /*价格设置*/
   .price {
     font-size: 24px;
     color: red;
   }
 
-  .change-cell {
-    padding-bottom: 0;
-    border-top: 1px solid #fff;
+  /*交易通知边框删除*/
+  .Notification-list .weui-cells:before,
+  .Notification-list .weui-cell:before {
+    border-top: none !important;
   }
 
-  .changes-cell {
-    z-index: 99;
-    border-bottom: 1px solid #fff;
+  .Notification-list .weui-cells:after {
+    border-bottom: none !important;
   }
+
 
   /*加载更多*/
   .load-more {
+    position: relative;
+    width: 92%;
+    margin-left: 4%;
+    margin-top: -8px;
     padding: 10px 0;
     font-size: 12px;
     color: #5799F9;
     text-align: center;
     background: #fff;
     border-top: 1px solid #eee;
+    border-radius: 0 0 12px 12px;
   }
-
 </style>
