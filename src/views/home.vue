@@ -34,7 +34,7 @@
           </cell>
           <cell>
             <div class="price" slot="title">{{item.tranAmt}}</div>
-            <div>{{item.channel}}</div>
+            <div class="trade">{{item.channel}}</div>
           </cell>
         </group>
         <div class="load-more" v-if="pushList.length === 3" @click="goPushList">{{$t('Load more')}}</div>
@@ -170,6 +170,10 @@
   /*边距调整*/
   .change-cell {
     padding-top: 10px !important;
+  }
+
+  .trade {
+    color: #333;
   }
 
   /*价格设置*/

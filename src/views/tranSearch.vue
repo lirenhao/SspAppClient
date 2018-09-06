@@ -4,12 +4,14 @@
               :title="$t(title)" :left-options="{showBack}">
       <div slot="right" @click="goTranList">{{$t('vux.calendar.confirm_text')}}</div>
     </x-header>
-    <!--<group-title>{{$t('Transaction date')}}</group-title>-->
-    <inline-calendar v-model="tranDate" disable-future>
-      <div solt="each-day">afda</div>
-    </inline-calendar>
-    <group-title>{{$t('Sub merchant')}}</group-title>
-    <picker :data="[merList]" v-model="merNos"></picker>
+    <div class="search-page">
+      <inline-calendar v-model="tranDate" disable-future>
+        <div solt="each-day">afda</div>
+      </inline-calendar>
+
+      <group-title>{{$t('Sub merchant')}}</group-title>
+      <picker :data="[merList]" v-model="merNos" ></picker>
+    </div>
   </div>
 </template>
 <script>
@@ -73,15 +75,53 @@ export default {
 };
 </script>
 
-<style scoped>
-.vux-picker {
-  width: 100%;
-  position: absolute !important;
-  bottom: 0 !important;
-}
-.weui-cells__title {
-  position: absolute;
-  bottom: 240px;
-  font-size: 12px;
+<style>
+  /*时间选择年、月份宽度修改*/
+  .search-page .calendar-header > div {
+    width: 40%;
+    margin-left: 7%;
+  }
+
+  /*字体修改*/
+  .search-page .calendar-title {
+    font-size: 16px;
+  }
+
+  /*选择箭头颜色修改*/
+  .search-page .vux-prev-icon, .vux-next-icon {
+    border-color: #5799F9 !important;
+  }
+
+  /*选择箭头大小修改*/
+  .search-page .vux-prev-icon, .search-page .vux-next-icon {
+    width: 9px;
+    height: 9px;
+  }
+
+  /*星期颜色修改*/
+  .search-page .inline-calendar th {
+    color: #5799F9;
+  }
+
+  .search-page .inline-calendar td.is-today {
+    /*width: 16px;*/
+    /*height: 16px;*/
+    /*border-radius: 50%;*/
+    /*color: #fff;*/
+    /*background: #5799F9;*/
+  }
+
+  /*商户标题*/
+  .search-page .weui-cells__title {
+    position: absolute;
+    bottom: 240px;
+    font-size: 12px;
+  }
+
+  /*商户选择*/
+  .search-page .vux-picker {
+    width: 100%;
+    position: absolute !important;
+    bottom: 0 !important;
   }
 </style>

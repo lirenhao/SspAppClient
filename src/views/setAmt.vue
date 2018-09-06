@@ -105,6 +105,16 @@ export default {
     border-bottom: 1px solid #d9d9d9;
   }
 
+  /*输入框*/
+  .money-input {
+    width: 84%;
+    height: 38px;
+    background: none;
+    border: none;
+    outline:medium;
+    font-size: 16px;
+  }
+
   /*间距调整*/
   .weui-cell {
     padding-left: 0 !important;
