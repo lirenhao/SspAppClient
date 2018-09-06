@@ -1,7 +1,7 @@
 <template>
   <div>
     <x-header style="width:100%;position:absolute;left:0;top:0;z-index:100;"
-              :title="title" :left-options="{showBack}">
+              :title="$t(title)" :left-options="{showBack}">
       <div slot="right" @click="goTranSearch">{{$t('Tran search select')}}</div>
     </x-header>
     <group-title class="Merchant">
@@ -60,9 +60,9 @@ export default {
         {
           label: dateFormat(
             new Date(moment(item.tranDate, 'YYYYMMDDHHmmss')),
-            'YYYY-MM-DD'
+            'YYYY-MM-DD HH:mm:ss'
           ),
-          value: item.respCode === '00' ? '成功' : '失败',
+          value: item.respCode === '00' ? this.$t('Success') : this.$t('Failed'),
         },
       ];
     },

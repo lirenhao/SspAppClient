@@ -50,6 +50,8 @@ en:
   Amount input error: Amount input error
   Transaction reminder: Transaction reminder
   Load more: Load more
+  Success: Success
+  Failed: Failed
 zh-CN:
   home: 首页
   userInfo: 个人中心
@@ -101,3 +103,5 @@ zh-CN:
   Amount input error: 金额输入错误
   Transaction reminder: 交易提醒
   Load more: 加载更多
+  Success: 成功
+  Failed: 失败
