@@ -171,6 +171,7 @@
   .change-cell {
     padding-top: 10px !important;
   }
+
   /*价格设置*/
   .price {
     font-size: 24px;
