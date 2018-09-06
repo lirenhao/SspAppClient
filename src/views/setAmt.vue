@@ -86,43 +86,50 @@ export default {
 </script>
 
 <style scoped>
-.money-box {
-  width: 80%;
-  height: 60px;
-  margin-left: 10%;
-  border-bottom: 1px solid #d9d9d9;
-}
-.weui-cell {
-  padding-left: 0 !important;
-  padding-bottom: 0 !important;
-}
+  /*标题*/
+  .money-title {
+    margin-left: 30px;
+    margin-top: 50px;
+    }
 
-.money-title {
-  margin-left: 30px;
-  margin-top: 50px;
-}
+  /*金额图标*/
+  .money {
+    font-size: 38px;
+    margin-bottom: 12px;
+  }
 
-.general-btn {
-  width: 66%;
-  height: 38px;
-  margin-left: 17%;
-  background: #67a2f9;
-  color: #fff;
-  border: none;
-  font-size: 15px;
-  margin-top: 96px;
-  border-radius: 4px;
-  text-align: center;
-}
+  /*输入金额框*/
+  .money-box {
+    width: 80%;
+    height: 60px;
+    margin-left: 10%;
+    border-bottom: 1px solid #d9d9d9;
+  }
 
-.weui-btn:after {
-  border: none !important;
-}
-.money {
-  font-size: 38px;
-  margin-bottom: 12px;
-}
-.money-input {
-  font-size: 14px;
-}
+  /*间距调整*/
+  .weui-cell {
+    padding-left: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  /*按钮*/
+  .general-btn {
+    width: 66%;
+    height: 38px;
+    margin-left: 17%;
+    background: #67a2f9;
+    color: #fff;
+    border: none;
+    font-size: 15px;
+    margin-top: 96px;
+    border-radius: 4px;
+    text-align: center;
+  }
+
+  /*删除按钮边框*/
+  .weui-btn:after {
+    border: none !important;
+  }
+
+
 </style>
