@@ -52,7 +52,7 @@ export default {
         this.$vux.toast.show({
           type: 'warn',
           position: 'default',
-          text: '输入错误'
+          text: this.$t('Input error')
         })
         return
       }
@@ -63,21 +63,21 @@ export default {
               this.$vux.toast.show({
                 type: 'success',
                 position: 'default',
-                text: '密码修改成功'
+                text: this.$t('Password modified successfully')
               })
               this.$router.go(-1)
             } else
               this.$vux.toast.show({
                 type: 'warn',
                 position: 'default',
-                text: '原密码错误'
+                text: this.$t('Old password failed')
               })
           })
       else
         this.$vux.toast.show({
           type: 'warn',
           position: 'default',
-          text: '密码不配'
+          text: this.$t('New password two input mismatch')
         })
     },
   },

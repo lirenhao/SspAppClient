@@ -34,6 +34,10 @@ en:
   Fill in the old password: Fill in the old password
   Fill in again to confirm: Fill in again to confirm
   Confirm the changes: Confirm the changes
+  Password modified successfully: Password modified successfully
+  Old password failed: Old password failed
+  Input error: Input error
+  New password two input mismatch: New password two input mismatch
   Please enter merchant number: Please enter merchant number
   Please enter login name: Please enter login name
   Please enter password: Please enter login name
@@ -93,6 +97,10 @@ zh-CN:
   Fill in the old password: 填写原密码
   Fill in again to confirm: 再次填写确认
   Confirm the changes: 确认修改
+  Password modified successfully: 密码修改成功
+  Old password failed: 原密码错误
+  Input error: 输入错误
+  New password two input mismatch: 新密码两次输入不匹配
   Please enter merchant number: 请输入商户号
   Please enter login name: 请输入登录名
   Please enter password: 请输入密码
