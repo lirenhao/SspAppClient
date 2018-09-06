@@ -129,7 +129,7 @@ export default {
   /*日期*/
   .PL-titme {
     font-size: 12px;
-    color: #ccc;
+    color: #999;
     margin: 4px 0 0 14px;
   }
 
@@ -137,7 +137,7 @@ export default {
   .PL-money {
     text-align: center;
     font-size: 12px;
-    color: #CCC;
+    color: #999;
     margin-top: 20px;
   }
 
@@ -154,7 +154,4 @@ export default {
     font-size: 12px;
   }
 
- .weui-form-preview__label {
-    color: #ccc !important;
- }
 </style>

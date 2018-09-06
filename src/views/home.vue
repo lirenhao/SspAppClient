@@ -174,7 +174,7 @@
 
   /*价格设置*/
   .price {
-    font-size: 24px;
+    font-size: 20px;
     color: red;
   }
 
