@@ -3,11 +3,10 @@
     <x-header style="width:100%;position:absolute;left:0;top:0;z-index:100;"
               :title="$t(title)" :left-options="{showBack}">
     </x-header>
-    <group class="money-title" :title="$t('Payment amount')"></group>
+    <group class="money-title" :title="$t('Please enter the payment amount')"></group>
     <div class="money-box">
       <label class="money" >￥</label>
-      <input class="money-input" v-model="amt" type="number" step="0.01"
-        :placeholder="$t('Please enter the payment amount')"/>
+      <input class="money-input" v-model="amt" type="number" step="0.01" />
     </div>
     <x-button class="general-btn" type="primary" @click.native="goCreateCode">{{$t('Generate QR code')}}</x-button>
   </div>
@@ -112,7 +111,7 @@ export default {
     background: none;
     border: none;
     outline:medium;
-    font-size: 16px;
+    font-size: 38px;
   }
 
   /*间距调整*/
