@@ -58,7 +58,7 @@
           this.$vux.toast.show({
             type: 'warn',
             position: 'default',
-            text: '请输入用户名或密码'
+            text: this.$t('Login validation failed')
           })
         }
       },

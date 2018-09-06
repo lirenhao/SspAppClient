@@ -16,10 +16,10 @@
       <qrcode :value="qrCode" type="img" class="code-img"></qrcode>
       <span class="code-prompt">{{$t('Pay the wait')}}...</span>
     </div>
-    <div class="show-titme">
+    <div class="show-titme" v-if="showTimeout">
         <img src="../assets/clock.png" class="clock">
-        <div class="timeout">付款码超时了...</div>
-        <x-button @click.native="goSetAmt">重新生成</x-button>
+        <div class="timeout">{{$t('The payment code has expired')}}...</div>
+        <x-button @click.native="goSetAmt">{{$t('New generation again')}}</x-button>
     </div>
   </div>
 </template>
@@ -73,7 +73,7 @@ export default {
       title: this.$route.meta.title,
       showBack: this.$route.meta.showBack,
       timecunt: this.timeout,
-      showTimeout: true,
+      showTimeout: false,
       request: true,
     };
   },

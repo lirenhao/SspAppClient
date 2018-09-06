@@ -52,6 +52,8 @@ en:
   Load more: Load more
   Success: Success
   Failed: Failed
+  The payment code has expired: The payment code has expired
+  New generation again: New generation again
 zh-CN:
   home: 首页
   userInfo: 个人中心
@@ -105,3 +107,5 @@ zh-CN:
   Load more: 加载更多
   Success: 成功
   Failed: 失败
+  The payment code has expired: 付款码超时了
+  New generation again: 重新生成

@@ -65,13 +65,24 @@ const login = (userName, passWord) => {
       grant_type: 'client_credentials'
     }
   })
-    .then((resp) => {
+    .then(resp => {
       if (resp.status === 200) {
         window.localStorage.setItem('token', resp.data.access_token)
         window.localStorage.setItem('merNo', userName.split('@')[0])
-        router.go(-1)
         // TODO 如何保证登录成功
         return bindPush()
+      } else {
+        store.commit('UPDATE_LOADING', false)
+        Vue.$vux.toast.show({
+          type: 'warn',
+          position: 'default',
+          text: resp.status
+        })
+      }
+    })
+    .then(resp => {
+      if (resp.status === 200 && resp.data) {
+        router.go(-1)
       } else {
         store.commit('UPDATE_LOADING', false)
         Vue.$vux.toast.show({
