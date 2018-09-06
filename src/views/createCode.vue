@@ -16,12 +16,10 @@
       <qrcode :value="qrCode" type="img" class="code-img"></qrcode>
       <span class="code-prompt">{{$t('Pay the wait')}}...</span>
     </div>
-    <div v-transfer-dom>
-      <x-dialog v-model="showTimeout">
-        <img src="../assets/clock.png">
-        <div>付款码超时了...</div>
+    <div class="show-titme">
+        <img src="../assets/clock.png" class="clock">
+        <div class="timeout">付款码超时了...</div>
         <x-button @click.native="goSetAmt">重新生成</x-button>
-      </x-dialog>
     </div>
   </div>
 </template>
@@ -180,4 +178,38 @@ export default {
   font-weight: 500;
   margin: 20px 0 -8px 0;
 }
+
+/*超时提示*/
+  .show-titme {
+    position: absolute;
+    z-index: 999;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.88);
+  }
+/*超时图片*/
+  .clock {
+    width: 40%;
+    margin-left: 30%;
+    margin-top: 160px;
+  }
+
+  /*超时文字提醒*/
+  .timeout {
+    text-align: center;
+    color: #fff;
+    font-size: 14px;
+    margin: 18px 0;
+  }
+
+  /*重新生成按钮*/
+  .show-titme button {
+    width: 38%;
+    color: #fff;
+    font-size: 14px;
+    background: none;
+    border: 1px solid #fff;
+    margin-top: 50px;
+  }
 </style>

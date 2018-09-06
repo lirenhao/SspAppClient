@@ -10,7 +10,7 @@
             <img slot="icon" src="../assets/code-icon.png">
           </grid-item>
         </div>
-        <div  @click="goTranSearch">
+        <div @click="goTranSearch">
           <grid-item :label="$t('Transaction inquiry')">
             <img slot="icon" src="../assets/seach-icon.png">
           </grid-item>
@@ -18,7 +18,7 @@
         <div @click="goUserInfo">
           <grid-item :label="$t('Personal center')">
             <img slot="icon" src="../assets/user-icon.png">
-        </grid-item>
+          </grid-item>
         </div>
       </grid>
       <div v-if="pushList.length === 0">
@@ -26,13 +26,13 @@
       </div>
       <div class="Notification-list" v-else>
         <group class="Notification-list-item" v-for="(item, index) in pushList" :key="index"
-          @click.native="goTranInfo(item.merNo, item.tranNo)">
+               @click.native="goTranInfo(item.merNo, item.tranNo)">
           <cell class="change-cell">
             <x-icon style="fill: #999; width: 20px; margin: 1px 2px 0 0" slot="icon" type="android-notifications"/>
             <div slot="title">{{$t('Transaction reminder')}}</div>
             <div>{{getDateFormat(item.tranDate)}}</div>
           </cell>
-          <cell class="changes-cell" >
+          <cell class="changes-cell">
             <div class="price" slot="title">{{item.tranAmt}}</div>
             <div>{{item.channel}}</div>
           </cell>
@@ -43,156 +43,154 @@
   </div>
 </template>
 <script>
-import {XHeader, Group, Cell, Grid, GridItem, Divider} from 'vux';
-import {mapState} from 'vuex';
-import {dateFormat} from 'vux';
-import moment from 'moment';
-import api from '../api';
-import localforage from '../localforage';
+  import {XHeader, Group, Cell, Grid, GridItem, Divider} from 'vux';
+  import {mapState} from 'vuex';
+  import {dateFormat} from 'vux';
+  import moment from 'moment';
+  import api from '../api';
+  import localforage from '../localforage';
 
-export default {
-  name: 'home',
-  components: {
-    XHeader,
-    Group,
-    Cell,
-    Grid,
-    GridItem,
-    Divider,
-  },
-  computed: {
-    ...mapState({
-      // 只显示3条
-      pushList: state => state.pushList.filter((item, index) => index < 3),
-    }),
-  },
-  created: function() {
-    if (!window.localStorage.token) {
-      this.$router.push({name: 'login', params: {isClear: false}});
-    } else {
-      // TODO 存储的与store如何一致
-      localforage(window.localStorage.merNo)
-        .getItem('trans')
-        .then(trans => (trans ? (this.trans = trans) : null));
-    }
-  },
-  data: function() {
-    return {
-      isShowNav: this.$route.meta.isShowNav,
-      title: this.$route.meta.title,
-      showBack: this.$route.meta.showBack,
-      trans: [],
-    };
-  },
-  methods: {
-    getDateFormat(date) {
-      if (date && date.length === 14)
-        return dateFormat(
-          new Date(moment(date, 'YYYYMMDDHHmmss')),
-          'YYYY-MM-DD HH:mm:ss'
-        );
-      else return dateFormat(new Date(), 'YYYY-MM-DD HH:mm:ss');
+  export default {
+    name: 'home',
+    components: {
+      XHeader,
+      Group,
+      Cell,
+      Grid,
+      GridItem,
+      Divider,
     },
-    goSetAmt() {
-      this.$router.push('/setAmt');
+    computed: {
+      ...mapState({
+        // 只显示3条
+        pushList: state => state.pushList.filter((item, index) => index < 3),
+      }),
     },
-    goTranSearch() {
-      this.$store.commit('UPDATE_TRAN_QUERY', {
-        tranDate: dateFormat(new Date(), 'YYYY-MM-DD'),
-      });
-      this.$router.push('/tranSearch');
+    created: function () {
+      if (!window.localStorage.token) {
+        this.$router.push({name: 'login', params: {isClear: false}});
+      } else {
+        // TODO 存储的与store如何一致
+        localforage(window.localStorage.merNo)
+          .getItem('trans')
+          .then(trans => (trans ? (this.trans = trans) : null));
+      }
     },
-    goUserInfo() {
-      api.userInfo().then(data => {
-        this.$router.push({name: 'userInfo', params: data});
-      });
+    data: function () {
+      return {
+        isShowNav: this.$route.meta.isShowNav,
+        title: this.$route.meta.title,
+        showBack: this.$route.meta.showBack,
+        trans: [],
+      };
     },
-    goTranInfo(merNo, tranNo) {
-      this.$router.push({
-        name: 'tranInfo',
-        params: {
-          info: {
-            merNo: '104000100010001',
-            termNo: '12345678',
-            tranType: '刷卡交易',
-            rrn: '12345',
-            tranNo: '201809031639580001',
-            channel: '微信支付',
-            tranDate: '20180903163958',
-            tranAmt: '100',
+    methods: {
+      getDateFormat(date) {
+        if (date && date.length === 14)
+          return dateFormat(
+            new Date(moment(date, 'YYYYMMDDHHmmss')),
+            'YYYY-MM-DD HH:mm:ss'
+          );
+        else return dateFormat(new Date(), 'YYYY-MM-DD HH:mm:ss');
+      },
+      goSetAmt() {
+        this.$router.push('/setAmt');
+      },
+      goTranSearch() {
+        this.$store.commit('UPDATE_TRAN_QUERY', {
+          tranDate: dateFormat(new Date(), 'YYYY-MM-DD'),
+        });
+        this.$router.push('/tranSearch');
+      },
+      goUserInfo() {
+        api.userInfo().then(data => {
+          this.$router.push({name: 'userInfo', params: data});
+        });
+      },
+      goTranInfo(merNo, tranNo) {
+        this.$router.push({
+          name: 'tranInfo',
+          params: {
+            info: {
+              merNo: '104000100010001',
+              termNo: '12345678',
+              tranType: '刷卡交易',
+              rrn: '12345',
+              tranNo: '201809031639580001',
+              channel: '微信支付',
+              tranDate: '20180903163958',
+              tranAmt: '100',
+            },
           },
-        },
-      });
+        });
+      },
+      goPushList() {
+        this.$router.push('/pushList');
+      },
     },
-    goPushList() {
-      this.$router.push('/pushList');
-    },
-  },
-};
+  };
 </script>
 
 <style scoped>
-.vux-demo {
-  text-align: center;
-}
-.logo {
-  width: 100px;
-  height: 100px;
-}
 
-.weui-grids:before,
-.weui-grids:after,
-.home-content .weui-grid:before,
-.home-content .weui-grid:after {
-  border: none;
-}
+  /*首页导航按钮边框删除*/
+  .weui-grids:before,
+  .weui-grids:after,
+  .home-content .weui-grid:before,
+  .home-content .weui-grid:after {
+    border: none;
+  }
 
-.home-content {
-  top: 14px;
-  background: #fff;
-  border: none;
-}
+  .home-content {
+    top: 14px;
+    background: #fff;
+    border: none;
+  }
 
-.weui-grid__icon + .weui-grid__label {
-  font-size: 12px !important;
-  color: red;
-}
-.trading-box {
-  width: 92%;
-  margin-left: 4%;
-  background: #fff;
-}
+  .weui-grid__icon + .weui-grid__label {
+    font-size: 12px !important;
+    color: red;
+  }
 
-.weui-cell:before {
-  border: none;
-}
-.Notification-list {
-  margin-top: 28px;
-}
+  .trading-box {
+    width: 92%;
+    margin-left: 4%;
+    background: #fff;
+  }
 
-.Notification-list .weui-cell {
-  font-size: 12px;
-  color: #999;
-}
+  .weui-cell:before {
+    border: none;
+  }
 
-.Notification-list-item .weui-cells {
-  width: 92%;
-  margin-left: 4%;
-  border-radius: 6px;
-}
+  .Notification-list {
+    margin-top: 28px;
+  }
 
-.price {
-  font-size: 24px;
-  color: red;
-}
-.change-cell {
-  padding-bottom: 0;
-  border-top: 1px solid #fff;
-}
-.changes-cell {
-  z-index: 99;
-  border-bottom: 1px solid #fff;
-}
+  .Notification-list .weui-cell {
+    font-size: 12px;
+    color: #999;
+  }
+
+  .Notification-list-item .weui-cells {
+    width: 92%;
+    margin-left: 4%;
+    border-radius: 6px;
+  }
+
+  .price {
+    font-size: 24px;
+    color: red;
+  }
+
+  .change-cell {
+    padding-bottom: 0;
+    border-top: 1px solid #fff;
+  }
+
+  .changes-cell {
+    z-index: 99;
+    border-bottom: 1px solid #fff;
+  }
 
   /*加载更多*/
   .load-more {
