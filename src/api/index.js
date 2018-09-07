@@ -7,6 +7,7 @@ import {
 import store from '../vuex/store'
 import router from '../router'
 import urls from './urls'
+import localforage from '../localforage'
 
 axios.interceptors.request.use(
   config => {
@@ -82,7 +83,9 @@ const login = (userName, passWord) => {
     })
     .then(resp => {
       if (resp.status === 200 && resp.data) {
-        router.go(-1)
+        return localforage(userName.split('@')[0])
+            .setItem('userInfo', resp.data)
+            .then(() => router.go(-1))
       } else {
         store.commit('UPDATE_LOADING', false)
         Vue.$vux.toast.show({
@@ -110,22 +113,7 @@ const login = (userName, passWord) => {
     })
 }
 
-const userInfo = () => {
-  store.commit('UPDATE_LOADING', true)
-  return axios.get(urls.userInfo)
-    .then(resp => {
-      if (resp.status === 200) {
-        return resp.data
-      } else {
-        store.commit('UPDATE_LOADING', false)
-        Vue.$vux.toast.show({
-          type: 'warn',
-          position: 'default',
-          text: resp.status
-        })
-      }
-    })
-}
+const userInfo = () => localforage(window.localStorage.merNo).getItem('userInfo')
 
 const bindPush = () => {
   const params = new URLSearchParams()

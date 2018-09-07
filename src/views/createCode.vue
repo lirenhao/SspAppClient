@@ -12,7 +12,7 @@
           </span>
         </div>
       </div>
-      <p class="code-price">￥{{tranAmt}}</p>
+      <p class="code-price">{{cry}} {{tranAmt}}</p>
       <qrcode :value="qrCode" type="img" class="code-img"></qrcode>
       <span class="code-prompt">{{$t('Pay the wait')}}...</span>
     </div>
@@ -58,6 +58,7 @@ export default {
     if (!window.localStorage.token) {
       this.$router.push({name: 'login', params: {isClear: false}});
     } else {
+      api.userInfo().then(data => this.cry = data.cry)
       this.timer = setInterval(() => {
         if (this.timecunt > 0) {
           this.timecunt--;
@@ -72,6 +73,7 @@ export default {
       isShowNav: this.$route.meta.isShowNav,
       title: this.$route.meta.title,
       showBack: this.$route.meta.showBack,
+      cry: '',
       timecunt: this.timeout,
       showTimeout: false,
       request: true,

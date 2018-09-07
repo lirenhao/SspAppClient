@@ -5,7 +5,7 @@
     </x-header>
     <group class="money-title" :title="$t('Please enter the payment amount')"></group>
     <div class="money-box">
-      <label class="money" >￥</label>
+      <label class="money" >{{cry}}</label>
       <input class="money-input" v-model="amt" type="number" step="0.01" />
     </div>
     <x-button class="general-btn" type="primary" @click.native="goCreateCode">{{$t('Generate QR code')}}</x-button>
@@ -26,6 +26,8 @@ export default {
   created: function() {
     if (!window.localStorage.token) {
       this.$router.push({name: 'login', params: {isClear: false}});
+    } else {
+      api.userInfo().then(data => this.cry = data.cry)
     }
   },
   props: {
@@ -37,6 +39,7 @@ export default {
       title: this.$route.meta.title,
       showBack: this.$route.meta.showBack,
       amt: this.tranAmt ? this.tranAmt : '',
+      cry: '',
     };
   },
   methods: {
