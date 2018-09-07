@@ -4,7 +4,7 @@
               :title="$t(title)" :left-options="{showBack}">
     </x-header>
     <group class="pushlist-content" v-for="(item, index) in pushList" :key="index" @click.native="goTranInfo(item.merNo, item.tranNo)">
-      <div class="PL-title">交易提醒</div>
+      <div class="PL-title">{{$t('Transaction reminder')}}</div>
       <div class="PL-titme">{{getDateFormat(item.tranDate)}}</div>
       <div class="PL-money" >
         交易金额

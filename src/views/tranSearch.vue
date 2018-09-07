@@ -14,14 +14,14 @@
       <div class="date-selected">
         <span class="yellow"></span> 选中
       </div>
-
-      <group-title>{{$t('Sub merchant')}}</group-title>
-      <picker :data="[merList]" v-model="merNos" ></picker>
     </div>
+    <group :title="$t('Sub merchant')">
+      <popup-picker title="选择商户" :data="[merList]" v-model="merNos"></popup-picker>
+    </group>
   </div>
 </template>
 <script>
-import {XHeader, InlineCalendar, GroupTitle, Picker, Group, Radio, XButton} from 'vux';
+import {XHeader, InlineCalendar, PopupPicker, Picker, Group, Radio, XButton} from 'vux';
 import api from '../api';
 
 export default {
@@ -29,7 +29,7 @@ export default {
   components: {
     XHeader,
     InlineCalendar,
-    GroupTitle,
+    PopupPicker,
     Picker,
     Group,
     Radio,
@@ -67,6 +67,7 @@ export default {
       isShowNav: this.$route.meta.isShowNav,
       title: this.$route.meta.title,
       showBack: this.$route.meta.showBack,
+      showMerSelect: false,
       merList: [],
     };
   },
