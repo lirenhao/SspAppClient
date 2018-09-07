@@ -43,167 +43,169 @@
   </div>
 </template>
 <script>
-  import {XHeader, Group, Cell, Grid, GridItem, Divider} from 'vux';
-  import {mapState} from 'vuex';
-  import {dateFormat} from 'vux';
-  import moment from 'moment';
-  import api from '../api';
-  import localforage from '../localforage';
+import {XHeader, Group, Cell, Grid, GridItem, Divider} from 'vux';
+import {mapState} from 'vuex';
+import {dateFormat} from 'vux';
+import moment from 'moment';
+import api from '../api';
+import localforage from '../localforage';
 
-  export default {
-    name: 'home',
-    components: {
-      XHeader,
-      Group,
-      Cell,
-      Grid,
-      GridItem,
-      Divider,
-    },
-    computed: {
-      ...mapState({
-        // 只显示3条
-        pushList: state => state.pushList.filter((item, index) => index < 3),
-      }),
-    },
-    created: function () {
-      if (!window.localStorage.token) {
-        this.$router.push({name: 'login', params: {isClear: false}});
-      } else {
-        // TODO 存储的与store如何一致
-        localforage(window.localStorage.merNo)
-          .getItem('trans')
-          .then(trans => (trans ? (this.trans = trans) : null));
-      }
-    },
-    data: function () {
-      return {
-        isShowNav: this.$route.meta.isShowNav,
-        title: this.$route.meta.title,
-        showBack: this.$route.meta.showBack,
-        trans: [],
-      };
-    },
-    methods: {
-      getDateFormat(date) {
-        if (date && date.length === 14)
-          return dateFormat(
-            new Date(moment(date, 'YYYYMMDDHHmmss')),
-            'YYYY-MM-DD HH:mm:ss'
-          );
-        else return dateFormat(new Date(), 'YYYY-MM-DD HH:mm:ss');
-      },
-      goSetAmt() {
-        this.$router.push('/setAmt');
-      },
-      goTranSearch() {
-        this.$store.commit('UPDATE_TRAN_QUERY', {
-          tranDate: dateFormat(new Date(), 'YYYY-MM-DD'),
+export default {
+  name: 'home',
+  components: {
+    XHeader,
+    Group,
+    Cell,
+    Grid,
+    GridItem,
+    Divider,
+  },
+  computed: {
+    ...mapState({
+      // 只显示3条
+      pushList: state => state.pushList.filter((item, index) => index < 3),
+    }),
+  },
+  created: function() {
+    if (!window.localStorage.token) {
+      this.$router.push({name: 'login', params: {isClear: false}});
+    } else {
+      // 存储的与store如何一致
+      localforage(window.localStorage.merNo)
+        .getItem('trans')
+        .then(trans => {
+          const currDate = dateFormat(new Date(), 'YYYYMMDD');
+          this.$store.commit('UPDATE_PUSH_LIST', trans ? trans.filter(tran => tran.tranDate.slice(0, 8) === currDate): []);
         });
-        this.$router.push('/tranSearch');
-      },
-      goUserInfo() {
-        api.userInfo().then(data => {
-          this.$router.push({name: 'userInfo', params: data});
-        });
-      },
-      goTranInfo(merNo, tranNo) {
-        api.tranInfo(merNo, tranNo).then(info => {
-          if (info) {
-            this.$router.push({
-              name: 'tranInfo',
-              params: {info},
-            });
-          } else {
-            this.$vux.toast.show({
-              type: 'warn',
-              position: 'default',
-              text: this.$t('Transaction query failed'),
-            });
-          }
-        });
-      },
-      goPushList() {
-        this.$router.push('/pushList');
-      },
+    }
+  },
+  data: function() {
+    return {
+      isShowNav: this.$route.meta.isShowNav,
+      title: this.$route.meta.title,
+      showBack: this.$route.meta.showBack,
+      trans: [],
+    };
+  },
+  methods: {
+    getDateFormat(date) {
+      if (date && date.length === 14)
+        return dateFormat(
+          new Date(moment(date, 'YYYYMMDDHHmmss')),
+          'YYYY-MM-DD HH:mm:ss'
+        );
+      else return dateFormat(new Date(), 'YYYY-MM-DD HH:mm:ss');
     },
-  };
+    goSetAmt() {
+      this.$router.push('/setAmt');
+    },
+    goTranSearch() {
+      this.$store.commit('UPDATE_TRAN_QUERY', {
+        tranDate: dateFormat(new Date(), 'YYYY-MM-DD'),
+      });
+      this.$router.push('/tranSearch');
+    },
+    goUserInfo() {
+      api.userInfo().then(data => {
+        this.$router.push({name: 'userInfo', params: data});
+      });
+    },
+    goTranInfo(merNo, tranNo) {
+      api.tranInfo(merNo, tranNo).then(info => {
+        if (info) {
+          this.$router.push({
+            name: 'tranInfo',
+            params: {info},
+          });
+        } else {
+          this.$vux.toast.show({
+            type: 'warn',
+            position: 'default',
+            text: this.$t('Transaction query failed'),
+          });
+        }
+      });
+    },
+    goPushList() {
+      this.$router.push('/pushList');
+    },
+  },
+};
 </script>
 
 <style>
-  /*首页导航栏*/
-  .home-content {
-    top: 8px;
-    background: #fff;
-    border: none;
-    margin-bottom: 28px;
-  }
+/*首页导航栏*/
+.home-content {
+  top: 8px;
+  background: #fff;
+  border: none;
+  margin-bottom: 28px;
+}
 
-  /*首页导航按钮边框删除*/
-  .home-page .weui-grids:before,
-  .home-page .weui-grids:after,
-  .home-content .weui-grid:before,
-  .home-content .weui-grid:after {
-    border: none;
-  }
+/*首页导航按钮边框删除*/
+.home-page .weui-grids:before,
+.home-page .weui-grids:after,
+.home-content .weui-grid:before,
+.home-content .weui-grid:after {
+  border: none;
+}
 
-  /*首页导航按文字大小设置*/
-  .home-content .weui-grid__icon + .weui-grid__label {
-    font-size: 13px !important;
-  }
+/*首页导航按文字大小设置*/
+.home-content .weui-grid__icon + .weui-grid__label {
+  font-size: 13px !important;
+}
 
-  /*交易通知 宽度 圆角设置*/
-  .Notification-list .weui-cells {
-    width: 92%;
-    margin-left: 4%;
-    border-radius: 12px;
-  }
+/*交易通知 宽度 圆角设置*/
+.Notification-list .weui-cells {
+  width: 92%;
+  margin-left: 4%;
+  border-radius: 12px;
+}
 
-  /*交易通知字体 颜色设置*/
-  .Notification-list .weui-cell {
-    font-size: 12px;
-    color: #999;
-    padding-top: 0;
-  }
+/*交易通知字体 颜色设置*/
+.Notification-list .weui-cell {
+  font-size: 12px;
+  color: #999;
+  padding-top: 0;
+}
 
-  /*边距调整*/
-  .change-cell {
-    padding-top: 10px !important;
-  }
+/*边距调整*/
+.change-cell {
+  padding-top: 10px !important;
+}
 
-  .trade {
-    color: #333;
-  }
+.trade {
+  color: #333;
+}
 
-  /*价格设置*/
-  .price {
-    font-size: 20px;
-    color: red;
-  }
+/*价格设置*/
+.price {
+  font-size: 20px;
+  color: red;
+}
 
-  /*交易通知边框删除*/
-  .Notification-list .weui-cells:before,
-  .Notification-list .weui-cell:before {
-    border-top: none !important;
-  }
+/*交易通知边框删除*/
+.Notification-list .weui-cells:before,
+.Notification-list .weui-cell:before {
+  border-top: none !important;
+}
 
-  .Notification-list .weui-cells:after {
-    border-bottom: none !important;
-  }
+.Notification-list .weui-cells:after {
+  border-bottom: none !important;
+}
 
-
-  /*加载更多*/
-  .load-more {
-    position: relative;
-    width: 92%;
-    margin-left: 4%;
-    margin-top: -8px;
-    padding: 10px 0;
-    font-size: 12px;
-    color: #5799F9;
-    text-align: center;
-    background: #fff;
-    border-top: 1px solid #eee;
-    border-radius: 0 0 12px 12px;
-  }
+/*加载更多*/
+.load-more {
+  position: relative;
+  width: 92%;
+  margin-left: 4%;
+  margin-top: -8px;
+  padding: 10px 0;
+  font-size: 12px;
+  color: #5799f9;
+  text-align: center;
+  background: #fff;
+  border-top: 1px solid #eee;
+  border-radius: 0 0 12px 12px;
+}
 </style>

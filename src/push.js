@@ -46,7 +46,7 @@ export default {
       localforage(window.localStorage.merNo).getItem('trans')
         .then(ld => {
           const trans = ld || []
-          trans.filter(tran => tran.tranDate === data.additionalData.tranDate)
+          trans.filter(tran => tran.tranDate.slice(0, 8) === data.additionalData.tranDate.slice(0, 8))
           return localforage(window.localStorage.merNo)
             .setItem('trans', [...trans, data.additionalData])
             .then(() => [...trans, data.additionalData])
