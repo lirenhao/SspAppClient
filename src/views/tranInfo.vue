@@ -5,21 +5,25 @@
     </x-header>
     <group class="traninfo-page">
       <div class="TI-money">
-        {{info.tranAmt}}
-      <p>COCO奶茶店</p>
+        {{info.tranCry + ' ' + info.tranAmt}}
+      <p>{{info.merName}}</p>
       </div>
       <cell-form-preview :list="parserItem(info)"></cell-form-preview>
-      <div class="state">
-        <!--<x-icon style="margin-bottom: -7px; fill: #0BB20C; " type="android-checkmark-circle"/>-->
-        <!--交易成功-->
+      <div class="state" v-if="info.respCode === '00'">
+        <x-icon style="margin-bottom: -7px; fill: #0BB20C; " type="android-checkmark-circle"/>
+        {{$t('Transaction successful')}}
+      </div>
+      <div class="state" v-else>
         <x-icon style="margin: 0 4px -7px 0; fill: red; " type="close-circled"/>
-        交易失败
+        {{$t('Transaction failed')}}
       </div>
     </group>
   </div>
 </template>
 <script>
 import {XHeader, Group, Cell, CellFormPreview,} from 'vux';
+import {dateFormat} from 'vux';
+import moment from 'moment';
 import api from '../api';
 
 export default {
@@ -51,15 +55,22 @@ export default {
   methods: {
     parserItem(item) {
       const body = []
-      body.push({label: '商户号', value: item.merNo})
-      body.push({label: '终端号', value: item.termNo})
-      body.push({label: '交易类型', value: item.tranType})
-      body.push({label: '参考号', value: item.rrn})
-      body.push({label: '商户单号', value: item.tranNo})
-      body.push({label: '支付方式', value: item.channel})
-      body.push({label: '交易时间', value: item.tranDate})
-      body.push({label: '交易金额', value: item.tranAmt})
+      body.push({label: this.$t('Merchant number'), value: item.merNo})
+      body.push({label: this.$t('Terminal number'), value: item.termNo})
+      body.push({label: this.$t('Transaction type'), value: item.tranType})
+      body.push({label: this.$t('Merchant order'), value: item.tranNo})
+      body.push({label: this.$t('Payment channel'), value: item.channel})
+      body.push({label: this.$t('Transaction date'), value: this.getDateFormat(item.tranDate)})
+      body.push({label: this.$t('Transaction amount'), value: item.tranAmt})
       return body
+    },
+    getDateFormat(date) {
+      if (date && date.length === 14)
+        return dateFormat(
+          new Date(moment(date, 'YYYYMMDDHHmmss')),
+          'YYYY-MM-DD HH:mm:ss'
+        );
+      else return dateFormat(new Date(), 'YYYY-MM-DD HH:mm:ss');
     },
   },
 };

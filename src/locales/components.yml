@@ -62,7 +62,11 @@ en:
   Payment is failed: Payment is failed
   Transaction amount: Transaction amount
   Transaction date: Transaction date
+  Transaction type: Transaction type
+  Merchant order: Merchant order
   Payment channel: Payment channel
+  Transaction successful: Transaction successful
+  Transaction failed: Transaction failed
 zh-CN:
   home: 首页
   userInfo: 个人中心
@@ -127,4 +131,8 @@ zh-CN:
   Payment is failed: 支付失败
   Transaction amount: 交易金额
   Transaction date: 交易时间
+  Transaction type: 交易类型
+  Merchant order: 商户单号
   Payment channel: 支付方式
+  Transaction successful: 交易成功
+  Transaction failed: 交易失败

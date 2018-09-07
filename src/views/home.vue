@@ -108,20 +108,19 @@
         });
       },
       goTranInfo(merNo, tranNo) {
-        this.$router.push({
-          name: 'tranInfo',
-          params: {
-            info: {
-              merNo: '104000100010001',
-              termNo: '12345678',
-              tranType: '刷卡交易',
-              rrn: '12345',
-              tranNo: '201809031639580001',
-              channel: '微信支付',
-              tranDate: '20180903163958',
-              tranAmt: '100',
-            },
-          },
+        api.tranInfo(merNo, tranNo).then(info => {
+          if (info) {
+            this.$router.push({
+              name: 'tranInfo',
+              params: {info},
+            });
+          } else {
+            this.$vux.toast.show({
+              type: 'warn',
+              position: 'default',
+              text: this.$t('Transaction query failed'),
+            });
+          }
         });
       },
       goPushList() {
