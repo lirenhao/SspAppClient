@@ -15,7 +15,7 @@
         <span class="yellow"></span> 选中
       </div>
     </div>
-    <group :title="$t('Sub merchant')">
+    <group class="date-box" :title="$t('Sub merchant')">
       <popup-picker title="选择商户" :data="[merList]" v-model="merNos"></popup-picker>
     </group>
   </div>
@@ -110,20 +110,6 @@ export default {
     color: #5799F9;
   }
 
-  /*商户标题*/
-  .search-page .weui-cells__title {
-    position: absolute;
-    bottom: 240px;
-    font-size: 12px;
-  }
-
-  /*商户选择*/
-  .search-page .vux-picker {
-    width: 100%;
-    position: absolute !important;
-    bottom: 0 !important;
-  }
-
   /*日历今日样式添加*/
   .search-page .inline-calendar td.is-today > span.vux-calendar-each-date {
     background-color: #5799F9;
@@ -165,5 +151,45 @@ export default {
 
   .blue {
     background: #5799F9 !important;
+  }
+
+  /*商户标题*/
+  .date-box .weui-cells__title {
+    font-size: 12px;
+    margin-top: 50px;
+  }
+
+  /*去掉边框*/
+  .date-box .weui-cells:before {
+    border-top: none !important;
+  }
+
+  .date-box .weui-cells:after {
+    border-bottom: none !important;
+  }
+
+  .date-box .vux-cell-box {
+    font-size: 14px;
+  }
+
+  .date-box .vux-cell-value {
+    font-size: 12px;
+  }
+
+  /*商户号选择*/
+  .vux-popup-header-left, .vux-popup-header-right {
+    font-size: 13px;
+    color: #5799F9 !important;
+  }
+  .vux-1px-b:after {
+    border-bottom: none !important;
+  }
+  .vux-popup-header {
+    height: 40px !important;
+    line-height: 40px !important;
+    background-color: #ededed !important;
+  }
+  .scroller-indicator {
+    background-image: none !important;
   }
 </style>
