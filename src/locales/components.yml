@@ -23,8 +23,6 @@ en:
   Payment amount: Payment amount
   Please enter the payment amount: Please enter the payment amount
   Generate QR code: Generate QR code
-  Transaction data: Transaction data
-  Transaction date: Transaction date
   Sub merchant: Sub merchant
   Tran search select: Select
   Tran no query to data: No query to data
@@ -62,6 +60,9 @@ en:
   New generation again: New generation again
   Payment is successful: Payment is successful
   Payment is failed: Payment is failed
+  Transaction amount: Transaction amount
+  Transaction date: Transaction date
+  Payment channel: Payment channel
 zh-CN:
   home: 首页
   userInfo: 个人中心
@@ -87,7 +88,6 @@ zh-CN:
   Please enter the payment amount: 请输入付款金额
   Generate QR code: 生成二维码
   Transaction data: 交易日期
-  Transaction date: 交易日期
   Sub merchant: 子级商户
   Tran search select: 筛选
   Tran no query to data: 没有查询到数据
@@ -125,4 +125,6 @@ zh-CN:
   New generation again: 重新生成
   Payment is successful: 支付成功
   Payment is failed: 支付失败
-  
+  Transaction amount: 交易金额
+  Transaction date: 交易时间
+  Payment channel: 支付方式

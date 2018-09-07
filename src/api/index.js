@@ -181,6 +181,23 @@ const tranList = (merNo, tranDate) => {
     })
 }
 
+const tranInfo = (merNo, tranNo) => {
+  store.commit('UPDATE_LOADING', true)
+  return axios.get(`${urls.tranList}/${merNo}/${tranNo}`)
+    .then(resp => {
+      if (resp.status === 200) {
+        return resp.data
+      } else {
+        store.commit('UPDATE_LOADING', false)
+        Vue.$vux.toast.show({
+          type: 'warn',
+          position: 'default',
+          text: Vue.i18n.translate('Transaction query failed')
+        })
+      }
+    })
+}
+
 const qrCodeCreate = (amt) => {
   store.commit('UPDATE_LOADING', true)
   const params = new URLSearchParams()
@@ -217,6 +234,7 @@ export default {
   userUpdatePwd,
   subMer,
   tranList,
+  tranInfo,
   qrCodeCreate,
   qrCodeQuery
 }
