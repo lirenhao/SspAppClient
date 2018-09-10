@@ -208,4 +208,13 @@ export default {
   border-top: 1px solid #eee;
   border-radius: 0 0 12px 12px;
 }
+
+  /*无更多信息*/
+  .vux-divider {
+    width: 78%;
+    margin-left: 11%;
+    font-size: 13px !important;
+    color: #bbb !important;
+    margin-top: 90px;
+  }
 </style>

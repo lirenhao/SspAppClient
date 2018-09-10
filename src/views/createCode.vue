@@ -17,171 +17,184 @@
       <span class="code-prompt">{{$t('Pay the wait')}}...</span>
     </div>
     <div class="show-titme" v-if="showTimeout">
-        <img src="../assets/clock.png" class="clock">
-        <div class="timeout">{{$t('The payment code has expired')}}...</div>
-        <x-button @click.native="goSetAmt">{{$t('New generation again')}}</x-button>
+      <img src="../assets/clock.png" class="clock">
+      <div class="timeout">{{$t('The payment code has expired')}}...</div>
+      <x-button @click.native="goSetAmt">{{$t('New generation again')}}</x-button>
     </div>
   </div>
 </template>
 <script>
-import {
-  XHeader,
-  Qrcode,
-  XInput,
-  XButton,
-  XDialog,
-  TransferDomDirective as TransferDom,
-} from 'vux';
-import api from '../api';
-import urls from '../api/urls';
-
-export default {
-  name: 'createCode',
-  directives: {
-    TransferDom,
-  },
-  components: {
+  import {
     XHeader,
     Qrcode,
     XInput,
     XButton,
     XDialog,
-  },
-  props: {
-    qrCode: String,
-    queryNo: String,
-    tranAmt: String,
-    tranCry: String,
-    timeout: Number,
-  },
-  created: function() {
-    if (!window.localStorage.token) {
-      this.$router.push({name: 'login', params: {isClear: false}});
-    } else {
-      api.userInfo().then(data => this.cry = data.cry)
-      this.timer = setInterval(() => {
-        if (this.timecunt > 0) {
-          this.timecunt--;
-        } else {
-          clearInterval(this.timer);
-        }
-      }, 1000);
-    }
-  },
-  data: function() {
-    return {
-      isShowNav: this.$route.meta.isShowNav,
-      title: this.$route.meta.title,
-      showBack: this.$route.meta.showBack,
-      cry: '',
-      timecunt: this.timeout,
-      showTimeout: false,
-      request: true,
-    };
-  },
-  methods: {
-    goSetAmt() {
-      this.$router.replace({name: 'setAmt', params: {tranAmt: this.tranAmt}});
+    TransferDomDirective as TransferDom,
+  } from 'vux';
+  import api from '../api';
+  import urls from '../api/urls';
+
+  export default {
+    name: 'createCode',
+    directives: {
+      TransferDom,
     },
-  },
-  watch: {
-    timecunt: function(newValue, oldValue) {
-      if (newValue === 0) {
-        clearInterval(this.timer);
-        this.showTimeout = true;
+    components: {
+      XHeader,
+      Qrcode,
+      XInput,
+      XButton,
+      XDialog,
+    },
+    props: {
+      qrCode: String,
+      queryNo: String,
+      tranAmt: String,
+      tranCry: String,
+      timeout: Number,
+    },
+    created: function () {
+      if (!window.localStorage.token) {
+        this.$router.push({name: 'login', params: {isClear: false}});
       } else {
-        if ((this.timeout - newValue) % 5 === 0 && this.request) {
-          this.request = false;
-          this.$http
-            .get(`${urls.qrCodeQuery}/${this.queryNo}`, {
-              headers: {Authorization: `bearer ${window.localStorage.token}`},
-            })
-            .then(resp => {
-              if (resp.status === 200 && resp.data && resp.data.respCode) {
-                if (resp.data.respCode === '00') {
-                  return this.$router.replace({
-                    name: 'payResult',
-                    params: {result: true},
-                  });
-                } else {
-                  return this.$router.replace({
-                    name: 'payResult',
-                    params: {result: false},
-                  });
-                }
-              }
-              return Promise.reject();
-            })
-            .catch(() => (this.request = true));
-        }
+        api.userInfo().then(data => this.cry = data.cry)
+        this.timer = setInterval(() => {
+          if (this.timecunt > 0) {
+            this.timecunt--;
+          } else {
+            clearInterval(this.timer);
+          }
+        }, 1000);
       }
     },
-  },
-  destroyed: function() {
-    clearInterval(this.timer);
-  },
-};
+    data: function () {
+      return {
+        isShowNav: this.$route.meta.isShowNav,
+        title: this.$route.meta.title,
+        showBack: this.$route.meta.showBack,
+        cry: '',
+        timecunt: this.timeout,
+        showTimeout: false,
+        request: true,
+      };
+    },
+    methods: {
+      goSetAmt() {
+        this.$router.replace({name: 'setAmt', params: {tranAmt: this.tranAmt}});
+      },
+    },
+    watch: {
+      timecunt: function (newValue, oldValue) {
+        if (newValue === 0) {
+          clearInterval(this.timer);
+          this.showTimeout = true;
+        } else {
+          if ((this.timeout - newValue) % 5 === 0 && this.request) {
+            this.request = false;
+            this.$http
+              .get(`${urls.qrCodeQuery}/${this.queryNo}`, {
+                headers: {Authorization: `bearer ${window.localStorage.token}`},
+              })
+              .then(resp => {
+                if (resp.status === 200 && resp.data && resp.data.respCode) {
+                  if (resp.data.respCode === '00') {
+                    return this.$router.replace({
+                      name: 'payResult',
+                      params: {result: true},
+                    });
+                  } else {
+                    return this.$router.replace({
+                      name: 'payResult',
+                      params: {result: false},
+                    });
+                  }
+                }
+                return Promise.reject();
+              })
+              .catch(() => (this.request = true));
+          }
+        }
+      },
+    },
+    destroyed: function () {
+      clearInterval(this.timer);
+    },
+  };
 </script>
 
 <style scoped>
-.blue-bg {
-  margin-top: -46px;
-  padding-top: 80px;
-  padding-bottom: 20px;
-  width: 100%;
-  height: 100%;
-  background: #67a2f9;
-}
 
-.code-show {
-  width: 80%;
-  margin-left: 10%;
-  text-align: center;
-  background: #fff;
-  border-radius: 8px;
-}
+  /*蓝色背景*/
+  .blue-bg {
+    margin-top: -46px;
+    padding-top: 80px;
+    padding-bottom: 20px;
+    width: 100%;
+    height: 100%;
+    background: #67a2f9;
+  }
 
-.show-title {
-  width: 100%;
-  height: 40px;
-  background: #e3eaf4;
-  border-radius: 8px 8px 0 0;
-  text-align: left;
-  font-size: 14px;
-  color: #5799f9;
-}
-.show-title p {
-  padding: 10px 0 0 16px;
-}
-.code-img {
-  margin: 20px 0;
-}
-.code-prompt {
-  display: block;
-  font-size: 12px;
-  color: #999;
-  height: 30px;
-}
-.code-time {
-  float: right;
-  font-size: 16px;
-  color: red;
-  margin: -22px 12px 0 0;
-}
+  /*二维码展示区域*/
+  .code-show {
+    width: 80%;
+    margin-left: 10%;
+    text-align: center;
+    background: #fff;
+    border-radius: 8px;
+  }
 
-.code-time em {
-  font-style: normal;
-  font-size: 12px;
-  color: #999;
-}
+  /*二维码标题*/
+  .show-title {
+    width: 100%;
+    height: 40px;
+    background: #e3eaf4;
+    border-radius: 8px 8px 0 0;
+    text-align: left;
+    font-size: 14px;
+    color: #5799f9;
+  }
 
-.code-price {
-  font-size: 18px;
-  font-weight: 500;
-  margin: 20px 0 -8px 0;
-}
+  .show-title p {
+    padding: 10px 0 0 16px;
+  }
 
-/*超时提示*/
+  /*二维码*/
+  .code-img {
+    margin: 20px 0;
+  }
+
+  /*订单提示语*/
+  .code-prompt {
+    display: block;
+    font-size: 12px;
+    color: #999;
+    height: 30px;
+  }
+
+  /*倒计时*/
+  .code-time {
+    float: right;
+    font-size: 16px;
+    color: red;
+    margin: -22px 12px 0 0;
+  }
+
+  /*倒计时*/
+  .code-time em {
+    font-style: normal;
+    font-size: 12px;
+    color: #999;
+  }
+
+  /*收款价格*/
+  .code-price {
+    font-size: 18px;
+    font-weight: 500;
+    margin: 20px 0 -8px 0;
+  }
+
+  /*超时提示*/
   .show-titme {
     position: absolute;
     z-index: 999;
@@ -190,7 +203,8 @@ export default {
     height: 100%;
     background: rgba(0, 0, 0, 0.88);
   }
-/*超时图片*/
+
+  /*超时图片*/
   .clock {
     width: 40%;
     margin-left: 30%;
