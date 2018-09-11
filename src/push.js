@@ -45,11 +45,12 @@ export default {
       // data.additionalData
       localforage(window.localStorage.merNo).getItem('trans')
         .then(ld => {
+          const push = window.localStorage.deviceType === 'APNS' ? data.additionalData.data : data.additionalData
           const trans = ld || []
-          trans.filter(tran => tran.tranDate.slice(0, 8) === data.additionalData.tranDate.slice(0, 8))
+          trans.filter(tran => tran.tranDate.slice(0, 8) === push.tranDate.slice(0, 8))
           return localforage(window.localStorage.merNo)
-            .setItem('trans', [...trans, data.additionalData])
-            .then(() => [...trans, data.additionalData])
+            .setItem('trans', [...trans, push])
+            .then(() => [...trans, push])
         })
         .then(trans => {
           store.commit('UPDATE_PUSH_LIST', trans)
