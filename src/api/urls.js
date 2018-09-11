@@ -1,4 +1,4 @@
-const CONTEXT = 'http://10.2.53.166:3001'
+const CONTEXT = 'http://10.2.53.11:8081'
 
 export default {
   token: CONTEXT + '/oauth/token',
