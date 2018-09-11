@@ -45,7 +45,7 @@ export default {
       // data.additionalData
       localforage(window.localStorage.merNo).getItem('trans')
         .then(ld => {
-          const push = window.localStorage.deviceType === 'APNS' ? data.additionalData.data : data.additionalData
+          const push = window.localStorage.pushType === 'APNS' ? data.additionalData.data : data.additionalData
           const trans = ld || []
           trans.filter(tran => tran.tranDate.slice(0, 8) === push.tranDate.slice(0, 8))
           return localforage(window.localStorage.merNo)
@@ -54,7 +54,7 @@ export default {
         })
         .then(trans => {
           store.commit('UPDATE_PUSH_LIST', trans)
-          window.localStorage.deviceType === 'APNS' || push.finish()
+          window.localStorage.pushType === 'APNS' || push.finish()
         })
     })
 
