@@ -26,7 +26,7 @@
         <div class="mine-list">
           <cell :title="$t('Tran currency')">
             <x-icon style="fill: #8dd531; margin-right: 8px; margin-left: -16px;" slot="icon" type="social-usd"/>
-            <span>{{cry}}</span>
+            <span>{{ccyType.ccyEname}}</span>
           </cell>
         </div>
         <div class="mine-list" @click="updatePwd">
@@ -58,7 +58,7 @@
       merNo: String,
       userName: String,
       termNo: String,
-      cry: String
+      ccyType: Object
     },
     created: function () {
       if (!window.localStorage.token) {
