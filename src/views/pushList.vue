@@ -3,7 +3,7 @@
     <x-header style="width:100%;position:absolute;left:0;top:0;z-index:100;"
               :title="$t(title)" :left-options="{showBack}">
     </x-header>
-    <view-box>
+    <view-box body-padding-bottom="0">
       <group class="pushlist-content" v-for="(item, index) in pushList" :key="index"
         @click.native="goTranInfo(item.merNo, item.tranNo)">
         <div class="PL-title">{{$t('Transaction reminder')}}</div>

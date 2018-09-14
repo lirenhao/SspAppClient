@@ -4,7 +4,7 @@
               :title="$t(title)" :left-options="{showBack}">
       <div slot="right" @click="goTranSearch">{{$t('Tran search select')}}</div>
     </x-header>
-    <view-box>
+    <view-box body-padding-bottom="0">
       <group-title class="Merchant">
         {{tranDate}}
         <span class="Merchants">{{merNo}}</span>
