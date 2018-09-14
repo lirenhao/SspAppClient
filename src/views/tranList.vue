@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="height:100%;">
     <x-header style="width:100%;position:absolute;left:0;top:0;z-index:100;"
               :title="$t(title)" :left-options="{showBack}">
       <div slot="right" @click="goTranSearch">{{$t('Tran search select')}}</div>
