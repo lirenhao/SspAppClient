@@ -46,8 +46,8 @@ export default {
       localforage(window.localStorage.merNo).getItem('trans')
         .then(ld => {
           const push = window.localStorage.pushType === 'APNS' ? data.additionalData.data : data.additionalData
-          const trans = ld || []
-          trans.filter(tran => tran.tranDate.slice(0, 8) === push.tranDate.slice(0, 8))
+          const oldTrans = ld || []
+          const trans = oldTrans.filter(tran => tran.tranDate.slice(0, 8) === push.tranDate.slice(0, 8))
           return localforage(window.localStorage.merNo)
             .setItem('trans', [...trans, push])
             .then(() => [...trans, push])
