@@ -42,4 +42,7 @@
   body {
     background-color: #f9f9f9;
   }
+  .vux-header .vux-header-title {
+    font-size: 16px !important;
+  }
 </style>
