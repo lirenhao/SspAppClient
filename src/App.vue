@@ -1,7 +1,7 @@
 <template>
   <div id="app" style="position:absolute;width:100%;height:100%;">
     <loading :show="isLoading"></loading>
-    <view-box :body-padding-top="isShowNav ? '46px' : '0'">
+    <view-box :body-padding-top="isShowNav ? '46px' : '0'" :body-padding-bottom="'0'">
       <router-view></router-view>
     </view-box>
   </div>
