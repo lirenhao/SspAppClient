@@ -4,20 +4,22 @@
               :title="$t(title)" :left-options="{showBack}">
       <div slot="right" @click="goTranSearch">{{$t('Tran search select')}}</div>
     </x-header>
-    <group-title class="Merchant">
-      {{tranDate}}
-      <span class="Merchants">{{merNo}}</span>
-    </group-title>
-    <div v-if="tranList.length === 0">
-      <divider>{{$t('Tran no query to data')}}</divider>
-    </div>
-    <div v-else class="tranlist">
-      <form-preview v-for="(item, index) in tranList" :key="index" @click.native="showInfo(item)"
-        :class="item.respCode === '00' ? '' : 'list-failure'"
-        :header-value="item.respCode === '00' ? '+' + item.tranAmt : '-' + item.tranAmt" 
-        :header-label="item.channel" :body-items="getView(item)">
-      </form-preview>
-    </div>
+    <view-box>
+      <group-title class="Merchant">
+        {{tranDate}}
+        <span class="Merchants">{{merNo}}</span>
+      </group-title>
+      <div v-if="tranList.length === 0">
+        <divider>{{$t('Tran no query to data')}}</divider>
+      </div>
+      <div v-else class="tranlist">
+        <form-preview v-for="(item, index) in tranList" :key="index" @click.native="showInfo(item)"
+          :class="item.respCode === '00' ? '' : 'list-failure'"
+          :header-value="item.respCode === '00' ? '+' + item.tranAmt : '-' + item.tranAmt" 
+          :header-label="item.channel" :body-items="getView(item)">
+        </form-preview>
+      </div>
+    </view-box>
   </div>
 </template>
 <script>

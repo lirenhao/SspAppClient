@@ -3,25 +3,27 @@
     <x-header style="width:100%;position:absolute;left:0;top:0;z-index:100;"
               :title="$t(title)" :left-options="{showBack}">
     </x-header>
-    <group class="pushlist-content" v-for="(item, index) in pushList" :key="index"
-      @click.native="goTranInfo(item.merNo, item.tranNo)">
-      <div class="PL-title">{{$t('Transaction reminder')}}</div>
-      <div class="PL-titme">{{getDateFormat(item.tranDate)}}</div>
-      <div class="PL-money" >
-        {{$t('Transaction amount')}}
-        <p>{{item.tranCry + ' ' + item.tranAmt}}</p>
-      </div>
-      <cell-form-preview :list="[
-        {
-          label: $t('Payment channel'),
-          value: item.channel
-        },
-        {
-          label: $t('Transaction date'),
-          value: getDateFormat(item.tranDate)
-        }
-      ]"></cell-form-preview>
-    </group>
+    <view-box>
+      <group class="pushlist-content" v-for="(item, index) in pushList" :key="index"
+        @click.native="goTranInfo(item.merNo, item.tranNo)">
+        <div class="PL-title">{{$t('Transaction reminder')}}</div>
+        <div class="PL-titme">{{getDateFormat(item.tranDate)}}</div>
+        <div class="PL-money" >
+          {{$t('Transaction amount')}}
+          <p>{{item.tranCry + ' ' + item.tranAmt}}</p>
+        </div>
+        <cell-form-preview :list="[
+          {
+            label: $t('Payment channel'),
+            value: item.channel
+          },
+          {
+            label: $t('Transaction date'),
+            value: getDateFormat(item.tranDate)
+          }
+        ]"></cell-form-preview>
+      </group>
+    </view-box>
   </div>
 </template>
 <script>
