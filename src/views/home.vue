@@ -33,7 +33,7 @@
             <div>{{getDateFormat(item.tranDate)}}</div>
           </cell>
           <cell>
-            <div class="price" slot="title">{{item.tranAmt}}</div>
+            <div class="price" slot="title">{{item.tranCry}}{{item.tranAmt}}</div>
             <div class="trade">{{item.channel}}</div>
           </cell>
         </group>
