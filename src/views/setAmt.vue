@@ -6,7 +6,7 @@
     <group class="money-title" :title="$t('Please enter the payment amount')"></group>
     <div class="money-box">
       <label class="money" >{{ccyType.ccySymbol}}</label>
-      <input class="money-input" v-model="amt" type="number" step="0.01" />
+      <input class="money-input" v-model="amt" type="number" step="0.01" :placeholder="ccyType.ccyEname"/>
     </div>
     <x-button class="general-btn" type="primary" @click.native="goCreateCode">{{$t('Generate QR code')}}</x-button>
   </div>

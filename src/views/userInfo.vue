@@ -44,103 +44,111 @@
   </div>
 </template>
 <script>
-  import {XHeader, Group, Cell} from 'vux';
-  import api from '../api';
+import {XHeader, Group, Cell} from 'vux';
+import api from '../api';
 
-  export default {
-    name: 'userInfo',
-    components: {
-      XHeader,
-      Group,
-      Cell,
-    },
-    props: {
-      merNo: String,
-      userName: String,
-      termNo: String,
-      ccyType: Object
-    },
-    created: function () {
-      if (!window.localStorage.token) {
-        this.$router.push({name: 'login', params: {isClear: false}});
-      }
-    },
-    data: function () {
-      return {
-        isShowNav: this.$route.meta.isShowNav,
-        title: this.$route.meta.title,
-        showBack: this.$route.meta.showBack,
-      };
-    },
-    methods: {
-      logout() {
-        // 解除设备绑定
-        api.unBindPush().then(data => {
+export default {
+  name: 'userInfo',
+  components: {
+    XHeader,
+    Group,
+    Cell,
+  },
+  created: function() {
+    if (!window.localStorage.token) {
+      this.$router.push({name: 'login', params: {isClear: false}});
+    } else {
+      api.userInfo().then(data => {
+        this.merNo = data.merNo;
+        this.userName = data.userName;
+        this.termNo = data.termNo;
+        this.ccyType = data.ccyType;
+      });
+    }
+  },
+  data: function() {
+    return {
+      isShowNav: this.$route.meta.isShowNav,
+      title: this.$route.meta.title,
+      showBack: this.$route.meta.showBack,
+      merNo: '',
+      userName: '',
+      termNo: '',
+      ccyType: {},
+    };
+  },
+  methods: {
+    logout() {
+      // 解除设备绑定
+      api
+        .unBindPush()
+        .then(data => {
           if (data) {
-            window.localStorage.removeItem('token')
+            window.localStorage.removeItem('token');
             this.$router.replace({name: 'login', params: {isClear: false}});
           } else {
             this.$vux.toast.show({
               type: 'warn',
               position: 'default',
-              text: this.$t('Login out faild')
-            })
+              text: this.$t('Login out faild'),
+            });
           }
-        }).catch(e => {
+        })
+        .catch(e => {
           this.$vux.toast.show({
             type: 'warn',
             position: 'default',
-            text: this.$t('Login out faild')
-          })
-        })
-      },
-      updatePwd() {
-        this.$router.push({name: 'updatePwd'});
-      },
+            text: this.$t('Login out faild'),
+          });
+        });
     },
-  };
+    updatePwd() {
+      this.$router.push({name: 'updatePwd'});
+    },
+  },
+};
 </script>
 
 <style scoped>
-  /*个人中心 文字居中*/
-  .vux-demo {
-    text-align: center;
-  }
+/*个人中心 文字居中*/
+.vux-demo {
+  text-align: center;
+}
 
-  /*个人中心 蓝色背景*/
-  .mine {
-    width: 100%;
-  }
+/*个人中心 蓝色背景*/
+.mine {
+  width: 100%;
+}
 
-  /*个人用户默认头像*/
-  .user {
-    width: 28%;
-    margin-top: -86px;
-    border: 3px solid #fff;
-    border-radius: 60px;
-  }
+/*个人用户默认头像*/
+.user {
+  width: 28%;
+  margin-top: -86px;
+  border: 3px solid #fff;
+  border-radius: 60px;
+}
 
-  /*个人中心 昵称*/
-  .vux-demo p {
-    font-size: 12px;
-    color: #999;
-  }
+/*个人中心 昵称*/
+.vux-demo p {
+  font-size: 12px;
+  color: #999;
+}
 
-  /*间距设置*/
-  .marginT {
-    margin-top: 30px;
-  }
+/*间距设置*/
+.marginT {
+  margin-top: 30px;
+}
 
-  /*个人中心 功能列表*/
-  .mine-list {
-    font-size: 14px;
-    margin-left: 16px;
-    border-bottom: 1px solid #eee;
-  }
+/*个人中心 功能列表*/
+.mine-list {
+  font-size: 14px;
+  margin-left: 16px;
+  border-bottom: 1px solid #eee;
+}
 
-  /*列表 右侧文字设置*/
-  .mine-list span {
-    font-size: 12px;
-    color: #999;
-  }
+/*列表 右侧文字设置*/
+.mine-list span {
+  font-size: 12px;
+  color: #999;
+}
 </style>

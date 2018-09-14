@@ -106,9 +106,7 @@ export default {
       this.$router.push('/tranSearch');
     },
     goUserInfo() {
-      api.userInfo().then(data => {
-        this.$router.push({name: 'userInfo', params: data});
-      });
+      this.$router.push('/userInfo');
     },
     goTranInfo(merNo, tranNo) {
       api.tranInfo(merNo, tranNo).then(info => {

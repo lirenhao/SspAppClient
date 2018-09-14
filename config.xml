@@ -35,10 +35,12 @@
         <icon height="80" src="res/icon/ios/icon-40@2x.png" width="80" />
         <icon height="29" src="res/icon/ios/icon-small.png" width="29" />
         <icon height="58" src="res/icon/ios/icon-small@2x.png" width="58" />
+        <splash src="res/screen/ios/screen-iphone-portrait-2x.jpg" />
     </platform>
     <plugin name="cordova-plugin-device" spec="^2.0.2" />
     <plugin name="phonegap-plugin-push" spec="^2.2.3" />
     <plugin name="cordova-plugin-sqlite-2" spec="^1.0.5" />
     <engine name="android" spec="^7.1.1" />
     <engine name="ios" spec="^4.5.5" />
+    <plugin name="cordova-plugin-splashscreen" spec="^5.0.2" />
 </widget>
