@@ -125,6 +125,7 @@ export default {
     font-size: 18px;
     color: #5799F9;
     padding: 30px 0 20px 0;
+    min-height: 42px !important;
   }
 
   /*商户*/

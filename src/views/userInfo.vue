@@ -110,6 +110,10 @@ export default {
 </script>
 
 <style scoped>
+  /*修改头部白色边框*/
+  .vux-header {
+    padding: 4px 0 !important;
+  }
 /*个人中心 文字居中*/
 .vux-demo {
   text-align: center;
@@ -125,7 +129,7 @@ export default {
   width: 28%;
   margin-top: -86px;
   border: 3px solid #fff;
-  border-radius: 60px;
+  border-radius: 50%;
 }
 
 /*个人中心 昵称*/
