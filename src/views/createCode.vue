@@ -98,12 +98,12 @@
               })
               .then(resp => {
                 if (resp.status === 200 && resp.data && resp.data.respCode) {
-                  if (resp.data.respCode === '00') {
+                  if (resp.data.respCode === 'success') {
                     return this.$router.replace({
                       name: 'payResult',
                       params: {result: true},
                     });
-                  } else {
+                  } else if(resp.data.respCode === 'failed') {
                     return this.$router.replace({
                       name: 'payResult',
                       params: {result: false},
