@@ -5,18 +5,16 @@
       <div slot="right" @click="goTranList">{{$t('vux.calendar.confirm_text')}}</div>
     </x-header>
     <div class="search-page">
-      <inline-calendar v-model="tranDate" disable-future>
-        <div solt="each-day">afda</div>
-      </inline-calendar>
+      <inline-calendar v-model="tranDate" disable-future></inline-calendar>
       <div class="date-today">
-        <span class="blue"></span> 今天
+        <span class="blue"></span> {{$t('Today')}}
       </div>
       <div class="date-selected">
-        <span class="yellow"></span> 选中
+        <span class="yellow"></span> {{$t('Selected')}}
       </div>
     </div>
     <group class="date-box" :title="$t('Sub merchant')">
-      <popup-picker title="选择商户" :data="[merList]" v-model="merNos"></popup-picker>
+      <popup-picker :title="$t('Select Merchant')" :data="[merList]" v-model="merNos"></popup-picker>
     </group>
   </div>
 </template>

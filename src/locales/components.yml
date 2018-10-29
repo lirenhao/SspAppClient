@@ -67,6 +67,9 @@ en:
   Payment channel: Payment channel
   Transaction successful: Transaction successful
   Transaction failed: Transaction failed
+  Today: Today
+  Selected: Selected
+  Select Merchant: Select Merchant
 zh-CN:
   home: 首页
   userInfo: 个人中心
@@ -136,3 +139,6 @@ zh-CN:
   Payment channel: 支付方式
   Transaction successful: 交易成功
   Transaction failed: 交易失败
+  Today: 今天
+  Selected: 选中
+  Select Merchant: 选择商户
