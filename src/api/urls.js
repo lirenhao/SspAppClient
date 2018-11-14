@@ -1,4 +1,4 @@
-const CONTEXT = 'http://10.2.53.11:8081'
+const CONTEXT = 'https://eccst.sg.ebs.bankofchina.com/sgecm/app'
 
 export default {
   token: CONTEXT + '/oauth/token',
