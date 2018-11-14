@@ -87,18 +87,16 @@ export default {
             window.localStorage.removeItem('token');
             this.$router.replace({name: 'login', params: {isClear: false}});
           } else {
-            this.$vux.toast.show({
-              type: 'warn',
-              position: 'default',
-              text: this.$t('Login out faild'),
+            this.$vux.alert.show({
+              title: this.$t('Login out faild'),
+              content: this.$t('Please try again later')
             });
           }
         })
         .catch(e => {
-          this.$vux.toast.show({
-            type: 'warn',
-            position: 'default',
-            text: this.$t('Login out faild'),
+          this.$vux.alert.show({
+            title: this.$t('Login out faild'),
+            content: this.$t('Please check the network status')
           });
         });
     },
