@@ -198,10 +198,11 @@ const tranInfo = (merNo, tranNo) => {
     })
 }
 
-const qrCodeCreate = (amt) => {
+const qrCodeCreate = (amt, channel) => {
   store.commit('UPDATE_LOADING', true)
   const params = new URLSearchParams()
   params.append('amt', amt)
+  params.append('channel', channel)
   return axios.post(`${urls.qrCodeCreate}`, params)
     .then(resp => {
       if (resp.status === 200) {

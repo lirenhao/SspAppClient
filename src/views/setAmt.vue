@@ -8,11 +8,28 @@
       <label class="money" >{{ccyType.ccySymbol}}</label>
       <input class="money-input" v-model="amt" type="number" step="0.01" :placeholder="ccyType.ccyEname"/>
     </div>
+    <group class="money-title" :title="$t('Please choose the payment channel')"></group>
+    <group>
+      <radio :options="options" v-model="channel">
+        <div slot="each-item" slot-scope="props">
+          <img slot="icon" width="24" src="../assets/UnionPay_logo.png" />
+          {{props.label}}
+        </div>
+        <div slot="each-item" slot-scope="props">
+          <img slot="icon" width="24" src="../assets/UnionPay_logo.png" />
+          {{props.label}}
+        </div>
+        <div slot="each-item" slot-scope="props">
+          <img slot="icon" width="24" src="../assets/UnionPay_logo.png" />
+          {{props.label}}
+        </div>
+      </radio>
+    </group>
     <x-button class="general-btn" type="primary" @click.native="goCreateCode">{{$t('Generate QR code')}}</x-button>
   </div>
 </template>
 <script>
-import {XHeader, Group, XInput, XButton} from 'vux';
+import {XHeader, Group, XInput, XButton, Radio} from 'vux';
 import api from '../api';
 
 export default {
@@ -22,6 +39,7 @@ export default {
     Group,
     XInput,
     XButton,
+    Radio,
   },
   created: function() {
     if (!window.localStorage.token) {
@@ -40,6 +58,19 @@ export default {
       showBack: this.$route.meta.showBack,
       amt: this.tranAmt ? this.tranAmt : '',
       ccyType: {},
+      channel: '01',
+      options: [
+        {
+          key: '01',
+          value: this.$t('UnionPay')
+        }, {
+          key: '02',
+          value: this.$t('WeChat')
+        }, {
+          key: '03',
+          value: this.$t('Alipay')
+        }
+      ],
     };
   },
   methods: {
@@ -52,7 +83,7 @@ export default {
     },
     goCreateCode() {
       if (this.amt !== '' && this.validAmount(this.amt).valid) {
-        api.qrCodeCreate(this.amt).then(data => {
+        api.qrCodeCreate(this.amt, this.channel).then(data => {
           if (data) {
             if (data.respCode && data.respCode === '00') {
               this.$router.replace({

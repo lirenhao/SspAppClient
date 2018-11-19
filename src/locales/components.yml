@@ -22,6 +22,10 @@ en:
   Personal center: Personal center
   Payment amount: Payment amount
   Please enter the payment amount: Please enter the payment amount
+  Please choose the payment channel: Please choose the payment channel
+  UnionPay: UnionPay
+  WeChat: WeChat
+  Alipay: Alipay
   Generate QR code: Generate QR code
   Sub merchant: Sub merchant
   Tran search select: Select
@@ -38,7 +42,7 @@ en:
   New password two input mismatch: New password two input mismatch
   Please enter merchant number: Please enter merchant number
   Please enter login name: Please enter login name
-  Please enter password: Please enter login name
+  Please enter password: Please enter password
   Login: Login
   Tran push no data: Tran push no data
   Pay the wait: 'Order submitted successfully,waiting for user scan'
@@ -95,6 +99,10 @@ zh-CN:
   Personal center: 个人中心
   Payment amount: 付款金额
   Please enter the payment amount: 请输入付款金额
+  Please choose the payment channel: 请选择支付方式
+  UnionPay: 银联
+  WeChat: 微信
+  Alipay: 支付宝
   Generate QR code: 生成二维码
   Transaction data: 交易日期
   Sub merchant: 子级商户
