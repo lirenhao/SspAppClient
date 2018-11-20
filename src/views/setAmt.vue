@@ -12,10 +12,10 @@
     <group>
       <radio :options="options" v-model="channel">
         <div slot-scope="props" slot="each-item">
-          <img width="24" src="../assets/UnionPay.png" v-if="props.index === 0"/>
-          <img width="24" src="../assets/WeChat.png" v-if="props.index === 1"/>
-          <img width="24" src="../assets/Alipay.png" v-if="props.index === 2"/>
-          {{props.label}}
+          <img width="26" class="UnionPay" src="../assets/UnionPay.png" v-if="props.index === 0"/>
+          <img width="24" class="WeChat" src="../assets/WeChat.png" v-if="props.index === 1"/>
+          <img width="24" class="WeChat" src="../assets/Alipay.png" v-if="props.index === 2"/>
+         {{props.label}}
         </div>
       </radio>
     </group>
@@ -167,5 +167,13 @@ export default {
     border: none !important;
   }
 
+  .WeChat {
+    margin-bottom: -4px;
+    margin-right: 4px;
+  }
+  .UnionPay {
+    margin-bottom: -2px;
+    margin-right: 2px;
+  }
 
 </style>

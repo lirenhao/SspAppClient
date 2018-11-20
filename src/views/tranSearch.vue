@@ -92,6 +92,7 @@ export default {
     font-size: 16px;
   }
 
+
   /*选择箭头颜色修改*/
   .search-page .vux-prev-icon, .vux-next-icon {
     border-color: #5799F9 !important;
@@ -113,6 +114,7 @@ export default {
     background-color: #5799F9;
     color: #fff;
   }
+
 
   /*今日 选中样式添加*/
   .date-bottom {
@@ -150,6 +152,7 @@ export default {
   .blue {
     background: #5799F9 !important;
   }
+
 
   /*商户标题*/
   .date-box .weui-cells__title {
