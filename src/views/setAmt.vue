@@ -3,22 +3,26 @@
     <x-header style="width:100%;position:absolute;left:0;top:0;z-index:100;"
               :title="$t(title)" :left-options="{showBack}">
     </x-header>
-    <group class="money-title" :title="$t('Please enter the payment amount')"></group>
-    <div class="money-box">
-      <label class="money" >{{ccyType.ccySymbol}}</label>
-      <input class="money-input" v-model="amt" type="number" step="0.01" :placeholder="ccyType.ccyEname"/>
+    <div class="BG">
+      <group class="money-title" :title="$t('Please enter the payment amount')"></group>
+      <div class="money-box">
+        <label class="money" >{{ccyType.ccySymbol}}</label>
+        <input class="money-input" v-model="amt" type="number" step="0.01" :placeholder="ccyType.ccyEname"/>
+      </div>
     </div>
-    <group class="money-title" :title="$t('Please choose the payment channel')"></group>
-    <group>
-      <radio :options="options" v-model="channel">
-        <div slot-scope="props" slot="each-item">
-          <img width="26" class="UnionPay" src="../assets/UnionPay.png" v-if="props.index === 0"/>
-          <img width="24" class="WeChat" src="../assets/WeChat.png" v-if="props.index === 1"/>
-          <img width="24" class="WeChat" src="../assets/Alipay.png" v-if="props.index === 2"/>
-         {{props.label}}
-        </div>
-      </radio>
-    </group>
+    <div class="Payment-options">
+      <group class="money-title" :title="$t('Please choose the payment channel')"></group>
+      <group>
+        <radio :options="options" v-model="channel">
+          <div slot-scope="props" slot="each-item">
+            <img width="26" class="UnionPay" src="../assets/UnionPay.png" v-if="props.index === 0"/>
+            <img width="24" class="WeChat" src="../assets/WeChat.png" v-if="props.index === 1"/>
+            <img width="24" class="WeChat" src="../assets/Alipay.png" v-if="props.index === 2"/>
+           {{props.label}}
+          </div>
+        </radio>
+      </group>
+    </div>
     <x-button class="general-btn" type="primary" @click.native="goCreateCode">{{$t('Generate QR code')}}</x-button>
   </div>
 </template>
@@ -112,11 +116,28 @@ export default {
 </script>
 
 <style scoped>
+  /*输入金额修改为白色背景*/
+  .BG {
+    background: #fff;
+    margin-top: -0.77em;
+    padding: 30px 0;
+  }
+
+  /*支付选择*/
+  .Payment-options {
+    background: #fff;
+    margin-top: 16px;
+    padding-top: 12px;
+  }
+
+  .Payment-options .money-title {
+    margin-bottom: -10px;
+  }
+
   /*标题*/
   .money-title {
-    margin-left: 30px;
-    margin-top: 50px;
-    }
+    margin-left: 10px;
+  }
 
   /*金额图标*/
   .money {
@@ -126,9 +147,9 @@ export default {
 
   /*输入金额框*/
   .money-box {
-    width: 80%;
+    width: 84%;
     height: 60px;
-    margin-left: 10%;
+    margin-left: 8%;
     border-bottom: 1px solid #d9d9d9;
   }
 
