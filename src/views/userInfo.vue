@@ -6,7 +6,6 @@
     <div>
       <div class="vux-demo">
         <img slot="icon" src="../assets/mine.png" class="mine">
-        <img slot="icon" src="../assets/user.png" class="user">
         <h4>{{userName}}</h4>
       </div>
       <div>
@@ -94,10 +93,13 @@ export default {
           }
         })
         .catch(e => {
-          this.$vux.alert.show({
-            title: this.$t('Login out faild'),
-            content: this.$t('Please check the network status')
-          });
+          console.log('Login out', e)
+          if(!e.response || e.response.status !== 401) {
+            this.$vux.alert.show({
+              title: this.$t('Login out faild'),
+              content: this.$t('Please check the network status')
+            });
+          }
         });
     },
     updatePwd() {
