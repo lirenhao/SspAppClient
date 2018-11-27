@@ -4,26 +4,38 @@
               :title="$t(title)" :left-options="{showBack}">
       <div slot="right" @click="goTranSearch">{{$t('Tran search select')}}</div>
     </x-header>
-    <view-box>
-      <group-title class="Merchant">
-        {{tranDate}}
-        <span class="Merchants">{{merNo}}</span>
-      </group-title>
-      <div v-if="tranList.length === 0">
-        <divider>{{$t('Tran no query to data')}}</divider>
-      </div>
-      <div v-else class="tranlist">
-        <form-preview v-for="(item, index) in tranList" :key="index" @click.native="showInfo(item)"
-          :class="item.respCode === '00' ? '' : 'list-failure'"
-          :header-value="item.respCode === '00' ? '+' + item.tranAmt : '-' + item.tranAmt" 
-          :header-label="item.channel" :body-items="getView(item)">
-        </form-preview>
-      </div>
-    </view-box>
+    <group-title class="Merchant">
+      {{tranDate}}
+      <span class="Merchants">{{merNo}}</span>
+    </group-title>
+    <div v-if="tranList.length > 0">
+      <grid :show-lr-borders="false" :show-vertical-dividers="false">
+        <grid-item label="总计">
+          <span class="grid-center">
+            {{tranList.reduce((a, b) => a.tranAmt + b.tranAmt, {tranAmt: 0}).tranAmt}}
+          </span>
+        </grid-item>
+        <grid-item label="笔数">
+          <span class="grid-center">
+            {{tranList.length}}
+          </span>
+        </grid-item>
+      </grid>
+    </div>
+    <div v-if="tranList.length === 0">
+      <divider>{{$t('Tran no query to data')}}</divider>
+    </div>
+    <div v-else class="tranlist">
+      <form-preview v-for="(item, index) in tranList" :key="index" @click.native="showInfo(item)"
+        :class="item.respCode === '00' ? '' : 'list-failure'"
+        :header-value="item.respCode === '00' ? '+' + item.tranAmt : '-' + item.tranAmt" 
+        :header-label="item.channel" :body-items="getView(item)">
+      </form-preview>
+    </div>
   </div>
 </template>
 <script>
-import {XHeader, GroupTitle, Divider, FormPreview} from 'vux';
+import {XHeader, GroupTitle, Grid, GridItem, Divider, FormPreview} from 'vux';
 import {mapState} from 'vuex';
 import {dateFormat} from 'vux';
 import moment from 'moment';
@@ -33,6 +45,8 @@ export default {
   components: {
     XHeader,
     GroupTitle,
+    Grid,
+    GridItem,
     Divider,
     FormPreview,
   },
@@ -134,5 +148,11 @@ export default {
 /*交易失败样式*/
 .tranlist .list-failure .weui-form-preview__value {
   color: #f04c50;
+}
+
+.grid-center {
+  display: block;
+  text-align: center;
+  color: #666;
 }
 </style>
