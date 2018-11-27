@@ -12,12 +12,12 @@
       <grid :show-lr-borders="false" :show-vertical-dividers="false">
         <grid-item :label="$t('Total')">
           <span class="grid-center">
-            {{getTotal}}
+            {{tranTotal}}
           </span>
         </grid-item>
         <grid-item :label="$t('Count')">
           <span class="grid-center">
-            {{tranList.length}}
+            {{tranCount}}
           </span>
         </grid-item>
       </grid>
@@ -55,6 +55,8 @@ export default {
       tranList: state => state.tranList,
       tranDate: state => state.tranQuery.tranDate,
       merNo: state => state.tranQuery.merNo,
+      tranTotal: state => numberComma(state.tranList.map(t => parseFloat(t.tranAmt)).reduce((a, b) => a + b, 0)),
+      tranCount: state => state.tranList.length,
     }),
   },
   created: function() {
@@ -69,7 +71,6 @@ export default {
       showBack: this.$route.meta.showBack,
     };
   },
-
   methods: {
     getView(item) {
       return [
@@ -83,7 +84,7 @@ export default {
       ];
     },
     getTotal() {
-      return numberComma(tranList.map(v => parseFloat(v.tranAmt)).reduce((a, b) => a + b, 0))
+      return numberComma(this.tranList.map(v => parseFloat(v.tranAmt)).reduce((a, b) => a + b, 0))
     },
     showInfo(value) {
       this.$router.push({name: 'tranInfo', params: {info: value}});
