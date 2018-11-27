@@ -76,6 +76,8 @@ en:
   Select Merchant: Select Merchant
   Please try again later: Please try again later
   Please check the network status: Please check the network status
+  Total: Total
+  Count: Count
 zh-CN:
   home: 首页
   userInfo: 个人中心
@@ -154,3 +156,5 @@ zh-CN:
   Select Merchant: 选择商户
   Please try again later: 请稍后再试
   Please check the network status: 请检查网络状况
+  Total: 总计
+  Count: 笔数

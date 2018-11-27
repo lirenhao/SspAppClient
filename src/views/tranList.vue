@@ -10,12 +10,12 @@
     </group-title>
     <div v-if="tranList.length > 0">
       <grid :show-lr-borders="false" :show-vertical-dividers="false">
-        <grid-item label="总计">
+        <grid-item :label="$t('Total')">
           <span class="grid-center">
-            {{tranList.reduce((a, b) => a.tranAmt + b.tranAmt, {tranAmt: 0}).tranAmt}}
+            {{getTotal}}
           </span>
         </grid-item>
-        <grid-item label="笔数">
+        <grid-item :label="$t('Count')">
           <span class="grid-center">
             {{tranList.length}}
           </span>
@@ -37,7 +37,7 @@
 <script>
 import {XHeader, GroupTitle, Grid, GridItem, Divider, FormPreview} from 'vux';
 import {mapState} from 'vuex';
-import {dateFormat} from 'vux';
+import {dateFormat, numberComma} from 'vux';
 import moment from 'moment';
 
 export default {
@@ -81,6 +81,9 @@ export default {
           value: item.respCode === '00' ? this.$t('Success') : this.$t('Failed'),
         },
       ];
+    },
+    getTotal() {
+      return numberComma(tranList.map(v => parseFloat(v.tranAmt)).reduce((a, b) => a + b, 0))
     },
     showInfo(value) {
       this.$router.push({name: 'tranInfo', params: {info: value}});
