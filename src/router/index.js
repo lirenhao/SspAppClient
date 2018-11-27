@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '../views/login'
+import ResetPwd from '../views/resetPwd'
 import Home from '../views/home'
 import UserInfo from '../views/userInfo'
 import UpdatePwd from '../views/updatePwd'
@@ -23,6 +24,17 @@ export default new Router({
       props: true,
       meta: {
         isShowNav: false
+      }
+    },
+    {
+      path: '/resetPwd',
+      name: 'resetPwd',
+      component: ResetPwd,
+      props: true,
+      meta: {
+        isShowNav: true,
+        title: 'updatePwd',
+        showBack: false
       }
     },
     {

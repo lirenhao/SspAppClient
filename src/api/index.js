@@ -70,6 +70,10 @@ const login = (userName, passWord) => {
       if (resp.status === 200) {
         window.localStorage.setItem('token', resp.data.access_token)
         window.localStorage.setItem('merNo', userName.split('@')[0])
+        // TODO 等待后台改造
+        if (passWord === '111111') {
+          window.localStorage.setItem('isResetPwd', true)
+        }
         // TODO 如何保证登录成功
         return bindPush()
       } else {
@@ -83,6 +87,7 @@ const login = (userName, passWord) => {
     })
     .then(resp => {
       if (resp.status === 200 && resp.data) {
+        // window.localStorage.removeItem('isResetPwd')
         return localforage(userName.split('@')[0])
             .setItem('userInfo', resp.data)
             .then(() => router.go(-1))

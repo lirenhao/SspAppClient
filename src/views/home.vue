@@ -71,12 +71,16 @@ export default {
       this.$router.push({name: 'login', params: {isClear: false}});
     } else {
       // 存储的与store如何一致
-      localforage(window.localStorage.merNo)
-        .getItem('trans')
-        .then(trans => {
-          const currDate = dateFormat(new Date(), 'YYYYMMDD');
-          this.$store.commit('UPDATE_PUSH_LIST', trans ? trans.filter(tran => tran.tranDate.slice(0, 8) === currDate): []);
-        });
+      if (window.localStorage.isResetPwd) {
+        this.$router.push('/resetPwd')
+      } else {
+         localforage(window.localStorage.merNo)
+          .getItem('trans')
+          .then(trans => {
+            const currDate = dateFormat(new Date(), 'YYYYMMDD');
+            this.$store.commit('UPDATE_PUSH_LIST', trans ? trans.filter(tran => tran.tranDate.slice(0, 8) === currDate): []);
+          });
+      }
     }
   },
   data: function() {
