@@ -10,14 +10,14 @@
     </group-title>
     <div v-if="tranList.length > 0">
       <grid :show-lr-borders="false" :show-vertical-dividers="false">
-        <grid-item :label="$t('Total')">
-          <span class="grid-center">
-            {{tranTotal}}
-          </span>
-        </grid-item>
         <grid-item :label="$t('Count')">
           <span class="grid-center">
             {{tranCount}}
+          </span>
+        </grid-item>
+        <grid-item :label="$t('Total')">
+          <span class="grid-center">
+            {{tranTotal}}
           </span>
         </grid-item>
       </grid>

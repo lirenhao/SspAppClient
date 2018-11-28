@@ -5,7 +5,7 @@
       <div slot="right" @click="goTranList">{{$t('vux.calendar.confirm_text')}}</div>
     </x-header>
     <div class="search-page">
-      <inline-calendar v-model="tranDate" disable-future></inline-calendar>
+      <inline-calendar v-model="tranDate" @on-select-single-date="goTranList" disable-future></inline-calendar>
       <div class="date-today">
         <span class="blue"></span> {{$t('Today')}}
       </div>
@@ -14,7 +14,7 @@
       </div>
     </div>
     <group class="date-box" :title="$t('Sub merchant')">
-      <popup-picker :title="$t('Select Merchant')" :data="[merList]" v-model="merNos"></popup-picker>
+      <popup-picker :title="$t('Select Merchant')" :data="[merList]" v-model="merNos" :show="showMerSelect"></popup-picker>
     </group>
   </div>
 </template>
@@ -65,7 +65,7 @@ export default {
       isShowNav: this.$route.meta.isShowNav,
       title: this.$route.meta.title,
       showBack: this.$route.meta.showBack,
-      showMerSelect: false,
+      showMerSelect: true,
       merList: [],
     };
   },
