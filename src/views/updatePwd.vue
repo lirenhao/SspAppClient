@@ -1,9 +1,9 @@
 <template>
   <div>
-    <x-header style="width:100%;position:absolute;left:0;top:0;z-index:100;"
-              :title="$t(title)" :left-options="{showBack}">
+    <x-header :title="$t(title)" :left-options="{showBack}">
     </x-header>
     <div class="Change-password">
+        <br/>
         <x-input v-model="oldPwd" type="password" :placeholder="$t('Fill in the old password')" required>
           <x-icon style="fill: #999; margin: 1px 4px 0 0" slot="label" type="android-lock" />
         </x-input>

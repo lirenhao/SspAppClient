@@ -1,7 +1,6 @@
 <template>
   <div style="height:100%;">
-    <x-header style="width:100%;position:absolute;left:0;top:0;z-index:100;"
-              :title="$t(title)" :left-options="{showBack}">
+    <x-header :title="$t(title)" :left-options="{showBack}">
       <div slot="right" @click="goTranSearch">{{$t('Tran search select')}}</div>
     </x-header>
     <group-title class="Merchant">
@@ -28,7 +27,7 @@
     <div v-else class="tranlist">
       <form-preview v-for="(item, index) in tranList" :key="index" @click.native="showInfo(item)"
         :class="item.respCode === '00' ? '' : 'list-failure'"
-        :header-value="item.respCode === '00' ? '+' + item.tranAmt : '-' + item.tranAmt" 
+        :header-value="item.respCode === '00' ? '+' + formatAmt(item.tranAmt) : '-' + formatAmt(item.tranAmt)" 
         :header-label="item.channel" :body-items="getView(item)">
       </form-preview>
     </div>
@@ -72,6 +71,9 @@ export default {
     };
   },
   methods: {
+    formatAmt(amt) {
+      return numberComma(amt)
+    },
     getView(item) {
       return [
         {

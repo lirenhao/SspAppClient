@@ -1,7 +1,6 @@
 <template>
   <div>
-    <x-header style="width:100%;position:absolute;left:0;top:0;z-index:100;"
-              :title="$t(title)" :left-options="{showBack}">
+    <x-header :title="$t(title)" :left-options="{showBack}">
       <div slot="right" @click="goTranList">{{$t('vux.calendar.confirm_text')}}</div>
     </x-header>
     <div class="search-page">

@@ -1,7 +1,6 @@
 <template>
   <div class="blue-bg">
-    <x-header style="width:100%;position:absolute;left:0;top:0;z-index:100;"
-              :title="$t(title)" :left-options="{showBack}">
+    <x-header :title="$t(title)" :left-options="{showBack}">
     </x-header>
     <div class="code-show">
       <div class="show-title">

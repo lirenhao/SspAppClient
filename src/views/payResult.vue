@@ -1,7 +1,6 @@
 <template>
   <div>
-    <x-header style="width:100%;position:absolute;left:0;top:0;z-index:100;"
-              :title="$t(title)" :left-options="{showBack}">
+    <x-header :title="$t(title)" :left-options="{showBack}">
     </x-header>
     <div class="pay-result" v-if="result">
       <img slot="icon" src="../assets/success.png" >
