@@ -1,5 +1,5 @@
 <template>
-  <div id="app" style="position:absolute;width:100%;height:100%;">
+  <div id="app" style="height:100%;">
     <loading :show="isLoading"></loading>
     <router-view></router-view>
   </div>

@@ -1,6 +1,7 @@
 <template>
-  <div>
-    <x-header :title="$t(title)" :left-options="{showBack}">
+  <view-box body-padding-top="46px">
+    <x-header slot="header" style="width:100%;position:absolute;left:0;top:0;z-index:100;"
+     :title="$t(title)" :left-options="{showBack}">
     </x-header>
     <div class="home-page">
       <grid class="home-content">
@@ -39,10 +40,28 @@
         <div class="load-more" v-if="pushList.length === 3" @click="goPushList">{{$t('Load more')}}</div>
       </div>
     </div>
-  </div>
+    <tabbar slot="bottom">
+      <tabbar-item selected>
+        <img slot="icon" src="../assets/vux_logo.png">
+        <span slot="label">{{$t('home')}}</span>
+      </tabbar-item>
+      <tabbar-item link="/setAmt">
+        <img slot="icon" src="../assets/code-icon.png">
+        <span slot="label">{{$t('Collection code')}}</span>
+      </tabbar-item>
+      <tabbar-item link="/tranSearch" :label="$t('Transaction inquiry')">
+        <img slot="icon" src="../assets/seach-icon.png">
+        <span slot="label">{{$t('Transaction inquiry')}}</span>
+      </tabbar-item>
+      <tabbar-item link="/userInfo">
+        <img slot="icon" src="../assets/user-icon.png">
+        <span slot="label">{{$t('Personal center')}}</span>
+      </tabbar-item>
+    </tabbar>
+  </view-box>
 </template>
 <script>
-import {XHeader, Group, Cell, Grid, GridItem, Divider} from 'vux';
+import {ViewBox, XHeader, Group, Cell, Grid, GridItem, Divider, Tabbar, TabbarItem} from 'vux';
 import {mapState} from 'vuex';
 import {dateFormat} from 'vux';
 import moment from 'moment';
@@ -52,12 +71,15 @@ import localforage from '../localforage';
 export default {
   name: 'home',
   components: {
+    ViewBox,
     XHeader,
     Group,
     Cell,
     Grid,
     GridItem,
     Divider,
+    Tabbar,
+    TabbarItem,
   },
   computed: {
     ...mapState({
@@ -73,12 +95,14 @@ export default {
       if (window.localStorage.isResetPwd) {
         this.$router.push('/resetPwd')
       } else {
-         localforage(window.localStorage.merNo)
+        localforage(window.localStorage.merNo)
           .getItem('trans')
           .then(trans => {
             const currDate = dateFormat(new Date(), 'YYYYMMDD');
             this.$store.commit('UPDATE_PUSH_LIST', trans ? trans.filter(tran => tran.tranDate.slice(0, 8) === currDate): []);
           });
+        this.$store.commit('UPDATE_TRAN_QUERY', {tranDate: dateFormat(new Date(), 'YYYY-MM-DD'),
+      });
       }
     }
   },
@@ -103,9 +127,6 @@ export default {
       this.$router.push('/setAmt');
     },
     goTranSearch() {
-      this.$store.commit('UPDATE_TRAN_QUERY', {
-        tranDate: dateFormat(new Date(), 'YYYY-MM-DD'),
-      });
       this.$router.push('/tranSearch');
     },
     goUserInfo() {
@@ -137,7 +158,6 @@ export default {
 <style>
 /*首页导航栏*/
 .home-content {
-  top: 8px;
   background: #fff;
   border: none;
   margin-bottom: 28px;
