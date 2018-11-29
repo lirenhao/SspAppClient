@@ -77,7 +77,7 @@ export default new Router({
       props: true,
       meta: {
         isShowNav: true,
-        title: 'tranList',
+        title: 'tranSearch',
         showBack: true
       }
     },

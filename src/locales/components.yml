@@ -14,7 +14,7 @@ en:
   Login exception: Login Error Please Try Again
   Access is denied: Network Error
   Password change failed: Password Change Unsuccessful
-  Sub merchant get failed: 
+  Sub merchant get failed: No Sub Merchant Data Available
   Transaction query failed: Transaction Query Unsuccesful
   QrCode create failed: QR Code Generation Unsuccessful
   Collection code: Payment Code
@@ -22,14 +22,14 @@ en:
   Personal center: Merchant Details
   Payment amount: Transaction Amount
   Please enter the payment amount: Please Enter Transaction Amount
-  Please choose the payment channel: 
+  Please choose the payment channel: Please Choose A Payment Type
   UnionPay: UnionPay
   WeChat: WeChat
   Alipay: Alipay
   Generate QR code: Generate QR Code
   Transaction data: Transaction Date
   Sub merchant: Sub Merchant
-  Tran search select: Search Selection
+  Tran search select: Search
   Tran no query to data: No Data Available
   Fill in the original password: Please Use Original Password
   Fill in the new password: Please Use New Password
@@ -75,8 +75,8 @@ en:
   Today: Today
   Selected: Selected
   Select Merchant: Select a Merchant 
-  Please try again later: 
-  Please check the network status: 
+  Please try again later: Please Try Again Later
+  Please check the network status: Please Check The Network Status
   Total: Total
   Count: Count
 zh-CN:
