@@ -89,7 +89,6 @@ export default {
     width: 66%;
     height: 38px;
     margin-left: 17%;
-    background: #67A2F9;
     color: #fff;
     border: none;
     font-size: 15px;

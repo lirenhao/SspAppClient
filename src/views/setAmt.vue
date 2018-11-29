@@ -173,7 +173,6 @@ export default {
     width: 66%;
     height: 38px;
     margin-left: 17%;
-    background: #67a2f9;
     color: #fff;
     border: none;
     font-size: 15px;
