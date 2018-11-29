@@ -41,10 +41,6 @@
       </div>
     </div>
     <tabbar slot="bottom">
-      <tabbar-item selected>
-        <img slot="icon" src="../assets/vux_logo.png">
-        <span slot="label">{{$t('home')}}</span>
-      </tabbar-item>
       <tabbar-item link="/setAmt">
         <img slot="icon" src="../assets/code-icon.png">
         <span slot="label">{{$t('Collection code')}}</span>

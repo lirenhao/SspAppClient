@@ -1,81 +1,82 @@
 en:
-  home: Home
-  userInfo: Personal center
+  home: Main Menu
+  userInfo: Merchant Info
   updatePwd: Change Password
-  tranSearch: Transaction inquiry
-  tranList: Transaction inquiry
-  tranInfo: Transaction Details
-  setAmt: Set amount
-  createCode: Collection code
-  payResult: Pay result
-  pushList: Transaction notification
-  Network anomaly: Network anomaly
-  Login validation failed: Login validation failed
-  Login exception: Login exception
-  Access is denied: Access is denied
-  Password change failed: Password change failed
-  Sub merchant get failed: Hold merchant get failed
-  Transaction query failed: Transaction query failed
-  QrCode create failed: QrCode create failed
-  Collection code: Collection code
-  Transaction inquiry: Transaction inquiry
-  Personal center: Personal center
-  Payment amount: Payment amount
-  Please enter the payment amount: Please enter the payment amount
-  Please choose the payment channel: Please choose the payment channel
+  tranSearch: Transaction Search
+  tranList: Transaction List
+  tranInfo: Transcation Details
+  setAmt: Set Txn Amount
+  createCode: Payment QR Code
+  payResult: Transaction Result
+  pushList: Notifications
+  Network anomaly: Network Error
+  Login validation failed: Login Unsuccesful
+  Login exception: Login Error Please Try Again
+  Access is denied: Network Error
+  Password change failed: Password Change Unsuccessful
+  Sub merchant get failed: 
+  Transaction query failed: Transaction Query Unsuccesful
+  QrCode create failed: QR Code Generation Unsuccessful
+  Collection code: Payment Code
+  Transaction inquiry: Transaction Query
+  Personal center: Merchant Details
+  Payment amount: Transaction Amount
+  Please enter the payment amount: Please Enter Transaction Amount
+  Please choose the payment channel: 
   UnionPay: UnionPay
   WeChat: WeChat
   Alipay: Alipay
-  Generate QR code: Generate QR code
-  Sub merchant: Sub merchant
-  Tran search select: Select
-  Tran no query to data: No query to data
-  Fill in the original password: Fill in the original password
-  Fill in the new password: Fill in the new password
-  Fill in the lod password: Fill in the original password
-  Fill in the old password: Fill in the old password
-  Fill in again to confirm: Fill in again to confirm
-  Confirm the changes: Confirm the changes
-  Password modified successfully: Password modified successfully
-  Old password failed: Old password failed
-  Input error: Input error
-  New password two input mismatch: New password two input mismatch
-  Please enter merchant number: Please enter merchant number
-  Please enter login name: Please enter login name
-  Please enter password: Please enter password
+  Generate QR code: Generate QR Code
+  Transaction data: Transaction Date
+  Sub merchant: Sub Merchant
+  Tran search select: Search Selection
+  Tran no query to data: No Data Available
+  Fill in the original password: Please Use Original Password
+  Fill in the new password: Please Use New Password
+  Fill in the lod password: Please Use Previous Password
+  Fill in the old password: Please Use Previous Password
+  Fill in again to confirm: Please Key In Again To Confirm
+  Confirm the changes: Confirm?
+  Password modified successfully: Password Change Successful
+  Old password failed: Original Password Error
+  Input error: Input Error
+  New password two input mismatch: Password Doesn't Match
+  Please enter merchant number: Please Enter Merchant ID
+  Please enter login name: Please Enter Login Name
+  Please enter password: Please Enter Password
   Login: Login
-  Tran push no data: Tran push no data
-  Pay the wait: Order submitted successfully,waiting for user scan
-  Merchant number: Merchant No.
-  Terminal number: Terminal No.
-  Tran currency: Tran currency
-  Login out: Login out
-  Change password: Change password
-  Login out faild: Login out faild
-  Collecting money from customers: Collecting money from customers
+  Tran push no data: No Available Data
+  Pay the wait: Please Scan QR Code
+  Merchant number: Merchant ID
+  Terminal number: Terminal ID
+  Tran currency: Transaction Currency
+  Login out: Log Out
+  Change password: Change Password
+  Login out faild: Log Out Unsuccessful
+  Collecting money from customers: Please Collect Payment From Customer
   Countdown: Countdown
-  Amount input error: Amount input error
-  Transaction reminder: Transaction reminder
-  Load more: Load more
-  Success: Success
-  Failed: Failed
-  Done: Done
-  The payment code has expired: The payment code has expired
-  New generation again: New generation again
-  Payment is successful: Payment is successful
-  Payment is failed: Payment is failed
-  Transaction amount: Transaction amount
-  Transaction date: Transaction date
-  Transaction type: Transaction type
-  Merchant order: Merchant order
-  Payment channel: Payment channel
-  Transaction successful: Transaction successful
-  Transaction failed: Transaction failed
+  Amount input error: Transaction Amount 
+  Transaction reminder: Transaction Reminder
+  Load more: Loading
+  Success: Successful
+  Failed: Unsuccessful
+  Done: Done 
+  The payment code has expired: QR Code Expired 
+  New generation again: Regenerate QR Code
+  Payment is successful: Transaction Sucessful
+  Payment is failed: Transaction Unsucessful
+  Transaction amount: Transaction Amount 
+  Transaction date: Transaction Date
+  Transaction type: Transaction Type
+  Merchant order: Merchant Order No.
+  Payment channel: Payment Type
+  Transaction successful: Transaction Sucessful
+  Transaction failed: Transaction Unsucessful
   Today: Today
   Selected: Selected
-  Select Merchant: Select Merchant
-  Please try again later: Please try again later
-  Please check the network status: Please check the network status
+  Select Merchant: Select a Merchant 
+  Please try again later: 
+  Please check the network status: 
   Total: Total
   Count: Count
 zh-CN:
@@ -94,6 +95,7 @@ zh-CN:
   Login exception: 登录异常
   Access is denied: 访问被拒绝
   Password change failed: 密码修改失败
+  Sub merchant get failed: 获取子商户失败
   Transaction query failed: 交易查询失败
   QrCode create failed: 二维码创建失败
   Collection code: 收款码

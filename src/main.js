@@ -26,7 +26,7 @@ router.afterEach(function () {
 })
 
 push.initialize()
-Vue.i18n.set('zh-CN')
+Vue.i18n.set('en')
 
 new Vue({
   store,
