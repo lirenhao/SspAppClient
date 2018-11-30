@@ -224,7 +224,6 @@ export default {
   background-color: #fff;
 }
 .channel-item-selected {
-  background: #b81c22;
-  border-color: #ff4a00;
+  background: #fad7d8;
 }
 </style>
