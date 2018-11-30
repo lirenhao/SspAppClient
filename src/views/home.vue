@@ -224,7 +224,7 @@ export default {
 /*价格设置*/
 .price {
   font-size: 20px;
-  color: #b6002a;
+  color: #B6002A;
 }
 
 /*交易通知边框删除*/
@@ -252,12 +252,12 @@ export default {
   border-radius: 0 0 12px 12px;
 }
 
-/*无更多信息*/
-.vux-divider {
-  width: 78%;
-  margin-left: 11%;
-  font-size: 13px !important;
-  color: #bbb !important;
-  margin-top: 90px;
-}
+  /*无更多信息*/
+  .vux-divider {
+    width: 78%;
+    margin-left: 11%;
+    font-size: 13px !important;
+    color: #bbb !important;
+    margin-top: 90px;
+  }
 </style>
