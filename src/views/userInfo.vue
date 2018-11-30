@@ -32,6 +32,11 @@
             <x-icon style="fill: #f8d743; margin-right: 8px; margin-left: -16px;" slot="icon" type="android-lock"/>
           </cell>
         </div>
+        <div class="mine-list">
+          <cell :title="$t('Help Center')" is-link>
+            <x-icon style="fill: #f8d743; margin-right: 8px; margin-left: -16px;" slot="icon" type="android-lock"/>
+          </cell>
+        </div>
         <div class="mine-list" @click="logout">
           <cell :title="$t('Login out')" is-link>
             <x-icon style="fill: #f06474; margin-right: 8px; margin-left: -16px;" slot="icon" type="person"/>
