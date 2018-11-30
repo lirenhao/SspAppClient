@@ -4,21 +4,23 @@
     <div class="Payment-options">
       <group class="money-title" :title="$t('Please choose the payment channel')"></group>
       <br>
-      <checker v-model="channel" :radio-required="true" class="weui-grids"
-        default-item-class="channel-item" selected-item-class="channel-item-selected">
-        <checker-item value="01" class="weui-grid">
-          <img class="weui-grid__icon" src="../assets/UnionPay.png">
-          <span class="weui-grid__label">{{$t('UnionPay')}}</span>
-        </checker-item>
-        <checker-item value="02" class="weui-grid">
-          <img class="weui-grid__icon" src="../assets/WeChat.png">
-          <span class="weui-grid__label">{{$t('WeChat')}}</span>
-        </checker-item>
-        <checker-item value="03" class="weui-grid">
-          <img class="weui-grid__icon" src="../assets/Alipay.png">
-          <span class="weui-grid__label">{{$t('Alipay')}}</span>
-        </checker-item>
-      </checker>
+      <grid>
+        <checker v-model="channel" :radio-required="true"
+          default-item-class="channel-item" selected-item-class="channel-item-selected">
+          <checker-item value="01" class="weui-grid">
+            <img class="weui-grid__icon" src="../assets/UnionPay.png">
+            <span class="weui-grid__label">{{$t('UnionPay')}}</span>
+          </checker-item>
+          <checker-item value="02" class="weui-grid">
+            <img class="weui-grid__icon" src="../assets/WeChat.png">
+            <span class="weui-grid__label">{{$t('WeChat')}}</span>
+          </checker-item>
+          <checker-item value="03" class="weui-grid">
+            <img class="weui-grid__icon" src="../assets/Alipay.png">
+            <span class="weui-grid__label">{{$t('Alipay')}}</span>
+          </checker-item>
+        </checker>
+      </grid>
     </div>
     <div class="BG">
       <group class="money-title" :title="$t('Please enter the payment amount')"></group>
