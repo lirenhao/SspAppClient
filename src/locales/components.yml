@@ -80,6 +80,8 @@ en:
   Total: Total
   Count: Count
   Help Center: Help Center
+  Total Transaction for Today: Total Transaction for Today
+  Transactions: Transactions
 zh-CN:
   home: 首页
   userInfo: 个人中心
@@ -162,3 +164,5 @@ zh-CN:
   Total: 总计
   Count: 笔数
   Help Center: 帮助中心
+  Total Transaction for Today: 今日总收入
+  Transactions: 笔

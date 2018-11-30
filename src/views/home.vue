@@ -1,23 +1,35 @@
 <template>
   <view-box body-padding-top="46px">
-    <x-header slot="header" style="width:100%;position:absolute;left:0;top:0;z-index:100;"
-     :title="$t(title)" :left-options="{showBack}">
-    </x-header>
+    <x-header
+      slot="header"
+      style="width:100%;position:absolute;left:0;top:0;z-index:100;"
+      :title="$t(title)"
+      :left-options="{showBack}"
+    ></x-header>
     <div class="home-page">
-     <div class="Total-revenue">
-       <p>今日总收入</p>
-       <p>86,628.03</p>
-       <P>共计<span>38</span>笔</P>
-     </div>
+      <div class="Total-revenue">
+        <p>{{$t('Total Transaction for Today')}}</p>
+        <p>S$ {{pushTotal}}</p>
+        <P>
+          <span>{{pushCount}}</span>{{$t('Transactions')}}
+        </P>
+      </div>
 
       <div v-if="pushList.length === 0">
         <divider>{{$t('Tran push no data')}}</divider>
       </div>
       <div class="Notification-list" v-else>
-        <group v-for="(item, index) in pushList" :key="index"
-               @click.native="goTranInfo(item.merNo, item.tranNo)">
+        <group
+          v-for="(item, index) in pushList"
+          :key="index"
+          @click.native="goTranInfo(item.merNo, item.tranNo)"
+        >
           <cell class="change-cell">
-            <x-icon style="fill: #999; width: 20px; margin: 1px 2px 0 0" slot="icon" type="android-notifications"/>
+            <x-icon
+              style="fill: #999; width: 20px; margin: 1px 2px 0 0"
+              slot="icon"
+              type="android-notifications"
+            />
             <div slot="title">{{$t('Transaction reminder')}}</div>
             <div>{{getDateFormat(item.tranDate)}}</div>
           </cell>
@@ -46,15 +58,25 @@
   </view-box>
 </template>
 <script>
-import {ViewBox, XHeader, Group, Cell, Grid, GridItem, Divider, Tabbar, TabbarItem} from 'vux';
-import {mapState} from 'vuex';
-import {dateFormat} from 'vux';
-import moment from 'moment';
-import api from '../api';
-import localforage from '../localforage';
+import {
+  ViewBox,
+  XHeader,
+  Group,
+  Cell,
+  Grid,
+  GridItem,
+  Divider,
+  Tabbar,
+  TabbarItem
+} from "vux";
+import { mapState } from "vuex";
+import { dateFormat, numberComma } from "vux";
+import moment from "moment";
+import api from "../api";
+import localforage from "../localforage";
 
 export default {
-  name: 'home',
+  name: "home",
   components: {
     ViewBox,
     XHeader,
@@ -64,30 +86,38 @@ export default {
     GridItem,
     Divider,
     Tabbar,
-    TabbarItem,
+    TabbarItem
   },
   computed: {
     ...mapState({
       // 只显示3条
       pushList: state => state.pushList.filter((item, index) => index < 3),
-    }),
+      pushTotal: state => numberComma(state.pushList.map(t => parseFloat(t.tranAmt)).reduce((a, b) => a + b, 0)),
+      pushCount: state => state.pushList.length,
+    })
   },
   created: function() {
     if (!window.localStorage.token) {
-      this.$router.push({name: 'login', params: {isClear: false}});
+      this.$router.push({ name: "login", params: { isClear: false } });
     } else {
       // 存储的与store如何一致
       if (window.localStorage.isResetPwd) {
-        this.$router.push('/resetPwd')
+        this.$router.push("/resetPwd");
       } else {
         localforage(window.localStorage.merNo)
-          .getItem('trans')
+          .getItem("trans")
           .then(trans => {
-            const currDate = dateFormat(new Date(), 'YYYYMMDD');
-            this.$store.commit('UPDATE_PUSH_LIST', trans ? trans.filter(tran => tran.tranDate.slice(0, 8) === currDate): []);
+            const currDate = dateFormat(new Date(), "YYYYMMDD");
+            this.$store.commit(
+              "UPDATE_PUSH_LIST",
+              trans
+                ? trans.filter(tran => tran.tranDate.slice(0, 8) === currDate)
+                : []
+            );
           });
-        this.$store.commit('UPDATE_TRAN_QUERY', {tranDate: dateFormat(new Date(), 'YYYY-MM-DD'),
-      });
+        this.$store.commit("UPDATE_TRAN_QUERY", {
+          tranDate: dateFormat(new Date(), "YYYY-MM-DD")
+        });
       }
     }
   },
@@ -96,58 +126,58 @@ export default {
       isShowNav: this.$route.meta.isShowNav,
       title: this.$route.meta.title,
       showBack: this.$route.meta.showBack,
-      trans: [],
+      trans: []
     };
   },
   methods: {
     getDateFormat(date) {
       if (date && date.length === 14)
         return dateFormat(
-          new Date(moment(date, 'YYYYMMDDHHmmss')),
-          'YYYY-MM-DD HH:mm:ss'
+          new Date(moment(date, "YYYYMMDDHHmmss")),
+          "YYYY-MM-DD HH:mm:ss"
         );
-      else return dateFormat(new Date(), 'YYYY-MM-DD HH:mm:ss');
+      else return dateFormat(new Date(), "YYYY-MM-DD HH:mm:ss");
     },
     goSetAmt() {
-      this.$router.push('/setAmt');
+      this.$router.push("/setAmt");
     },
     goTranSearch() {
-      this.$router.push('/tranSearch');
+      this.$router.push("/tranSearch");
     },
     goUserInfo() {
-      this.$router.push('/userInfo');
+      this.$router.push("/userInfo");
     },
     goTranInfo(merNo, tranNo) {
       api.tranInfo(merNo, tranNo).then(info => {
         if (info) {
           this.$router.push({
-            name: 'tranInfo',
-            params: {info},
+            name: "tranInfo",
+            params: { info }
           });
         } else {
           this.$vux.toast.show({
-            type: 'warn',
-            position: 'default',
-            text: this.$t('Transaction query failed'),
+            type: "warn",
+            position: "default",
+            text: this.$t("Transaction query failed")
           });
         }
       });
     },
     goPushList() {
-      this.$router.push('/pushList');
-    },
-  },
+      this.$router.push("/pushList");
+    }
+  }
 };
 </script>
 
-<style>
+<style scoped>
 /*今日总收入*/
 .Total-revenue {
   width: 100%;
   min-height: 150px;
   color: #fff;
   text-align: center;
-  background: linear-gradient(to bottom, #B6002A, #f7393f);
+  background: linear-gradient(to bottom, #b6002a, #f7393f);
 }
 
 .Total-revenue p:nth-child(1),
@@ -194,7 +224,7 @@ export default {
 /*价格设置*/
 .price {
   font-size: 20px;
-  color: #B6002A;
+  color: #b6002a;
 }
 
 /*交易通知边框删除*/
@@ -215,19 +245,19 @@ export default {
   margin-top: -8px;
   padding: 10px 0;
   font-size: 12px;
-  color: #B6002A;
+  color: #b6002a;
   text-align: center;
   background: #fff;
   border-top: 1px solid #eee;
   border-radius: 0 0 12px 12px;
 }
 
-  /*无更多信息*/
-  .vux-divider {
-    width: 78%;
-    margin-left: 11%;
-    font-size: 13px !important;
-    color: #bbb !important;
-    margin-top: 90px;
-  }
+/*无更多信息*/
+.vux-divider {
+  width: 78%;
+  margin-left: 11%;
+  font-size: 13px !important;
+  color: #bbb !important;
+  margin-top: 90px;
+}
 </style>
