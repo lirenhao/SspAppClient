@@ -43,6 +43,7 @@ export default {
       // data.sound,
       // data.image,
       // data.additionalData
+      console.log('push', data)
       localforage(window.localStorage.merNo).getItem('trans')
         .then(ld => {
           const push = window.localStorage.pushType === 'APNS' ? data.additionalData.data : data.additionalData
