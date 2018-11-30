@@ -1,22 +1,23 @@
 <template>
   <div class="login-bg">
-    <img slot="icon" src="../assets/logo.png" class="logo">
+    <img slot="icon" src="../assets/BankOfChina.png" class="logo">
     <div class="login-box">
       <div class="login-input">
         <x-input class="text-box" v-model="merNo" :placeholder="$t('Please enter merchant number')">
-          <x-icon style="fill: #fff;" slot="label" type="compose" />
+          <x-icon style="fill: #101010;" slot="label" type="compose" />
         </x-input>
       </div>
       <div class="login-input">
         <x-input class="text-box" v-model="loginName" :placeholder="$t('Please enter login name')">
-          <x-icon style="fill: #fff;" slot="label" type="person" />
+          <x-icon style="fill: #101010;" slot="label" type="person" />
         </x-input>
       </div>
       <div class="login-input">
         <x-input class="text-box" v-model="passWord" :placeholder="$t('Please enter password')" type="password">
-          <x-icon style="fill: #fff;" slot="label" type="android-lock" />
+          <x-icon style="fill: #101010;" slot="label" type="android-lock" />
         </x-input>
       </div>
+      <a class="help">帮助中心？</a>
       <x-button class="login-btn" @click.native="click" :text="$t('Login')"/>
       <div class="close-btn" v-if="isClear">
         <x-icon style="fill: rgba(255,255,255,0.31); position: fixed; top: 20px; right: 20px; " @click.native="clear" type="android-close"></x-icon>
@@ -81,8 +82,8 @@
 
   /*登陆页logo*/
   .logo {
-    width: 38%;
-    margin-left: 31%;
+    width: 46%;
+    margin-left: 27%;
     margin-top: 70px;
     margin-bottom: 30px;
   }
@@ -91,9 +92,9 @@
     width: 74%;
     margin-left: 13%;
     background: none;
-    border-bottom: 1px solid #fff;
+    border-bottom: 1px solid #CCC;
     height: 42px;
-    margin-top: 20px;
+    margin-top: 14px;
   }
 
   /*登录页输入框宽度调整*/
@@ -101,19 +102,27 @@
     font-size: 13px;
     padding: 8px 0 !important;
     text-indent: .3em;
-    color: #fff;
+    color: #101010;
+  }
+
+  /*帮助中心*/
+  .help {
+    float: right;
+    margin-right: 12%;
+    margin-top: 8px;
+    font-size: 12px;
+    color: #666;
   }
   /*登录按钮*/
   .login-btn {
     width: 74%;
-    height: 42px;
+    height: 40px;
     margin-left: 13%;
-    background: none;
+    background: #B6002A;
+    border-radius: 4px;
     color: #fff;
-    border: 1px solid #fff;
     font-size: 16px;
     margin-top: 56px;
-    border-radius: 2px;
     text-align: center;
   }
   .weui-btn:after {

@@ -1,6 +1,7 @@
 <template>
   <div style="height:100%;">
-    <x-header :title="$t(title)" :left-options="{showBack}">
+    <x-header style="width:100%;position:absolute;left:0;top:0;z-index:100;"
+              :title="$t(title)" :left-options="{showBack}">
     </x-header>
     <view-box>
       <group class="pushlist-content" v-for="(item, index) in pushList" :key="index"
