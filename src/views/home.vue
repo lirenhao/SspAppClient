@@ -9,7 +9,7 @@
     <div class="home-page">
       <div class="Total-revenue">
         <p>{{$t('Total Transaction for Today')}}</p>
-        <p>S$ {{pushTotal}}</p>
+        <p>{{ccyType.ccySymbol}} {{pushTotal}}</p>
         <P>
           <span>{{pushCount}}</span>{{$t('Transactions')}}
         </P>
@@ -118,6 +118,7 @@ export default {
         this.$store.commit("UPDATE_TRAN_QUERY", {
           tranDate: dateFormat(new Date(), "YYYY-MM-DD")
         });
+        api.userInfo().then(data => (this.ccyType = data.ccyType));
       }
     }
   },
@@ -126,7 +127,7 @@ export default {
       isShowNav: this.$route.meta.isShowNav,
       title: this.$route.meta.title,
       showBack: this.$route.meta.showBack,
-      trans: []
+      ccyType: {}
     };
   },
   methods: {
