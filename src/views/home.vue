@@ -4,23 +4,12 @@
      :title="$t(title)" :left-options="{showBack}">
     </x-header>
     <div class="home-page">
-      <grid class="home-content">
-        <div @click="goSetAmt">
-          <grid-item :label="$t('Collection code')">
-            <img slot="icon" src="../assets/code-icon.png">
-          </grid-item>
-        </div>
-        <div @click="goTranSearch">
-          <grid-item :label="$t('Transaction inquiry')">
-            <img slot="icon" src="../assets/seach-icon.png">
-          </grid-item>
-        </div>
-        <div @click="goUserInfo">
-          <grid-item :label="$t('Personal center')">
-            <img slot="icon" src="../assets/user-icon.png">
-          </grid-item>
-        </div>
-      </grid>
+     <div class="Total-revenue">
+       <p>今日总收入</p>
+       <p>86,628.03</p>
+       <P>共计<span>38</span>笔</P>
+     </div>
+
       <div v-if="pushList.length === 0">
         <divider>{{$t('Tran push no data')}}</divider>
       </div>
@@ -152,24 +141,31 @@ export default {
 </script>
 
 <style>
-/*首页导航栏*/
-.home-content {
-  background: #fff;
-  border: none;
-  margin-bottom: 28px;
+/*今日总收入*/
+.Total-revenue {
+  width: 100%;
+  min-height: 150px;
+  color: #fff;
+  text-align: center;
+  background: linear-gradient(to bottom, #B6002A, #f7393f);
 }
 
-/*首页导航按钮边框删除*/
-.home-page .weui-grids:before,
-.home-page .weui-grids:after,
-.home-content .weui-grid:before,
-.home-content .weui-grid:after {
-  border: none;
+.Total-revenue p:nth-child(1),
+.Total-revenue p:nth-child(3) {
+  font-size: 12px;
 }
 
-/*首页导航按文字大小设置*/
-.home-content .weui-grid__icon + .weui-grid__label {
-  font-size: 13px !important;
+.Total-revenue p:nth-child(1) {
+  padding-top: 24px;
+}
+
+.Total-revenue p:nth-child(2) {
+  font-size: 36px;
+}
+
+.Total-revenue span {
+  margin: 0 8px;
+  font-size: 18px;
 }
 
 /*交易通知 宽度 圆角设置*/
@@ -198,7 +194,7 @@ export default {
 /*价格设置*/
 .price {
   font-size: 20px;
-  color: red;
+  color: #B6002A;
 }
 
 /*交易通知边框删除*/
@@ -219,7 +215,7 @@ export default {
   margin-top: -8px;
   padding: 10px 0;
   font-size: 12px;
-  color: #5799f9;
+  color: #B6002A;
   text-align: center;
   background: #fff;
   border-top: 1px solid #eee;
