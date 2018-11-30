@@ -5,7 +5,7 @@
     <div>
       <div class="vux-demo">
         <img slot="icon" src="../assets/mine.png" class="mine">
-        <img slot="icon" src="../assets/merchants.png" class="merchants">
+        <!-- <img slot="icon" src="../assets/merchants.png" class="merchants"> -->
         <h4>{{userName}}</h4>
       </div>
       <div>

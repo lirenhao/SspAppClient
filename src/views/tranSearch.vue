@@ -94,7 +94,7 @@ export default {
 
   /*选择箭头颜色修改*/
   .search-page .vux-prev-icon, .vux-next-icon {
-    border-color: #5799F9 !important;
+    border-color: #B6002A !important;
   }
 
   /*选择箭头大小修改*/
@@ -105,12 +105,12 @@ export default {
 
   /*星期颜色修改*/
   .search-page .inline-calendar th {
-    color: #5799F9;
+    color: #B6002A;
   }
 
   /*日历今日样式添加*/
   .search-page .inline-calendar td.is-today > span.vux-calendar-each-date {
-    background-color: #5799F9;
+    background-color: #B6002A;
     color: #fff;
   }
 
@@ -149,7 +149,7 @@ export default {
   }
 
   .blue {
-    background: #5799F9 !important;
+    background: #B6002A !important;
   }
 
 
@@ -179,7 +179,7 @@ export default {
   /*商户号选择*/
   .vux-popup-header-left, .vux-popup-header-right {
     font-size: 13px;
-    color: #5799F9 !important;
+    color: #B6002A !important;
   }
   .vux-1px-b:after {
     border-bottom: none !important;
