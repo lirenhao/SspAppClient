@@ -4,7 +4,7 @@
     </x-header>
     <group class="traninfo-page">
       <div class="TI-money">
-        {{info.tranCry + ' ' + info.tranAmt}}
+        {{ccyType.ccySymbol + ' ' + info.tranAmt}}
       <p>{{info.merName}}</p>
       </div>
       <cell-form-preview :list="parserItem(info)"></cell-form-preview>
@@ -21,7 +21,7 @@
 </template>
 <script>
 import {XHeader, Group, Cell, CellFormPreview,} from 'vux';
-import {dateFormat} from 'vux';
+import {dateFormat, numberComma} from 'vux';
 import moment from 'moment';
 import api from '../api';
 
@@ -42,6 +42,8 @@ export default {
   created: function() {
     if (!window.localStorage.token) {
       this.$router.push({name: 'login', params: {isClear: false}});
+    } else {
+      api.userInfo().then(data => (this.ccyType = data.ccyType));
     }
   },
   data: function() {
@@ -49,6 +51,7 @@ export default {
       isShowNav: this.$route.meta.isShowNav,
       title: this.$route.meta.title,
       showBack: this.$route.meta.showBack,
+      ccyType: {},
     };
   },
   methods: {
@@ -57,10 +60,9 @@ export default {
       body.push({label: this.$t('Merchant number'), value: item.merNo})
       body.push({label: this.$t('Terminal number'), value: item.termNo})
       body.push({label: this.$t('Transaction type'), value: item.tranType})
-      body.push({label: this.$t('Merchant order'), value: item.tranNo})
+      body.push({label: this.$t('Merchant order'), value: item.traceNo})
       body.push({label: this.$t('Payment channel'), value: item.channel})
       body.push({label: this.$t('Transaction date'), value: this.getDateFormat(item.tranDate)})
-      body.push({label: this.$t('Transaction amount'), value: item.tranAmt})
       return body
     },
     getDateFormat(date) {
