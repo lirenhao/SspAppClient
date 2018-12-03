@@ -1,17 +1,25 @@
 <template>
-  <view-box>
-    <x-header slot="header" style="width:100%;position:absolute;left:0;top:0;z-index:100;"
-              :title="$t(title)" :left-options="{showBack}">
-    </x-header>
-    <group class="pushlist-content" v-for="(item, index) in pushList" :key="index"
-      @click.native="goTranInfo(item.merNo, item.tranNo)">
+  <view-box body-padding-top="46px">
+    <x-header
+      slot="header"
+      style="width:100%;position:absolute;left:0;top:0;z-index:100;"
+      :title="$t(title)"
+      :left-options="{showBack}"
+    ></x-header>
+    <group
+      class="pushlist-content"
+      v-for="(item, index) in pushList"
+      :key="index"
+      @click.native="goTranInfo(item.merNo, item.tranNo)"
+    >
       <div class="PL-title">{{$t('Transaction reminder')}}</div>
       <div class="PL-titme">{{getDateFormat(item.tranDate)}}</div>
-      <div class="PL-money" >
+      <div class="PL-money">
         {{$t('Transaction amount')}}
         <p>{{item.tranCry + ' ' + item.tranAmt}}</p>
       </div>
-      <cell-form-preview :list="[
+      <cell-form-preview
+        :list="[
         {
           label: $t('Payment channel'),
           value: item.channel
@@ -20,7 +28,8 @@
           label: $t('Transaction date'),
           value: getDateFormat(item.tranDate)
         }
-      ]"></cell-form-preview>
+      ]"
+      ></cell-form-preview>
     </group>
   </view-box>
 </template>
@@ -32,15 +41,15 @@ import {
   Grid,
   GridItem,
   Divider,
-  CellFormPreview,
-} from 'vux';
-import {mapState} from 'vuex';
-import {dateFormat} from 'vux';
-import moment from 'moment';
-import api from '../api';
+  CellFormPreview
+} from "vux";
+import { mapState } from "vuex";
+import { dateFormat } from "vux";
+import moment from "moment";
+import api from "../api";
 
 export default {
-  name: 'pushList',
+  name: "pushList",
   components: {
     XHeader,
     Group,
@@ -48,46 +57,46 @@ export default {
     Grid,
     GridItem,
     Divider,
-    CellFormPreview,
+    CellFormPreview
   },
   computed: {
     ...mapState({
-      pushList: state => state.pushList,
-    }),
+      pushList: state => state.pushList
+    })
   },
   data: function() {
     return {
       isShowNav: this.$route.meta.isShowNav,
       title: this.$route.meta.title,
-      showBack: this.$route.meta.showBack,
+      showBack: this.$route.meta.showBack
     };
   },
   methods: {
     getDateFormat(date) {
       if (date && date.length === 14)
         return dateFormat(
-          new Date(moment(date, 'YYYYMMDDHHmmss')),
-          'YYYY-MM-DD HH:mm:ss'
+          new Date(moment(date, "YYYYMMDDHHmmss")),
+          "YYYY-MM-DD HH:mm:ss"
         );
-      else return dateFormat(new Date(), 'YYYY-MM-DD HH:mm:ss');
+      else return dateFormat(new Date(), "YYYY-MM-DD HH:mm:ss");
     },
     goTranInfo(merNo, tranNo) {
       api.tranInfo(merNo, tranNo).then(info => {
         if (info) {
           this.$router.push({
-            name: 'tranInfo',
-            params: {info},
+            name: "tranInfo",
+            params: { info }
           });
         } else {
           this.$vux.toast.show({
-            type: 'warn',
-            position: 'default',
-            text: this.$t('Transaction query failed'),
+            type: "warn",
+            position: "default",
+            text: this.$t("Transaction query failed")
           });
         }
       });
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -141,7 +150,7 @@ export default {
 
 .PL-money p {
   font-size: 18px;
-  color: #B6002A;
+  color: #b6002a;
   margin-bottom: 14px;
 }
 
