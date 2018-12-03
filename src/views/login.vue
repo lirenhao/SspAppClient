@@ -17,7 +17,7 @@
           <x-icon style="fill: #101010;" slot="label" type="android-lock" />
         </x-input>
       </div>
-      <a class="help">{{$t('Help')}}？</a>
+      <a class="help" @click="goHelp">{{$t('Help')}}</a>
       <x-button class="login-btn" @click.native="click" :text="$t('Login')"/>
       <div class="close-btn" v-if="isClear">
         <x-icon style="fill: rgba(255,255,255,0.31); position: fixed; top: 20px; right: 20px; " @click.native="clear" type="android-close"></x-icon>
@@ -65,6 +65,12 @@
       },
       clear() {
         this.$router.go(-1)
+      },
+      goHelp() {
+        this.$vux.alert.show({
+          title: this.$t('Help Center'),
+          content: this.$t('Please check the network status')
+        });
       }
     }
   }

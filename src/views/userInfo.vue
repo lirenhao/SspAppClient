@@ -110,6 +110,12 @@ export default {
     updatePwd() {
       this.$router.push({name: 'updatePwd'});
     },
+    goHelp() {
+      this.$vux.alert.show({
+        title: this.$t('Help Center'),
+        content: this.$t('Please check the network status')
+      });
+    }
   },
 };
 </script>
