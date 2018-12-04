@@ -124,7 +124,7 @@ export default {
   .traninfo-page .TI-money {
     text-align: center;
     font-size: 18px;
-    color: #5799F9;
+    color: #B6002A;
     padding: 30px 0 20px 0;
     min-height: 42px !important;
   }
