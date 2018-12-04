@@ -5,7 +5,7 @@
     <div>
       <div class="vux-demo">
         <img slot="icon" src="../assets/mine.png" class="mine">
-        <!-- <img slot="icon" src="../assets/merchants.png" class="merchants"> -->
+        <img slot="icon" src="../assets/merchants.png" class="merchants">
         <h4>{{userName}}</h4>
       </div>
       <div>
@@ -30,17 +30,17 @@
         </div>
         <div class="mine-list" @click="updatePwd">
           <cell :title="$t('Change password')" is-link>
-            <x-icon style="fill: #f8d743; margin-right: 8px; margin-left: -16px;" slot="icon" type="android-lock"/>
+            <x-icon style="fill: #f06474; margin-right: 8px; margin-left: -16px;" slot="icon" type="android-lock"/>
           </cell>
         </div>
         <div class="mine-list">
           <cell :title="$t('Help Center')" is-link>
-            <x-icon style="fill: #f8d743; margin-right: 8px; margin-left: -16px;" slot="icon" type="android-lock"/>
+            <x-icon style="fill: #f8d743; margin-right: 8px; margin-left: -16px;" slot="icon" type="help-circled"/>
           </cell>
         </div>
         <div class="mine-list" @click="logout">
           <cell :title="$t('Login out')" is-link>
-            <x-icon style="fill: #f06474; margin-right: 8px; margin-left: -16px;" slot="icon" type="person"/>
+            <x-icon style="fill: #B6002A; margin-right: 8px; margin-left: -16px;" slot="icon" type="log-out"/>
           </cell>
         </div>
       </div>
@@ -125,33 +125,34 @@ export default {
   .vux-header {
     padding: 4px 0 !important;
   }
-/*个人中心 文字居中*/
-.vux-demo {
-  text-align: center;
-}
 
-/*个人中心 蓝色背景*/
+/*个人中心 背景*/
 .mine {
   width: 100%;
+  margin-top: -2px;
 }
 
 /*个人用户默认头像*/
-.user {
-  width: 28%;
-  margin-top: -86px;
-  border: 3px solid #fff;
-  border-radius: 50%;
-}
+  .merchants {
+    position: absolute;
+    width: 50px;
+    left: 18%;
+    top: 96px;
+  }
 
 /*个人中心 昵称*/
-.vux-demo p {
-  font-size: 12px;
-  color: #999;
+.vux-demo h4 {
+  position: absolute;
+  left: 35%;
+  top: 100px;
+  font-size: 26px;
+  color: #fff;
+  font-weight: 500;
 }
 
 /*间距设置*/
 .marginT {
-  margin-top: 30px;
+  margin-top: 14px;
 }
 
 /*个人中心 功能列表*/
@@ -166,4 +167,5 @@ export default {
   font-size: 12px;
   color: #999;
 }
+
 </style>
