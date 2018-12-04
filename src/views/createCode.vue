@@ -10,7 +10,10 @@
       <qrcode :value="qrCode" type="img" :size="240" class="code-img"></qrcode>
     </div>
     <div class="Payment-type">
-      支付方式：<span>支付宝</span>
+      {{$t('Payment channel')}}：
+      <span v-if="channel==='01'">UnionPay</span>
+      <span v-if="channel==='02'">WeChat</span>
+      <span v-if="channel==='03'">Alipay</span>
     </div>
     <div class="code-time">
       <span>
@@ -54,6 +57,7 @@
       tranAmt: String,
       tranCry: String,
       timeout: Number,
+      channel: String,
     },
     created: function () {
       if (!window.localStorage.token) {
