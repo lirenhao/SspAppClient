@@ -5,15 +5,17 @@
     <div class="code-show">
       <div class="show-title">
         <p>{{$t('Collecting money from customers')}}</p>
-        <div class="code-time">
-          <span>
-            <em>{{$t('Countdown')}}</em> {{timecunt}} <em>S</em>
-          </span>
-        </div>
       </div>
       <p class="code-price">{{ccyType.ccySymbol}} {{tranAmt}}</p>
-      <qrcode :value="qrCode" type="img" class="code-img"></qrcode>
-      <span class="code-prompt">{{$t('Pay the wait')}}...</span>
+      <qrcode :value="qrCode" type="img" :size="240" class="code-img"></qrcode>
+    </div>
+    <div class="Payment-type">
+      支付方式：<span>支付宝</span>
+    </div>
+    <div class="code-time">
+      <span>
+        <em>{{$t('Countdown')}}</em> {{timecunt}} <em>S</em>
+      </span>
     </div>
     <div class="show-titme" v-if="showTimeout">
       <img src="../assets/clock.png" class="clock">
@@ -123,21 +125,11 @@
 </script>
 
 <style scoped>
-
-  /*蓝色背景*/
-  .blue-bg {
-    margin-top: -46px;
-    padding-top: 80px;
-    padding-bottom: 20px;
-    width: 100%;
-    height: 100%;
-    background: #67a2f9;
-  }
-
   /*二维码展示区域*/
   .code-show {
     width: 80%;
     margin-left: 10%;
+    margin-top: 60px;
     text-align: center;
     background: #fff;
     border-radius: 8px;
@@ -147,11 +139,10 @@
   .show-title {
     width: 100%;
     height: 40px;
-    background: #e3eaf4;
+    background: rgba(182, 0, 42, 0.2);
     border-radius: 8px 8px 0 0;
     text-align: left;
     font-size: 14px;
-    color: #5799f9;
   }
 
   .show-title p {
@@ -161,6 +152,7 @@
   /*二维码*/
   .code-img {
     margin: 20px 0;
+    padding-bottom: 20px;
   }
 
   /*订单提示语*/
@@ -171,12 +163,24 @@
     height: 30px;
   }
 
+  /*支付类型*/
+.Payment-type {
+  float: left;
+  font-size: 12px;
+  color: #999;
+  margin: 6px 0 0 38px;
+}
+
+  .Payment-type span {
+    color: #010101;
+  }
+
   /*倒计时*/
   .code-time {
     float: right;
     font-size: 16px;
-    color: red;
-    margin: -22px 12px 0 0;
+    color: #B6002A;
+    margin-right:38px;
   }
 
   /*倒计时*/
@@ -220,7 +224,7 @@
 
   /*重新生成按钮*/
   .show-titme button {
-    width: 38%;
+    width: 50%;
     color: #fff;
     font-size: 14px;
     background: none;
