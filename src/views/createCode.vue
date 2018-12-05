@@ -7,7 +7,7 @@
         <p>{{$t('Collecting money from customers')}}</p>
       </div>
       <p class="code-price">{{ccyType.ccySymbol}} {{tranAmt}}</p>
-      <qrcode :value="qrCode" type="img" :size="240" class="code-img"></qrcode>
+      <qrcode :value="qrCode" type="img" :size="qrCodeSize" class="code-img"></qrcode>
     </div>
     <div class="Payment-type">
       {{$t('Payment channel')}}：
@@ -63,7 +63,9 @@
       if (!window.localStorage.token) {
         this.$router.push({name: 'login', params: {isClear: false}});
       } else {
-        api.userInfo().then(data => this.ccyType = data.ccyType)
+        api.userInfo().then(data => {
+          this.ccyType = data.ccyType
+        })
         this.timer = setInterval(() => {
           if (this.timecunt > 0) {
             this.timecunt--;
@@ -82,6 +84,7 @@
         timecunt: this.timeout,
         showTimeout: false,
         request: true,
+        qrCodeSize: document.documentElement.clientWidth * 0.75
       };
     },
     methods: {
