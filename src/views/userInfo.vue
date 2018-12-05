@@ -33,7 +33,7 @@
             <x-icon style="fill: #f06474; margin-right: 8px; margin-left: -16px;" slot="icon" type="android-lock"/>
           </cell>
         </div>
-        <div class="mine-list">
+        <div class="mine-list" @click="goHelp">
           <cell :title="$t('Help Center')" is-link>
             <x-icon style="fill: #f8d743; margin-right: 8px; margin-left: -16px;" slot="icon" type="help-circled"/>
           </cell>
