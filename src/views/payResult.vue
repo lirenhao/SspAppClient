@@ -57,12 +57,15 @@ export default {
 
   /*交易结果按钮*/
   .pay-result button {
-    width: 38%;
-    color: #666;
-    font-size: 14px;
-    background: none;
-    border: 1px solid #bbbbbb;
-    margin-top: 50px;
+    width: 66%;
+    height: 38px;
+    margin-left: 17%;
+    color: #fff;
+    border: none;
+    font-size: 15px;
+    margin-top: 96px;
+    border-radius: 4px;
+    text-align: center;
   }
 
   .pay-result .weui-btn:after {
