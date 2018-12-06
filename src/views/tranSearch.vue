@@ -4,7 +4,7 @@
       <div slot="right" @click="goTranList">{{$t('vux.calendar.confirm_text')}}</div>
     </x-header>
     <div class="search-page">
-      <inline-calendar v-model="tranDate" @on-select-single-date="goTranList" disable-future></inline-calendar>
+      <inline-calendar v-model="tranDate" @on-select-single-date="selectTranDate" disable-future></inline-calendar>
       <div class="date-today">
         <span class="blue"></span> {{$t('Today')}}
       </div>
@@ -75,6 +75,12 @@ export default {
         .then(() => this.$router.replace('/tranList'))
         .catch(console.log)
     },
+    selectTranDate(value) {
+      api.tranList(this.merNos[0], value.replace(/-/g, ''))
+        .then(data => this.$store.commit('UPDATE_TRAN_LIST', data))
+        .then(() => this.$router.replace('/tranList'))
+        .catch(console.log)
+    }
   },
 };
 </script>
