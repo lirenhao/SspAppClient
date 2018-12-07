@@ -10,7 +10,7 @@
       <qrcode :value="qrCode" type="img" :size="qrCodeSize" class="code-img"></qrcode>
     </div>
     <div class="Payment-type">
-      {{$t('Payment channel')}}：
+      {{$t('Payment channel')}}:
       <span v-if="channel==='01'">UnionPay</span>
       <span v-if="channel==='02'">WeChat</span>
       <span v-if="channel==='03'">Alipay</span>
