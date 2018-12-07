@@ -178,6 +178,7 @@ export default {
   min-height: 150px;
   color: #fff;
   text-align: center;
+  margin-top: -1px;
   background: linear-gradient(to bottom, #b6002a, #f7393f);
 }
 
