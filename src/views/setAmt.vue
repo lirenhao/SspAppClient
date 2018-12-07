@@ -6,9 +6,9 @@
       <br>
       <grid>
         <checker v-model="channel" :radio-required="true"
-          default-item-class="channel-item" selected-item-class="channel-item-selected">
+                 default-item-class="channel-item" selected-item-class="channel-item-selected">
           <checker-item value="01" class="weui-grid">
-            <img class="weui-grid__icon" src="../assets/UnionPay.png">
+            <img class="weui-grid__icon UnionPay" src="../assets/UnionPay.png">
             <span class="weui-grid__label">{{$t('UnionPay')}}</span>
           </checker-item>
           <checker-item value="02" class="weui-grid">
@@ -39,26 +39,12 @@
       class="general-btn"
       type="primary"
       @click.native="goCreateCode"
-    >{{$t('Generate QR code')}}</x-button>
+    >{{$t('Generate QR code')}}
+    </x-button>
   </div>
 </template>
 <script>
-import {
-  XHeader,
-  Group,
-  Grid,
-  GridItem,
-  XInput,
-  XButton,
-  Radio,
-  Checker,
-  CheckerItem
-} from "vux";
-import api from "../api";
-
-export default {
-  name: "setAmt",
-  components: {
+  import {
     XHeader,
     Group,
     Grid,
@@ -68,58 +54,80 @@ export default {
     Radio,
     Checker,
     CheckerItem
-  },
-  created: function() {
-    if (!window.localStorage.token) {
-      this.$router.push({ name: "login", params: { isClear: false } });
-    } else {
-      api.userInfo().then(data => (this.ccyType = data.ccyType));
-    }
-  },
-  props: {
-    tranAmt: String
-  },
-  data: function() {
-    return {
-      isShowNav: this.$route.meta.isShowNav,
-      title: this.$route.meta.title,
-      showBack: this.$route.meta.showBack,
-      amt: this.tranAmt ? this.tranAmt : "",
-      ccyType: {},
-      channel: "01",
-      options: [
-        {
-          key: "01",
-          value: this.$t("UnionPay")
-        },
-        {
-          key: "02",
-          value: this.$t("WeChat")
-        },
-        {
-          key: "03",
-          value: this.$t("Alipay")
-        }
-      ]
-    };
-  },
-  methods: {
-    validAmount(amt) {
-      const regex = /^[1-9]\d*(((,\d{3}){1})?(\.\d{0,2})?)$/;
-      if (regex.test(amt)) {
-        return { valid: true };
-      }
-      return { valid: false, msg: this.$t("Amount input error") };
+  } from "vux";
+  import api from "../api";
+
+  export default {
+    name: "setAmt",
+    components: {
+      XHeader,
+      Group,
+      Grid,
+      GridItem,
+      XInput,
+      XButton,
+      Radio,
+      Checker,
+      CheckerItem
     },
-    goCreateCode() {
-      if (this.amt !== "" && this.validAmount(this.amt).valid) {
-        api.qrCodeCreate(this.amt, this.channel).then(data => {
-          if (data) {
-            if (data.respCode && data.respCode === "00") {
-              this.$router.replace({
-                name: "createCode",
-                params: { ...data, timeout: parseInt(data.timeout) }
-              });
+    created: function () {
+      if (!window.localStorage.token) {
+        this.$router.push({name: "login", params: {isClear: false}});
+      } else {
+        api.userInfo().then(data => (this.ccyType = data.ccyType));
+      }
+    },
+    props: {
+      tranAmt: String
+    },
+    data: function () {
+      return {
+        isShowNav: this.$route.meta.isShowNav,
+        title: this.$route.meta.title,
+        showBack: this.$route.meta.showBack,
+        amt: this.tranAmt ? this.tranAmt : "",
+        ccyType: {},
+        channel: "01",
+        options: [
+          {
+            key: "01",
+            value: this.$t("UnionPay")
+          },
+          {
+            key: "02",
+            value: this.$t("WeChat")
+          },
+          {
+            key: "03",
+            value: this.$t("Alipay")
+          }
+        ]
+      };
+    },
+    methods: {
+      validAmount(amt) {
+        const regex = /^[1-9]\d*(((,\d{3}){1})?(\.\d{0,2})?)$/;
+        if (regex.test(amt)) {
+          return {valid: true};
+        }
+        return {valid: false, msg: this.$t("Amount input error")};
+      },
+      goCreateCode() {
+        if (this.amt !== "" && this.validAmount(this.amt).valid) {
+          api.qrCodeCreate(this.amt, this.channel).then(data => {
+            if (data) {
+              if (data.respCode && data.respCode === "00") {
+                this.$router.replace({
+                  name: "createCode",
+                  params: {...data, timeout: parseInt(data.timeout)}
+                });
+              } else {
+                this.$vux.toast.show({
+                  type: "warn",
+                  position: "default",
+                  text: this.$t("QrCode create failed")
+                });
+              }
             } else {
               this.$vux.toast.show({
                 type: "warn",
@@ -127,103 +135,113 @@ export default {
                 text: this.$t("QrCode create failed")
               });
             }
-          } else {
-            this.$vux.toast.show({
-              type: "warn",
-              position: "default",
-              text: this.$t("QrCode create failed")
-            });
-          }
-        });
-      } else {
-        this.$vux.toast.show({
-          type: "warn",
-          position: "default",
-          text: this.$t("Amount input error")
-        });
+          });
+        } else {
+          this.$vux.toast.show({
+            type: "warn",
+            position: "default",
+            text: this.$t("Amount input error")
+          });
+        }
       }
     }
-  }
-};
+  };
 </script>
 
 <style scoped>
-/*输入金额修改为白色背景*/
-.BG {
-  background: #fff;
-  margin-top: -0.77em;
-  padding: 30px 0;
-}
+  /*输入金额修改为白色背景*/
+  .BG {
+    background: #fff;
+    margin-top: -0.77em;
+    padding: 30px 0;
+  }
 
-/*支付选择*/
-.Payment-options {
-  background: #fff;
-  margin-top: 16px;
-  padding-top: 12px;
-}
+  /*支付选择*/
+  .Payment-options {
+    background: #fff;
+    margin-top: 16px;
+    padding-top: 12px;
+  }
 
-.Payment-options .money-title {
-  margin-bottom: -10px;
-}
+  .Payment-options .money-title {
+    margin-bottom: -10px;
+  }
 
-/*标题*/
-.money-title {
-  margin-left: 10px;
-}
+  /*支付图标间距调整*/
+  .weui-grid {
+    padding: 10px !important;
+  }
 
-/*金额图标*/
-.money {
-  font-size: 38px;
-  margin-bottom: 12px;
-}
+  /*支付图标大小调整*/
+  .weui-grid__icon {
+    width: 47px !important;
+    height: 47px !important;
+  }
 
-/*输入金额框*/
-.money-box {
-  width: 84%;
-  height: 60px;
-  margin-left: 8%;
-  border-bottom: 1px solid #d9d9d9;
-}
+  .UnionPay {
+    width: 66px !important;
+    height: 47px !important;
+  }
 
-/*输入框*/
-.money-input {
-  width: 84%;
-  height: 38px;
-  background: none;
-  border: none;
-  outline: medium;
-  font-size: 38px;
-}
+  /*标题*/
+  .money-title {
+    margin-left: 10px;
+  }
 
-/*间距调整*/
-.weui-cell {
-  padding-left: 0 !important;
-  padding-bottom: 0 !important;
-}
+  /*金额图标*/
+  .money {
+    font-size: 38px;
+    margin-bottom: 12px;
+  }
 
-/*按钮*/
-.general-btn {
-  width: 66%;
-  height: 38px;
-  margin-left: 17%;
-  color: #fff;
-  border: none;
-  font-size: 15px;
-  margin-top: 96px;
-  border-radius: 4px;
-  text-align: center;
-}
+  /*输入金额框*/
+  .money-box {
+    width: 84%;
+    height: 60px;
+    margin-left: 8%;
+    border-bottom: 1px solid #d9d9d9;
+  }
 
-/*删除按钮边框*/
-.weui-btn:after {
-  border: none !important;
-}
+  /*输入框*/
+  .money-input {
+    width: 81%;
+    height: 38px;
+    background: none;
+    border: none;
+    outline: medium;
+    font-size: 38px;
+  }
 
-.channel-item {
-  text-align: center;
-  background-color: #fff;
-}
-.channel-item-selected {
-  background: #fad7d8;
-}
+  /*间距调整*/
+  .weui-cell {
+    padding-left: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  /*按钮*/
+  .general-btn {
+    width: 66%;
+    height: 38px;
+    margin-left: 17%;
+    color: #fff;
+    border: none;
+    font-size: 15px;
+    margin-top: 96px;
+    border-radius: 4px;
+    text-align: center;
+  }
+
+  /*删除按钮边框*/
+  .weui-btn:after {
+    border: none !important;
+  }
+
+  .channel-item {
+    text-align: center;
+    background-color: #fff;
+  }
+
+  .channel-item-selected {
+    background: #fad7d8;
+  }
 </style>
