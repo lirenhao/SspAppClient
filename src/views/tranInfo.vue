@@ -148,7 +148,7 @@ export default {
   /*交易结果状态展示*/
   .traninfo-page .state {
     padding: 12px;
-    font-size: 14px;
+    font-size: 18px;
     text-align: center;
     border-top: 1px dotted #d9d9d9;
   }
