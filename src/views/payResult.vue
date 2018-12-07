@@ -5,12 +5,12 @@
     <div class="pay-result" v-if="result">
       <img slot="icon" src="../assets/success.png" >
       <p>{{$t('Payment is successful')}}</p>
-      <x-button @click.native="goBack">{{$t('Done')}}</x-button>
+      <x-button class="general-btn" @click.native="goBack">{{$t('Done')}}</x-button>
     </div>
     <div class="pay-result" v-else>
       <img slot="icon" src="../assets/failure.png" >
       <p>{{$t('Payment is failed')}}</p>
-      <x-button @click.native="goBack">{{$t('Done')}}</x-button>
+      <x-button class="general-btn" @click.native="goBack">{{$t('Done')}}</x-button>
     </div>
   </div>
 </template>
@@ -56,7 +56,7 @@ export default {
   }
 
   /*交易结果按钮*/
-  .pay-result button {
+  .general-btn {
     width: 66%;
     height: 38px;
     margin-left: 17%;
@@ -68,7 +68,7 @@ export default {
     text-align: center;
   }
 
-  .pay-result .weui-btn:after {
+  .weui-btn:after {
     border: none !important;
   }
 </style>
