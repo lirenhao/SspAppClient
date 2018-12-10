@@ -10,7 +10,7 @@
     <div class="pay-result" v-else>
       <img slot="icon" src="../assets/failure.png" >
       <p>{{$t('Payment is failed')}}</p>
-      <x-button class="general-btn" @click.native="goBack">{{$t('Done')}}</x-button>
+      <x-button class="general-btn" type="primary" @click.native="goBack">{{$t('Done')}}</x-button>
     </div>
   </div>
 </template>
