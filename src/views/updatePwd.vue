@@ -15,7 +15,7 @@
           <x-icon style="fill: #999; margin: 1px 4px 0 0" slot="label" type="android-lock" />
         </x-input>
         <br/>
-        <span>密码必须是大小写数字组合,长度不能小于6位大于32位</span>
+        <span class="Pwd-prompt">密码必须是大小写数字组合,长度不能小于6位大于32位</span>
         <x-button class="general-btn" type="primary" @click.native="goUpdatePwd">{{$t('Confirm the changes')}}</x-button>
     </div>
   </div>
@@ -112,5 +112,12 @@ export default {
   .weui-input {
     height: 2.411765em !important;
   }
-
+  .Pwd-prompt {
+    display: block;
+    width: 100%;
+    text-align: right;
+    margin-right: 12px;
+    font-size: 12px;
+    color: #666;
+  }
 </style>
