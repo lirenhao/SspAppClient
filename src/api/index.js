@@ -2,7 +2,7 @@ import Vue from 'vue'
 import 'es6-promise/auto'
 import axios from 'axios'
 import {
-  base64
+  base64, dateFormat
 } from 'vux'
 import store from '../vuex/store'
 import router from '../router'
@@ -84,13 +84,18 @@ const login = (userName, passWord) => {
     })
     .then(resp => {
       if (resp.status === 200 && resp.data) {
-         // TODO 等待后台改造
         if (passWord !== '111111') {
           window.localStorage.removeItem('isResetPwd')
         }
         return localforage(userName.split('@')[0])
             .setItem('userInfo', resp.data)
             .then(() => router.go(-1))
+            .then(() => pushList(resp.data.termNo, dateFormat(new Date(), 'YYYYMMDD')))
+            .then(resp => {
+              if (resp.status === 200 && resp.data) {
+                store.commit('UPDATE_PUSH_LIST', resp.data)
+              }
+            })
       } else {
         store.commit('UPDATE_LOADING', false)
         Vue.$vux.toast.show({
@@ -128,9 +133,7 @@ const bindPush = () => {
   return axios.post(urls.bindPush, params)
 }
 
-const unBindPush = () => {
-  return axios.delete(urls.unBindPush)
-}
+const unBindPush = () => axios.delete(urls.unBindPush)
 
 const userUpdatePwd = (oldPwd, newPwd) => {
   store.commit('UPDATE_LOADING', true)
@@ -168,6 +171,8 @@ const subMer = () => {
       }
     })
 }
+
+const pushList = (termNo, tranDate) => axios.get(`${urls.pushList}/${termNo}`, {params: {tranDate}})
 
 const tranList = (merNo, tranDate) => {
   store.commit('UPDATE_LOADING', true)
@@ -240,6 +245,7 @@ export default {
   userUpdatePwd,
   subMer,
   tranList,
+  pushList,
   tranInfo,
   qrCodeCreate,
   qrCodeQuery

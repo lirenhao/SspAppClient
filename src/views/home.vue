@@ -104,17 +104,6 @@ export default {
       if (window.localStorage.isResetPwd) {
         this.$router.push("/resetPwd");
       } else {
-        localforage(window.localStorage.merNo)
-          .getItem("trans")
-          .then(trans => {
-            const currDate = dateFormat(new Date(), "YYYYMMDD");
-            this.$store.commit(
-              "UPDATE_PUSH_LIST",
-              trans
-                ? trans.filter(tran => tran.tranDate.slice(0, 8) === currDate)
-                : []
-            );
-          });
         this.$store.commit("UPDATE_TRAN_QUERY", {
           tranDate: dateFormat(new Date(), "YYYY-MM-DD")
         });

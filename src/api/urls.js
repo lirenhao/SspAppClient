@@ -8,6 +8,7 @@ export default {
   userUpdatePwd: CONTEXT + '/user/updatePwd',
   subMer: CONTEXT + '/tran/subMer',
   tranList: CONTEXT + '/tran',
+  pushList: CONTEXT + '/tran/term',
   qrCodeCreate: CONTEXT + '/qrCode/',
   qrCodeQuery: CONTEXT + '/qrCode'
 }
