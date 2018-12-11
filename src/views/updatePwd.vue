@@ -4,7 +4,7 @@
     </x-header>
     <div class="Change-password">
         <br/>
-        <x-input v-model="oldPwd" type="password" :placeholder="$t('Fill in the old password')" 
+        <x-input v-model="oldPwd" type="password" :placeholder="$t('Fill in the old password')"
           required :is-type="validPwd" :min="6" :max="32">
           <x-icon style="fill: #999; margin: 1px 4px 0 0" slot="label" type="android-lock" />
         </x-input>
@@ -91,6 +91,9 @@ export default {
 </script>
 
 <style scoped>
+  .weui-cell:before {
+    border-top: none !important;
+  }
   .general-btn {
     width: 66%;
     height: 38px;
@@ -107,16 +110,16 @@ export default {
   }
   .Change-password .weui-cell {
     font-size: 13px;
-    padding: 6px 15px;
+    padding: 6px 15px 6px 0;
+    border-bottom: 1px solid #D9D9D9;
+    margin-left: 15px;
   }
   .weui-input {
     height: 2.411765em !important;
   }
   .Pwd-prompt {
-    display: block;
-    width: 100%;
-    text-align: right;
-    margin-right: 12px;
+    position: absolute;
+    right: 12px;
     font-size: 12px;
     color: #666;
   }

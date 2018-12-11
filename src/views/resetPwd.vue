@@ -93,7 +93,6 @@ export default {
 <style scoped>
   .weui-cell:before {
     border-top: none !important;
-    border-bottom: 1px solid #D9D9D9;
   }
   .general-btn {
     width: 66%;
@@ -111,16 +110,17 @@ export default {
   }
   .Change-password .weui-cell {
     font-size: 13px;
-    padding: 6px 15px;
+    padding: 6px 15px 6px 0;
+    border-bottom: 1px solid #D9D9D9;
+    margin-left: 15px;
   }
   .weui-input {
     height: 2.411765em !important;
   }
+
   .Pwd-prompt {
-    display: block;
-    width: 100%;
-    text-align: right;
-    margin-right: 12px;
+    position: absolute;
+    right: 12px;
     font-size: 12px;
     color: #666;
   }
