@@ -6,7 +6,7 @@
       <div class="show-title">
         <p>{{$t('Collecting money from customers')}}</p>
       </div>
-      <p class="code-price">{{ccyType.ccySymbol}} {{tranAmt}}</p>
+      <p class="code-price">{{ccyType.ccySymbol}} {{formatAmt(tranAmt)}}</p>
       <qrcode :value="qrCode" type="img" :size="qrCodeSize" class="code-img"></qrcode>
     </div>
     <div class="Payment-type">
@@ -36,6 +36,7 @@
     XDialog,
     TransferDomDirective as TransferDom,
   } from 'vux';
+  import {numberComma} from 'vux';
   import api from '../api';
   import urls from '../api/urls';
 
@@ -90,6 +91,9 @@
     methods: {
       goSetAmt() {
         this.$router.replace({name: 'setAmt', params: {tranAmt: this.tranAmt}});
+      },
+      formatAmt(amt) {
+        return numberComma(amt)
       },
     },
     watch: {

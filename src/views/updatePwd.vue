@@ -4,7 +4,8 @@
     </x-header>
     <div class="Change-password">
         <br/>
-        <x-input v-model="oldPwd" type="password" :placeholder="$t('Fill in the old password')" required>
+        <x-input v-model="oldPwd" type="password" :placeholder="$t('Fill in the old password')" 
+          required :is-type="validPwd" :min="6" :max="32">
           <x-icon style="fill: #999; margin: 1px 4px 0 0" slot="label" type="android-lock" />
         </x-input>
         <x-input v-model="newPwd" type="password" :placeholder="$t('Fill in the new password')" required>
@@ -13,7 +14,8 @@
         <x-input v-model="valiPwd" type="password" :placeholder="$t('Fill in again to confirm')" required>
           <x-icon style="fill: #999; margin: 1px 4px 0 0" slot="label" type="android-lock" />
         </x-input>
-        <x-input> </x-input>
+        <br/>
+        <span>密码必须是大小写数字组合,长度不能小于6位大于32位</span>
         <x-button class="general-btn" type="primary" @click.native="goUpdatePwd">{{$t('Confirm the changes')}}</x-button>
     </div>
   </div>
@@ -47,8 +49,12 @@ export default {
     };
   },
   methods: {
+    validPwd(value){
+      const regu = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,32}$/
+      return regu.test(value) ? {valid: true} : {valid: false, msg: this.$t('Input error')}
+    },
     goUpdatePwd() {
-      if(this.oldPwd === '' || this.newPwd === '' || this.valiPwd === ''){
+      if(!this.validPwd(this.oldPwd).valid || !this.validPwd(this.newPwd).valid || !this.validPwd(this.valiPwd).valid){
         this.$vux.toast.show({
           type: 'warn',
           position: 'default',
