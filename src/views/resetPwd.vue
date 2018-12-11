@@ -6,16 +6,16 @@
       <br/>
       <br/>
       <br/>
-      <x-input v-model="newPwd" type="password" :placeholder="$t('Fill in the new password')" 
+      <x-input v-model="newPwd" type="password" :placeholder="$t('Fill in the new password')"
         required :is-type="validPwd" :min="6" :max="32">
         <x-icon style="fill: #999; margin: 1px 4px 0 0" slot="label" type="android-lock" />
       </x-input>
-      <x-input v-model="valiPwd" type="password" :placeholder="$t('Fill in again to confirm')" 
+      <x-input v-model="valiPwd" type="password" :placeholder="$t('Fill in again to confirm')"
         required :is-type="validPwd" :min="6" :max="32">
         <x-icon style="fill: #999; margin: 1px 4px 0 0" slot="label" type="android-lock" />
       </x-input>
       <br/>
-      <span>密码必须是大小写数字组合,长度不能小于6位大于32位</span>
+      <span class="Pwd-prompt">密码必须是大小写数字组合,长度不能小于6位大于32位</span>
       <x-button class="general-btn" type="primary" @click.native="goUpdatePwd">{{$t('Confirm the changes')}}</x-button>
     </div>
   </div>
@@ -91,6 +91,10 @@ export default {
 </script>
 
 <style scoped>
+  .weui-cell:before {
+    border-top: none !important;
+    border-bottom: 1px solid #D9D9D9;
+  }
   .general-btn {
     width: 66%;
     height: 38px;
@@ -111,6 +115,14 @@ export default {
   }
   .weui-input {
     height: 2.411765em !important;
+  }
+  .Pwd-prompt {
+    display: block;
+    width: 100%;
+    text-align: right;
+    margin-right: 12px;
+    font-size: 12px;
+    color: #666;
   }
 
 </style>

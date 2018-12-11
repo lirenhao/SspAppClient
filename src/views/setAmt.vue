@@ -204,7 +204,7 @@
 
   /*输入框*/
   .money-input {
-    width: 81%;
+    width: 78%;
     height: 38px;
     background: none;
     border: none;
