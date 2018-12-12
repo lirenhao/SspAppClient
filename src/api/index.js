@@ -172,11 +172,28 @@ const subMer = () => {
     })
 }
 
-const pushList = (termNo, tranDate) => axios.get(`${urls.pushList}/${termNo}`, {params: {tranDate}})
+const pushList = (termNo, tranDate) => axios.get(`${urls.termTranList}/${termNo}`, {params: {tranDate}})
 
 const tranList = (merNo, tranDate) => {
   store.commit('UPDATE_LOADING', true)
   return axios.get(`${urls.tranList}/${merNo}`, {params: {tranDate}})
+    .then(resp => {
+      if (resp.status === 200) {
+        return resp.data
+      } else {
+        store.commit('UPDATE_LOADING', false)
+        Vue.$vux.toast.show({
+          type: 'warn',
+          position: 'default',
+          text: Vue.i18n.translate('Transaction query failed')
+        })
+      }
+    })
+}
+
+const termTranList = (termNo, tranDate) => {
+  store.commit('UPDATE_LOADING', true)
+  return axios.get(`${urls.termTranList}/${termNo}`, {params: {tranDate}})
     .then(resp => {
       if (resp.status === 200) {
         return resp.data
@@ -244,8 +261,9 @@ export default {
   unBindPush,
   userUpdatePwd,
   subMer,
-  tranList,
   pushList,
+  tranList,
+  termTranList,
   tranInfo,
   qrCodeCreate,
   qrCodeQuery
