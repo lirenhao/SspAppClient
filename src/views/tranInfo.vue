@@ -62,7 +62,7 @@ export default {
       body.push({label: this.$t('Transaction type'), value: item.tranType})
       body.push({label: this.$t('Merchant order'), value: item.traceNo})
       body.push({label: this.$t('Payment channel'), value: item.channel})
-      body.push({label: this.$t('Transaction date'), value: this.getDateFormat(item.tranDate)})
+      body.push({label: this.$t('Transaction date'), value: this.getDateFormat(item.tranDate + item.tranTime)})
       return body
     },
     getDateFormat(date) {

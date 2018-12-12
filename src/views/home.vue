@@ -22,7 +22,7 @@
         <group
           v-for="(item, index) in pushList"
           :key="index"
-          @click.native="goTranInfo(item.merNo, item.tranNo)"
+          @click.native="goTranInfo(item.merNo, item.traceNo)"
         >
           <cell class="change-cell">
             <x-icon
@@ -31,7 +31,7 @@
               type="android-notifications"
             />
             <div slot="title">{{$t('Transaction reminder')}}</div>
-            <div>{{getDateFormat(item.tranDate)}}</div>
+            <div>{{getDateFormat(item.tranDate + item.tranTime)}}</div>
           </cell>
           <cell>
             <div class="price" slot="title">{{item.tranCry}}{{item.tranAmt}}</div>

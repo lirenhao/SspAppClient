@@ -78,7 +78,7 @@ export default {
       return [
         {
           label: dateFormat(
-            new Date(moment(item.tranDate, 'YYYYMMDDHHmmss')),
+            new Date(moment(item.tranDate + item.tranTime, 'YYYYMMDDHHmmss')),
             'YYYY-MM-DD HH:mm:ss'
           ),
           value: item.respCode === '00' ? this.$t('Success') : this.$t('Failed'),
