@@ -254,6 +254,19 @@ const qrCodeQuery = (queryNo) => {
     })
 }
 
+const setRefund = () => axios.get(urls.setRefund)
+  .then(resp => resp.status === 200 ? Promise.resolve(resp.data) : Promise.reject(resp))
+
+const openRefund = (pwd) => {
+  const params = new URLSearchParams()
+  params.append('pwd', pwd)
+  return axios.post(urls.setRefund, params)
+    .then(resp => resp.status === 200 ? Promise.resolve(resp.data) : Promise.reject(resp))
+}
+
+const closeRefund = () => axios.delete(urls.setRefund)
+  .then(resp => resp.status === 200 ? Promise.resolve(resp.data) : Promise.reject(resp))
+
 export default {
   login,
   userInfo,
@@ -266,5 +279,8 @@ export default {
   termTranList,
   tranInfo,
   qrCodeCreate,
-  qrCodeQuery
+  qrCodeQuery,
+  setRefund,
+  openRefund,
+  closeRefund
 }

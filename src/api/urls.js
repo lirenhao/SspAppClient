@@ -10,5 +10,7 @@ export default {
   tranList: CONTEXT + '/tran',
   termTranList: CONTEXT + '/tran/term',
   qrCodeCreate: CONTEXT + '/qrCode/',
-  qrCodeQuery: CONTEXT + '/qrCode'
+  qrCodeQuery: CONTEXT + '/qrCode',
+  setRefund: CONTEXT + '/user/refund',
+  refund: CONTEXT + '/refund'
 }
