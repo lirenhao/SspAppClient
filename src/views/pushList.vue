@@ -26,7 +26,7 @@
         },
         {
           label: $t('Transaction date'),
-          value: getDateFormat(item.tranDate)
+          value: getDateFormat(item.tranDate + item.tranTime)
         }
       ]"
       ></cell-form-preview>
