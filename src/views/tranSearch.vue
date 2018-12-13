@@ -119,11 +119,11 @@ export default {
       this.getTranList(this.merNos[0], this.termNo, value.replace(/-/g, ""));
     },
     getTranList(merNo, termNo, tranDate) {
-      new Promise(resolve =>
+      const trans =
         termNo === ""
-          ? resolve(api.tranList(merNos, tranDate))
-          : resolve(api.termTranList(termNo, tranDate))
-      )
+          ? api.tranList(merNo, tranDate)
+          : api.termTranList(termNo, tranDate);
+      trans
         .then(data => this.$store.commit("UPDATE_TRAN_LIST", data))
         .then(() => this.$router.replace("/tranList"))
         .catch(console.log);

@@ -38,7 +38,7 @@
             <span>{{ccyType.ccyEname}}</span>
           </cell>
         </div>
-        <div class="mine-list" @click="setRefund">
+        <div class="mine-list" @click="setRefund" v-if="isAdmin">
           <cell :title="$t('Refund settings')" is-link>
             <x-icon
               style="fill: #f06074; margin-right: 8px; margin-left: -16px;"
@@ -120,6 +120,7 @@ export default {
       this.$router.push({ name: "login", params: { isClear: false } });
     } else {
       api.userInfo().then(data => {
+        this.isAdmin = data.roles.indexOf("admin") > -1
         this.merNo = data.merNo;
         this.userName = data.userName;
         this.termNo = data.termNo;
@@ -132,6 +133,7 @@ export default {
       isShowNav: this.$route.meta.isShowNav,
       title: this.$route.meta.title,
       showBack: this.$route.meta.showBack,
+      isAdmin: false,
       merNo: "",
       userName: "",
       termNo: "",
