@@ -26,7 +26,7 @@
         :key="index"
         @click.native="showInfo(item)"
         :class="item.respCode === '00' ? '' : 'list-failure'"
-        :header-value="item.respCode === '00' ? '+' + formatAmt(item.tranAmt) : '-' + formatAmt(item.tranAmt)"
+        :header-value="item.debcreFlag === '1' ? '+' + formatAmt(item.tranAmt) : '-' + formatAmt(item.tranAmt)"
         :header-label="item.channel"
         :body-items="getView(item)"
       ></form-preview>

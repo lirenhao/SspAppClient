@@ -16,7 +16,7 @@
       <div class="PL-titme">{{getDateFormat(item.tranDate)}}</div>
       <div class="PL-money">
         {{$t('Transaction amount')}}
-        <p>{{item.tranCry + ' ' + item.tranAmt}}</p>
+        <p>{{ccyType.ccySymbol}} {{item.tranAmt}}</p>
       </div>
       <cell-form-preview
         :list="[
@@ -64,11 +64,19 @@ export default {
       pushList: state => state.pushList
     })
   },
+  created: function() {
+    if (!window.localStorage.token) {
+      this.$router.push({ name: "login", params: { isClear: false } });
+    } else {
+      api.userInfo().then(data => (this.ccyType = data.ccyType));
+    }
+  },
   data: function() {
     return {
       isShowNav: this.$route.meta.isShowNav,
       title: this.$route.meta.title,
-      showBack: this.$route.meta.showBack
+      showBack: this.$route.meta.showBack,
+      ccyType: {}
     };
   },
   methods: {
