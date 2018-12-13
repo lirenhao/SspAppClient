@@ -90,7 +90,7 @@ const login = (userName, passWord) => {
         return localforage(userName.split('@')[0])
             .setItem('userInfo', resp.data)
             .then(() => router.go(-1))
-            .then(() => pushList(resp.data.termNo, dateFormat(new Date(), 'YYYYMMDD')))
+            .then(() => pushList(resp.data.merNo, resp.data.roles.indexOf('admin') > -1 ? '' : resp.data.termNo, dateFormat(new Date(), 'YYYYMMDD')))
             .then(resp => {
               if (resp.status === 200 && resp.data) {
                 store.commit('UPDATE_PUSH_LIST', resp.data)
