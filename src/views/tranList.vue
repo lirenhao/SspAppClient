@@ -5,19 +5,15 @@
     </x-header>
     <group-title class="Merchant">
       {{tranDate}}
-      <span class="Merchants">{{merNo}}</span>
+      <span class="Merchants">{{termNo === "" ? merNo : termNo}}</span>
     </group-title>
     <div v-if="tranList.length > 0">
       <grid :show-lr-borders="false" :show-vertical-dividers="false">
         <grid-item :label="$t('Count')">
-          <span class="grid-center">
-            {{tranCount}}
-          </span>
+          <span class="grid-center">{{tranCount}}</span>
         </grid-item>
         <grid-item :label="$t('Total')">
-          <span class="grid-center">
-            {{tranTotal}}
-          </span>
+          <span class="grid-center">{{tranTotal}}</span>
         </grid-item>
       </grid>
     </div>
@@ -25,42 +21,58 @@
       <divider>{{$t('Tran no query to data')}}</divider>
     </div>
     <div v-else class="tranlist">
-      <form-preview v-for="(item, index) in tranList" :key="index" @click.native="showInfo(item)"
+      <form-preview
+        v-for="(item, index) in tranList"
+        :key="index"
+        @click.native="showInfo(item)"
         :class="item.respCode === '00' ? '' : 'list-failure'"
-        :header-value="item.respCode === '00' ? '+' + formatAmt(item.tranAmt) : '-' + formatAmt(item.tranAmt)" 
-        :header-label="item.channel" :body-items="getView(item)">
-      </form-preview>
+        :header-value="item.respCode === '00' ? '+' + formatAmt(item.tranAmt) : '-' + formatAmt(item.tranAmt)"
+        :header-label="item.channel"
+        :body-items="getView(item)"
+      ></form-preview>
     </div>
   </div>
 </template>
 <script>
-import {XHeader, GroupTitle, Grid, GridItem, Divider, FormPreview} from 'vux';
-import {mapState} from 'vuex';
-import {dateFormat, numberComma} from 'vux';
-import moment from 'moment';
+import { XHeader, GroupTitle, Grid, GridItem, Divider, FormPreview } from "vux";
+import { mapState } from "vuex";
+import { dateFormat, numberComma } from "vux";
+import moment from "moment";
+import api from "../api";
 
 export default {
-  name: 'tranList',
+  name: "tranList",
   components: {
     XHeader,
     GroupTitle,
     Grid,
     GridItem,
     Divider,
-    FormPreview,
+    FormPreview
   },
   computed: {
     ...mapState({
       tranList: state => state.tranList,
       tranDate: state => state.tranQuery.tranDate,
       merNo: state => state.tranQuery.merNo,
-      tranTotal: state => numberComma(state.tranList.map(t => parseFloat(t.tranAmt)).reduce((a, b) => a + b, 0)),
-      tranCount: state => state.tranList.length,
-    }),
+      tranTotal: state =>
+        numberComma(
+          state.tranList
+            .map(t => parseFloat(t.tranAmt))
+            .reduce((a, b) => a + b, 0)
+        ),
+      tranCount: state => state.tranList.length
+    })
   },
   created: function() {
     if (!window.localStorage.token) {
-      this.$router.push({name: 'login', params: {isClear: false}});
+      this.$router.push({ name: "login", params: { isClear: false } });
+    } else {
+      api
+        .userInfo()
+        .then(data =>
+          data.roles.indexOf("admin") < 0 ? (this.termNo = data.termNo) : ""
+        );
     }
   },
   data: function() {
@@ -68,36 +80,39 @@ export default {
       isShowNav: this.$route.meta.isShowNav,
       title: this.$route.meta.title,
       showBack: this.$route.meta.showBack,
+      termNo: ""
     };
   },
   methods: {
     formatAmt(amt) {
-      return numberComma(amt)
+      return numberComma(amt);
     },
     getView(item) {
       return [
         {
           label: dateFormat(
-            new Date(moment(item.tranDate + item.tranTime, 'YYYYMMDDHHmmss')),
-            'YYYY-MM-DD HH:mm:ss'
+            new Date(moment(item.tranDate + item.tranTime, "YYYYMMDDHHmmss")),
+            "YYYY-MM-DD HH:mm:ss"
           ),
-          value: item.respCode === '00' ? this.$t('Success') : this.$t('Failed'),
-        },
+          value: item.respCode === "00" ? this.$t("Success") : this.$t("Failed")
+        }
       ];
     },
     getTotal() {
-      return numberComma(this.tranList.map(v => parseFloat(v.tranAmt)).reduce((a, b) => a + b, 0))
+      return numberComma(
+        this.tranList.map(v => parseFloat(v.tranAmt)).reduce((a, b) => a + b, 0)
+      );
     },
     showInfo(value) {
-      this.$router.push({name: 'tranInfo', params: {info: value}});
+      this.$router.push({ name: "tranInfo", params: { info: value } });
     },
     goTranSearch() {
       this.$router.replace({
-        name: 'tranSearch',
-        params: {merNo: this.merNo, tranDate: this.tranDate},
+        name: "tranSearch",
+        params: { merNo: this.merNo, tranDate: this.tranDate }
       });
-    },
-  },
+    }
+  }
 };
 </script>
 

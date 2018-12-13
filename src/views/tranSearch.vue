@@ -22,9 +22,7 @@
         v-model="merNos"
         :show="showMerSelect"
       ></popup-picker>
-      <cell v-else :title="$t('Terminal number')">
-        <span>{{termNo}}</span>
-      </cell>
+      <cell v-else :title="$t('Terminal number')" :value="termNo"/>
     </group>
   </div>
 </template>
@@ -35,6 +33,7 @@ import {
   PopupPicker,
   Picker,
   Group,
+  Cell,
   Radio,
   XButton
 } from "vux";
@@ -48,6 +47,7 @@ export default {
     PopupPicker,
     Picker,
     Group,
+    Cell,
     Radio,
     XButton
   },
@@ -76,7 +76,7 @@ export default {
       api
         .userInfo()
         .then(data => {
-          if (data.roles.indexOf("admin") != -1) {
+          if (data.roles.indexOf("admin") > 0) {
             this.isAdmin = true;
             return true;
           } else {
@@ -109,24 +109,20 @@ export default {
   },
   methods: {
     goTranList() {
-      new Promise(resolve =>
-        this.termNo
-          ? resolve(
-              api.tranList(this.merNos[0], this.tranDate.replace(/-/g, ""))
-            )
-          : resolve(
-              api.termTranList(this.termNo, this.tranDate.replace(/-/g, ""))
-            )
-      )
-        .then(data => this.$store.commit("UPDATE_TRAN_LIST", data))
-        .then(() => this.$router.replace("/tranList"))
-        .catch(console.log);
+      this.getTranList(
+        this.merNos[0],
+        this.termNo,
+        this.tranDate.replace(/-/g, "")
+      );
     },
     selectTranDate(value) {
+      this.getTranList(this.merNos[0], this.termNo, value.replace(/-/g, ""));
+    },
+    getTranList(merNo, termNo, tranDate) {
       new Promise(resolve =>
-        this.termNo
-          ? resolve(api.tranList(this.merNos[0], value.replace(/-/g, "")))
-          : resolve(api.termTranList(this.merNos[0], value.replace(/-/g, "")))
+        termNo === ""
+          ? resolve(api.tranList(merNos, tranDate))
+          : resolve(api.termTranList(termNo, tranDate))
       )
         .then(data => this.$store.commit("UPDATE_TRAN_LIST", data))
         .then(() => this.$router.replace("/tranList"))
