@@ -11,7 +11,8 @@
         <p>{{$t('Total Transaction for Today')}}</p>
         <p>{{ccyType.ccySymbol}} {{pushTotal}}</p>
         <P>
-          <span>{{pushCount}}</span>{{$t('Transactions')}}
+          <span>{{pushCount}}</span>
+          {{$t('Transactions')}}
         </P>
       </div>
 
@@ -92,8 +93,15 @@ export default {
     ...mapState({
       // 只显示3条
       pushList: state => state.pushList.filter((item, index) => index < 3),
-      pushTotal: state => numberComma(state.pushList.map(t => parseFloat(t.tranAmt)).reduce((a, b) => a + b, 0)),
-      pushCount: state => state.pushList.length,
+      pushTotal: state =>
+        numberComma(
+          state.pushList
+            .map(t =>
+              parseFloat((t.debcreFlag === "1" ? "+" : "-") + t.tranAmt)
+            )
+            .reduce((a, b) => a + b, 0)
+        ),
+      pushCount: state => state.pushList.length
     })
   },
   created: function() {
@@ -215,7 +223,7 @@ export default {
 /*价格设置*/
 .price {
   font-size: 20px;
-  color: #B6002A;
+  color: #b6002a;
 }
 
 /*交易通知边框删除*/
@@ -242,12 +250,12 @@ export default {
   border-radius: 0 0 12px 12px;
 }
 
-  /*无更多信息*/
-  .vux-divider {
-    width: 78%;
-    margin-left: 11%;
-    font-size: 13px !important;
-    color: #bbb !important;
-    margin-top: 90px;
-  }
+/*无更多信息*/
+.vux-divider {
+  width: 78%;
+  margin-left: 11%;
+  font-size: 13px !important;
+  color: #bbb !important;
+  margin-top: 90px;
+}
 </style>

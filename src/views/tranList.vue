@@ -58,7 +58,9 @@ export default {
       tranTotal: state =>
         numberComma(
           state.tranList
-            .map(t => parseFloat(t.tranAmt))
+            .map(t =>
+              parseFloat((t.debcreFlag === "1" ? "+" : "-") + t.tranAmt)
+            )
             .reduce((a, b) => a + b, 0)
         ),
       tranCount: state => state.tranList.length
