@@ -71,7 +71,7 @@ export default {
       api
         .userInfo()
         .then(data =>
-          data.roles.indexOf("admin") < 0 ? (this.termNo = data.termNo) : ""
+          data.roles.indexOf("admin") > -1 ? "" : (this.termNo = data.termNo)
         );
     }
   },

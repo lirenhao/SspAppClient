@@ -76,7 +76,7 @@ export default {
       api
         .userInfo()
         .then(data => {
-          if (data.roles.indexOf("admin") > 0) {
+          if (data.roles.indexOf("admin") > -1) {
             this.isAdmin = true;
             return true;
           } else {

@@ -26,7 +26,8 @@ export default {
     const tranDate = dateFormat(new Date(), 'YYYYMMDD')
     console.log('Resume: Event' + tranDate)
     if (window.localStorage.token) {
-      api.userInfo().then(data => api.pushList(data.termNo, tranDate))
+      api.userInfo()
+        .then(data => api.pushList(data.merNo, data.roles.indexOf('admin') > -1 ? '' : data.termNo, tranDate)
         .then(resp => {
           if (resp.status === 200 && resp.data) {
             store.commit('UPDATE_PUSH_LIST', resp.data)

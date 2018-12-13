@@ -172,7 +172,7 @@ const subMer = () => {
     })
 }
 
-const pushList = (termNo, tranDate) => axios.get(`${urls.termTranList}/${termNo}`, {params: {tranDate}})
+const pushList = (merNo, termNo, tranDate) => axios.get(termNo === '' ? `${urls.tranList}/${merNo}` : `${urls.termTranList}/${termNo}`, {params: {tranDate}})
 
 const tranList = (merNo, tranDate) => {
   store.commit('UPDATE_LOADING', true)
