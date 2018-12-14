@@ -99,7 +99,7 @@ export default {
             .map(t =>
               parseFloat((t.debcreFlag === "1" ? "+" : "-") + t.tranAmt)
             )
-            .reduce((a, b) => a + b, 0)
+            .reduce((a, b) => a + b, 0).toFixed(2)
         ),
       pushCount: state => state.pushList.length
     })

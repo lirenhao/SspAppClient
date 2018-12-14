@@ -24,7 +24,7 @@
       <form-preview
         v-for="(item, index) in tranList"
         :key="index"
-        @click.native="showInfo(item)"
+        @click.native="goTranInfo(item.merNo, item.tranNo)"
         :class="item.respCode === '00' ? '' : 'list-failure'"
         :header-value="item.debcreFlag === '1' ? '+' + formatAmt(item.tranAmt) : '-' + formatAmt(item.tranAmt)"
         :header-label="item.channel"
@@ -61,7 +61,7 @@ export default {
             .map(t =>
               parseFloat((t.debcreFlag === "1" ? "+" : "-") + t.tranAmt)
             )
-            .reduce((a, b) => a + b, 0)
+            .reduce((a, b) => a + b, 0).toFixed(2)
         ),
       tranCount: state => state.tranList.length
     })
@@ -100,13 +100,21 @@ export default {
         }
       ];
     },
-    getTotal() {
-      return numberComma(
-        this.tranList.map(v => parseFloat(v.tranAmt)).reduce((a, b) => a + b, 0)
-      );
-    },
-    showInfo(value) {
-      this.$router.push({ name: "tranInfo", params: { info: value } });
+    goTranInfo(merNo, tranNo) {
+      api.tranInfo(merNo, tranNo).then(info => {
+        if (info) {
+          this.$router.push({
+            name: "tranInfo",
+            params: { info }
+          });
+        } else {
+          this.$vux.toast.show({
+            type: "warn",
+            position: "default",
+            text: this.$t("Transaction query failed")
+          });
+        }
+      });
     },
     goTranSearch() {
       this.$router.replace({
