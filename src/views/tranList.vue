@@ -1,5 +1,5 @@
 <template>
-  <view-box body-padding-top="46px">
+  <view-box body-padding-top="46px" ref="viewBox">
     <x-header
       slot="header"
       style="width:100%;position:absolute;left:0;top:0;z-index:100;"
@@ -103,6 +103,9 @@ export default {
   methods: {
     formatAmt(amt) {
       return numberComma(parseFloat(amt).toFixed(2));
+    },
+    goViewTop() {
+      this.$refs.viewBox.scrollTo(0)
     },
     getView(item) {
       return [
