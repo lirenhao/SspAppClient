@@ -1,6 +1,11 @@
 <template>
-  <div style="height:100%;">
-    <x-header :title="$t(title)" :left-options="{showBack}">
+  <view-box body-padding-top="46px">
+    <x-header
+      slot="header"
+      style="width:100%;position:absolute;left:0;top:0;z-index:100;"
+      :title="$t(title)"
+      :left-options="{showBack}"
+    >
       <div slot="right" @click="goTranSearch">{{$t('Tran search select')}}</div>
     </x-header>
     <group-title class="Merchant">
@@ -31,10 +36,18 @@
         :body-items="getView(item)"
       ></form-preview>
     </div>
-  </div>
+  </view-box>
 </template>
 <script>
-import { XHeader, GroupTitle, Grid, GridItem, Divider, FormPreview } from "vux";
+import {
+  ViewBox,
+  XHeader,
+  GroupTitle,
+  Grid,
+  GridItem,
+  Divider,
+  FormPreview
+} from "vux";
 import { mapState } from "vuex";
 import { dateFormat, numberComma } from "vux";
 import moment from "moment";
@@ -43,6 +56,7 @@ import api from "../api";
 export default {
   name: "tranList",
   components: {
+    ViewBox,
     XHeader,
     GroupTitle,
     Grid,
