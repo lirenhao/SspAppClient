@@ -272,7 +272,7 @@ const refund = (amt, bankLsNo, pwd) => {
   params.append('amt', amt)
   params.append('bankLsNo', bankLsNo)
   params.append('pwd', pwd)
-  return axios.post(urls.refund)
+  return axios.post(urls.refund, params)
     .then(resp => resp.status === 200 ? Promise.resolve(resp.data) : Promise.reject(resp))
 }
 

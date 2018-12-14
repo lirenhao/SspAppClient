@@ -15,6 +15,9 @@
         <x-icon style="margin: 0 4px -7px 0; fill: red; " type="close-circled"/>
         {{$t('Transaction failed')}}
       </div>
+      <div class="state" v-if="'125'.indexOf(info.tranFlag) < 0">
+        <x-button @click.native="showRefundPwd = true">Refund</x-button>
+      </div>
     </group>
     <div v-transfer-dom>
       <confirm
@@ -34,6 +37,7 @@ import {
   Group,
   Cell,
   CellFormPreview,
+  XButton,
   Confirm,
   TransferDomDirective as TransferDom
 } from "vux";
@@ -51,6 +55,7 @@ export default {
     Group,
     Cell,
     CellFormPreview,
+    XButton,
     Confirm
   },
   props: {
@@ -101,15 +106,43 @@ export default {
       else return dateFormat(new Date(), "YYYY-MM-DD HH:mm:ss");
     },
     goRefund(pwd) {
-      if (pwd) {
+      const regu = /^.{6,32}$/
+      if (regu.test(pwd)) {
         api
           .refund(this.info.tranAmt, this.info.bankLsNo, pwd)
-          .then(console.log)
-          .catch(console.log);
+          .then(data => {
+            if (data.respCode === "00") {
+              this.$vux.alert.show({
+                title: this.$t("Refund success"),
+                content: this.$t("Return has been accepted")
+              });
+            } else {
+              this.$vux.alert.show({
+                title: this.$t("Refund faild"),
+                content: data.respMsg
+              });
+            }
+          })
+          .catch(e => {
+            console.log("Refund faild", e);
+            switch (err.status) {
+              case 500:
+                this.$vux.alert.show({
+                  title: this.$t("Refund faild"),
+                  content: this.$t("Refund password error")
+                });
+                break;
+              default:
+                this.$vux.alert.show({
+                  title: this.$t("Refund faild"),
+                  content: this.$t("Please check the network status")
+                });
+            }
+          });
       } else {
         this.$vux.alert.show({
           title: this.$t("Refund warning"),
-          content: this.$t("Refund password is requised")
+          content: this.$t("Refund password error")
         });
       }
     }
