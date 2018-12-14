@@ -10,7 +10,7 @@
       class="pushlist-content"
       v-for="(item, index) in pushList"
       :key="index"
-      @click.native="goTranInfo(item.merNo, item.tranNo)"
+      @click.native="goTranInfo(item.merNo, item.traceNo)"
     >
       <div class="PL-title">{{$t('Transaction reminder')}}</div>
       <div class="PL-titme">{{getDateFormat(item.tranDate)}}</div>
@@ -88,8 +88,8 @@ export default {
         );
       else return dateFormat(new Date(), "YYYY-MM-DD HH:mm:ss");
     },
-    goTranInfo(merNo, tranNo) {
-      api.tranInfo(merNo, tranNo).then(info => {
+    goTranInfo(merNo, traceNo) {
+      api.tranInfo(merNo, traceNo).then(info => {
         if (info) {
           this.$router.push({
             name: "tranInfo",

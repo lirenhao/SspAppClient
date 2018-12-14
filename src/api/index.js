@@ -208,9 +208,9 @@ const termTranList = (termNo, tranDate) => {
     })
 }
 
-const tranInfo = (merNo, tranNo) => {
+const tranInfo = (merNo, traceNo) => {
   store.commit('UPDATE_LOADING', true)
-  return axios.get(`${urls.tranList}/${merNo}/${tranNo}`)
+  return axios.get(`${urls.tranList}/${merNo}/${traceNo}`)
     .then(resp => {
       if (resp.status === 200) {
         return resp.data
@@ -267,6 +267,15 @@ const openRefund = (pwd) => {
 const closeRefund = () => axios.delete(urls.setRefund)
   .then(resp => resp.status === 200 ? Promise.resolve(resp.data) : Promise.reject(resp))
 
+const refund = (amt, bankLsNo, pwd) => {
+  const params = new URLSearchParams()
+  params.append('amt', amt)
+  params.append('bankLsNo', bankLsNo)
+  params.append('pwd', pwd)
+  return axios.post(urls.refund)
+    .then(resp => resp.status === 200 ? Promise.resolve(resp.data) : Promise.reject(resp))
+}
+
 export default {
   login,
   userInfo,
@@ -282,5 +291,6 @@ export default {
   qrCodeQuery,
   setRefund,
   openRefund,
-  closeRefund
+  closeRefund,
+  refund
 }

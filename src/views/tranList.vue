@@ -24,7 +24,7 @@
       <form-preview
         v-for="(item, index) in tranList"
         :key="index"
-        @click.native="goTranInfo(item.merNo, item.tranNo)"
+        @click.native="goTranInfo(item.merNo, item.traceNo)"
         :class="item.respCode === '00' ? '' : 'list-failure'"
         :header-value="item.debcreFlag === '1' ? '+' + formatAmt(item.tranAmt) : '-' + formatAmt(item.tranAmt)"
         :header-label="item.channel"
@@ -61,7 +61,8 @@ export default {
             .map(t =>
               parseFloat((t.debcreFlag === "1" ? "+" : "-") + t.tranAmt)
             )
-            .reduce((a, b) => a + b, 0).toFixed(2)
+            .reduce((a, b) => a + b, 0)
+            .toFixed(2)
         ),
       tranCount: state => state.tranList.length
     })
@@ -87,7 +88,7 @@ export default {
   },
   methods: {
     formatAmt(amt) {
-      return numberComma(amt);
+      return numberComma(parseFloat(amt).toFixed(2));
     },
     getView(item) {
       return [
@@ -100,8 +101,8 @@ export default {
         }
       ];
     },
-    goTranInfo(merNo, tranNo) {
-      api.tranInfo(merNo, tranNo).then(info => {
+    goTranInfo(merNo, traceNo) {
+      api.tranInfo(merNo, traceNo).then(info => {
         if (info) {
           this.$router.push({
             name: "tranInfo",

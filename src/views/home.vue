@@ -35,7 +35,7 @@
             <div>{{getDateFormat(item.tranDate + item.tranTime)}}</div>
           </cell>
           <cell>
-            <div class="price" slot="title">{{item.tranAmt}}</div>
+            <div class="price" slot="title">{{formatAmt(item.tranAmt)}}</div>
             <div class="trade">{{item.channel}}</div>
           </cell>
         </group>
@@ -128,6 +128,9 @@ export default {
     };
   },
   methods: {
+    formatAmt(amt) {
+      return numberComma(parseFloat(amt).toFixed(2));
+    },
     getDateFormat(date) {
       if (date && date.length === 14)
         return dateFormat(
@@ -145,8 +148,8 @@ export default {
     goUserInfo() {
       this.$router.push("/userInfo");
     },
-    goTranInfo(merNo, tranNo) {
-      api.tranInfo(merNo, tranNo).then(info => {
+    goTranInfo(merNo, traceNo) {
+      api.tranInfo(merNo, traceNo).then(info => {
         if (info) {
           this.$router.push({
             name: "tranInfo",
