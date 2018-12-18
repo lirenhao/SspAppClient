@@ -44,7 +44,7 @@ import {
   CellFormPreview
 } from "vux";
 import { mapState } from "vuex";
-import { dateFormat } from "vux";
+import { dateFormat, numberComma } from "vux";
 import moment from "moment";
 import api from "../api";
 
