@@ -16,7 +16,7 @@
       <div class="PL-titme">{{getDateFormat(item.tranDate)}}</div>
       <div class="PL-money">
         {{$t('Transaction amount')}}
-        <p>{{ccyType.ccySymbol}} {{item.tranAmt}}</p>
+        <p>{{ccyType.ccySymbol}} {{formatAmt(item.tranAmt)}}</p>
       </div>
       <cell-form-preview
         :list="[
@@ -80,6 +80,9 @@ export default {
     };
   },
   methods: {
+    formatAmt(amt) {
+      return numberComma(parseFloat(amt).toFixed(2));
+    },
     getDateFormat(date) {
       if (date && date.length === 14)
         return dateFormat(
