@@ -15,7 +15,7 @@
         <x-icon style="margin: 0 4px -7px 0; fill: red; " type="close-circled"/>
         {{$t('Transaction failed')}}
       </div>
-      <div class="state" v-if="'125'.indexOf(info.tranFlag) < 0">
+      <div class="state" v-if="'125'.indexOf(info.tranFlag) < 0 && info.debcreFlag === '1'">
         <x-button class="refund-btn" @click.native="showRefundPwd = true">Refund</x-button>
       </div>
       <div class="state" v-if="'1' === info.tranFlag">
