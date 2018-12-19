@@ -36,7 +36,7 @@ const store = new Vuex.Store({
       state.pushList = status
     },
     ADD_PUSH_LIST (state, status) {
-      if (state.pushList.filter(v => status.traceNo === v.traceNo).length === 0) {
+      if (state.pushList.filter(v => status.lsId === v.lsId).length === 0) {
         state.pushList = [status, ...state.pushList]
       }
     }

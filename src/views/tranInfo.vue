@@ -3,7 +3,7 @@
     <x-header :title="$t(title)" :left-options="{showBack}"></x-header>
     <group class="traninfo-page">
       <div class="TI-money">
-        {{ccyType.ccySymbol}} {{formatAmt(info.tranAmt)}}
+        {{ccyType.ccySymbol}} {{formatAmt((info.debcreFlag === "1" ? "+" : "-") + info.tranAmt)}}
         <p>{{info.merName}}</p>
       </div>
       <cell-form-preview :list="parserItem(info)"></cell-form-preview>
@@ -16,7 +16,16 @@
         {{$t('Transaction failed')}}
       </div>
       <div class="state" v-if="'125'.indexOf(info.tranFlag) < 0">
-        <x-button @click.native="showRefundPwd = true">Refund</x-button>
+        <x-button class="refund-btn" @click.native="showRefundPwd = true">Refund</x-button>
+      </div>
+      <div class="state" v-if="'1' === info.tranFlag">
+        {{$t('已撤销')}}
+      </div>
+      <div class="state" v-if="'2' === info.tranFlag">
+        {{$t('已退货')}}
+      </div>
+      <div class="state" v-if="'5' === info.tranFlag">
+        {{$t('退货中')}}
       </div>
     </group>
     <div v-transfer-dom>
@@ -109,17 +118,19 @@ export default {
       const regu = /^.{6,32}$/
       if (regu.test(pwd)) {
         api
-          .refund(this.info.tranAmt, this.info.bankLsNo, pwd)
+          .refund(this.info.tranAmt, this.info.lsId, pwd)
           .then(data => {
             if (data.respCode === "00") {
               this.$vux.alert.show({
                 title: this.$t("Refund success"),
-                content: this.$t("Return has been accepted")
+                content: this.$t("Return has been accepted"),
+                onHide: () => this.$router.back()
               });
             } else {
               this.$vux.alert.show({
                 title: this.$t("Refund faild"),
-                content: data.respMsg
+                content: data.respMsg,
+                onHide: () => this.$router.back()
               });
             }
           })
@@ -135,7 +146,8 @@ export default {
               default:
                 this.$vux.alert.show({
                   title: this.$t("Refund faild"),
-                  content: this.$t("Please check the network status")
+                  content: this.$t("Please check the network status"),
+                  onHide: () => this.$router.back()
                 });
             }
           });
@@ -224,4 +236,9 @@ export default {
   text-align: center;
   border-top: 1px dotted #d9d9d9;
 }
+.refund-btn {
+  margin-top: 80px;
+
+}
+
 </style>

@@ -267,10 +267,10 @@ const openRefund = (pwd) => {
 const closeRefund = () => axios.delete(urls.setRefund)
   .then(resp => resp.status === 200 ? Promise.resolve(resp.data) : Promise.reject(resp))
 
-const refund = (amt, bankLsNo, pwd) => {
+const refund = (amt, lsId, pwd) => {
   const params = new URLSearchParams()
   params.append('amt', amt)
-  params.append('bankLsNo', bankLsNo)
+  params.append('bankLsNo', lsId)
   params.append('pwd', pwd)
   return axios.post(urls.refund, params)
     .then(resp => resp.status === 200 ? Promise.resolve(resp.data) : Promise.reject(resp))

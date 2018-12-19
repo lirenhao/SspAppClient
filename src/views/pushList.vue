@@ -10,13 +10,13 @@
       class="pushlist-content"
       v-for="(item, index) in pushList"
       :key="index"
-      @click.native="goTranInfo(item.merNo, item.traceNo)"
+      @click.native="goTranInfo(item.merNo, item.lsId)"
     >
       <div class="PL-title">{{$t('Transaction reminder')}}</div>
       <div class="PL-titme">{{getDateFormat(item.tranDate)}}</div>
       <div class="PL-money">
         {{$t('Transaction amount')}}
-        <p>{{ccyType.ccySymbol}} {{formatAmt(item.tranAmt)}}</p>
+        <p>{{ccyType.ccySymbol}} {{formatAmt((item.debcreFlag === "1" ? "+" : "-") + item.tranAmt)}}</p>
       </div>
       <cell-form-preview
         :list="[
@@ -91,8 +91,8 @@ export default {
         );
       else return dateFormat(new Date(), "YYYY-MM-DD HH:mm:ss");
     },
-    goTranInfo(merNo, traceNo) {
-      api.tranInfo(merNo, traceNo).then(info => {
+    goTranInfo(merNo, lsId) {
+      api.tranInfo(merNo, lsId).then(info => {
         if (info) {
           this.$router.push({
             name: "tranInfo",

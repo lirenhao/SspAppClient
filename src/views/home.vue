@@ -23,7 +23,7 @@
         <group
           v-for="(item, index) in pushList"
           :key="index"
-          @click.native="goTranInfo(item.merNo, item.traceNo)"
+          @click.native="goTranInfo(item.merNo, item.lsId)"
         >
           <cell class="change-cell">
             <x-icon
@@ -35,7 +35,7 @@
             <div>{{getDateFormat(item.tranDate + item.tranTime)}}</div>
           </cell>
           <cell>
-            <div class="price" slot="title">{{formatAmt(item.tranAmt)}}</div>
+            <div class="price" slot="title">{{formatAmt((item.debcreFlag === "1" ? "+" : "-") + item.tranAmt)}}</div>
             <div class="trade">{{item.channel}}</div>
           </cell>
         </group>
@@ -148,8 +148,8 @@ export default {
     goUserInfo() {
       this.$router.push("/userInfo");
     },
-    goTranInfo(merNo, traceNo) {
-      api.tranInfo(merNo, traceNo).then(info => {
+    goTranInfo(merNo, lsId) {
+      api.tranInfo(merNo, lsId).then(info => {
         if (info) {
           this.$router.push({
             name: "tranInfo",
