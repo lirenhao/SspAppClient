@@ -106,7 +106,7 @@
     },
     methods: {
       validAmount(amt) {
-        const regex = /^[1-9]\d*(((,\d{3}){1})?(\.\d{0,2})?)$/;
+        const regex = /^\d+(\.\d{1,2})?$/;
         if (regex.test(amt)) {
           return {valid: true};
         }
