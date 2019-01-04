@@ -1,4 +1,5 @@
 const CONTEXT = 'https://eccst.sg.ebs.bankofchina.com/sgecm/app'
+// const CONTEXT = 'https://ecc.sg.ebs.bankofchina.com/bcfescore/app'
 
 export default {
   token: CONTEXT + '/oauth/token',
