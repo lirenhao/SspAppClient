@@ -10,9 +10,7 @@
     </div>
     <div class="Payment-type">
       {{$t('Payment channel')}}:
-      <span v-if="channel==='01'">UnionPay</span>
-      <span v-if="channel==='02'">WeChat</span>
-      <span v-if="channel==='03'">Alipay</span>
+      <span>{{channelName}}</span>
     </div>
     <div class="code-time">
       <span>
@@ -68,6 +66,18 @@ export default {
       api.userInfo().then(data => {
         this.ccyType = data.ccyType;
       });
+      switch (this.channel) {
+        case "01":
+          this.channelName = "UnionPay";
+          break;
+        case "02":
+          this.channelName = "WeChat";
+          break;
+        case "03":
+          this.channelName = "Alipay";
+          break;
+        default:
+      }
       this.timer = setInterval(() => {
         if (this.timecunt > 0) {
           this.timecunt--;
@@ -86,7 +96,8 @@ export default {
       timecunt: this.timeout,
       showTimeout: false,
       request: true,
-      qrCodeSize: document.documentElement.clientWidth * 0.75
+      qrCodeSize: document.documentElement.clientWidth * 0.75,
+      channelName: ""
     };
   },
   methods: {
@@ -98,7 +109,7 @@ export default {
     },
     formatAmt(amt) {
       return numberComma(parseFloat(amt).toFixed(2));
-    },
+    }
   },
   watch: {
     timecunt: function(newValue, oldValue) {
@@ -116,14 +127,14 @@ export default {
               if (resp.status === 200 && resp.data && resp.data.respCode) {
                 if (resp.data.respCode === "success") {
                   this.$store.commit("ADD_PUSH_LIST", {
-                    lsId: resp.data.tranNo,
+                    lsId: resp.data.lsId,
                     merNo: window.localStorage.merNo,
                     tranAmt: resp.data.tranAmt,
                     tranCry: resp.data.tranCry,
-                    tranDate: dateFormat(new Date(), 'YYYYMMDD'),
-                    tranTime: dateFormat(new Date(), 'HHmmss'),
-                    debcreFlag: '1',
-                    channel: this.channel
+                    tranDate: dateFormat(new Date(), "YYYYMMDD"),
+                    tranTime: dateFormat(new Date(), "HHmmss"),
+                    debcreFlag: "1",
+                    channel: this.channelName
                   });
                   return this.$router.replace({
                     name: "payResult",
