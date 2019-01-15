@@ -1,42 +1,36 @@
 {
   "project_info": {
-    "project_number": "528963455123",
-    "firebase_url": "https://push-yada.firebaseio.com",
-    "project_id": "push-yada",
-    "storage_bucket": "push-yada.appspot.com"
+      "project_number": "411911286913",
+      "firebase_url": "https://ssppushnotification-ce76e.firebaseio.com",
+      "project_id": "ssppushnotification-ce76e",
+      "storage_bucket": "ssppushnotification-ce76e.appspot.com"
   },
-  "client": [
-    {
+  "client": [{
       "client_info": {
-        "mobilesdk_app_id": "1:528963455123:android:38c41105e2742797",
-        "android_client_info": {
-          "package_name": "com.yada.sg.ssp"
-        }
+          "mobilesdk_app_id": "1:411911286913:android:38c41105e2742797",
+          "android_client_info": {
+              "package_name": "com.yada.sg.ssp"
+          }
       },
-      "oauth_client": [
-        {
-          "client_id": "528963455123-qpdhbugep0o8o1mga914d72esvou8reo.apps.googleusercontent.com",
+      "oauth_client": [{
+          "client_id": "411911286913-kafsgcpd9au2n76mn4hv8eprr09antop.apps.googleusercontent.com",
           "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyCGt1_m0tvRWwgDV9sZQOOEVFYgznGmMA0"
-        }
-      ],
+      }],
+      "api_key": [{
+          "current_key": "AIzaSyAachYLtA8hEkAF_rm-5ztCd4-T3GlWQl0"
+      }],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 2
-        }
+          "analytics_service": {
+              "status": 1
+          },
+          "appinvite_service": {
+              "status": 1,
+              "other_platform_oauth_client": []
+          },
+          "ads_service": {
+              "status": 2
+          }
       }
-    }
-  ],
+  }],
   "configuration_version": "1"
 }
