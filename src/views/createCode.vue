@@ -143,7 +143,7 @@ export default {
                 } else if (resp.data.respCode === "failed") {
                   return this.$router.replace({
                     name: "payResult",
-                    params: { result: false }
+                    params: { result: false, failMsg: resp.data.respMsg }
                   });
                 }
               }

@@ -9,7 +9,7 @@
     </div>
     <div class="pay-result" v-else>
       <img slot="icon" src="../assets/failure.png" >
-      <p>{{$t('Payment is failed')}}</p>
+      <p>{{$t('Payment is failed')}}<br/>{{failMsg}}</p>
       <x-button class="general-btn" type="primary" @click.native="goBack">{{$t('Done')}}</x-button>
     </div>
   </div>
@@ -25,6 +25,7 @@ export default {
   },
   props: {
     result: Boolean,
+    failMsg: String,
   },
   data: function() {
     return {
