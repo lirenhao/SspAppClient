@@ -1,0 +1,11 @@
+{
+  "android": {
+      "release": {
+          "keystore": "./ssp.keystore",
+          "storePassword": "Password2010",
+          "alias": "ssp",
+          "password" : "Password2010",
+          "keystoreType": "jks"
+      }
+  }
+}
