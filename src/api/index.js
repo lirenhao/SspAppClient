@@ -2,7 +2,8 @@ import Vue from 'vue'
 import 'es6-promise/auto'
 import axios from 'axios'
 import {
-  base64, dateFormat
+  base64,
+  dateFormat
 } from 'vux'
 import store from '../vuex/store'
 import router from '../router'
@@ -33,7 +34,9 @@ axios.interceptors.response.use(
         case 401:
           router.push({
             name: 'login',
-            params: {isClear: false}
+            params: {
+              isClear: false
+            }
           })
           break
         case 403:
@@ -64,63 +67,61 @@ const login = (userName, passWord) => {
     },
     params: {
       grant_type: 'client_credentials'
+    },
+    timeout: 60000
+  }).then(resp => {
+    if (resp.status === 200) {
+      window.localStorage.setItem('token', resp.data.access_token)
+      window.localStorage.setItem('merNo', userName.split('@')[0])
+      window.localStorage.setItem('isResetPwd', true)
+      // TODO 如何保证登录成功
+      return bindPush()
+    } else {
+      store.commit('UPDATE_LOADING', false)
+      Vue.$vux.toast.show({
+        type: 'warn',
+        position: 'default',
+        text: resp.status
+      })
+    }
+  }).then(resp => {
+    if (resp.status === 200 && resp.data) {
+      if (passWord !== '111111') {
+        window.localStorage.removeItem('isResetPwd')
+      }
+      return localforage(userName.split('@')[0])
+        .setItem('userInfo', resp.data)
+        .then(() => router.go(-1))
+        .then(() => pushList(resp.data.merNo, resp.data.roles.indexOf('admin') > -1 ? '' : resp.data.termNo, dateFormat(new Date(), 'YYYYMMDD')))
+        .then(resp => {
+          if (resp.status === 200 && resp.data) {
+            store.commit('UPDATE_PUSH_LIST', resp.data)
+          }
+        })
+    } else {
+      store.commit('UPDATE_LOADING', false)
+      Vue.$vux.toast.show({
+        type: 'warn',
+        position: 'default',
+        text: resp.status
+      })
+    }
+  }).catch(err => {
+    store.commit('UPDATE_LOADING', false)
+    if (err.response && err.response.status === 401) {
+      Vue.$vux.toast.show({
+        type: 'warn',
+        position: 'default',
+        text: Vue.i18n.translate('Login validation failed')
+      })
+    } else {
+      Vue.$vux.toast.show({
+        type: 'warn',
+        position: 'default',
+        text: Vue.i18n.translate('Login exception')
+      })
     }
   })
-    .then(resp => {
-      if (resp.status === 200) {
-        window.localStorage.setItem('token', resp.data.access_token)
-        window.localStorage.setItem('merNo', userName.split('@')[0])
-        window.localStorage.setItem('isResetPwd', true)
-        // TODO 如何保证登录成功
-        return bindPush()
-      } else {
-        store.commit('UPDATE_LOADING', false)
-        Vue.$vux.toast.show({
-          type: 'warn',
-          position: 'default',
-          text: resp.status
-        })
-      }
-    })
-    .then(resp => {
-      if (resp.status === 200 && resp.data) {
-        if (passWord !== '111111') {
-          window.localStorage.removeItem('isResetPwd')
-        }
-        return localforage(userName.split('@')[0])
-            .setItem('userInfo', resp.data)
-            .then(() => router.go(-1))
-            .then(() => pushList(resp.data.merNo, resp.data.roles.indexOf('admin') > -1 ? '' : resp.data.termNo, dateFormat(new Date(), 'YYYYMMDD')))
-            .then(resp => {
-              if (resp.status === 200 && resp.data) {
-                store.commit('UPDATE_PUSH_LIST', resp.data)
-              }
-            })
-      } else {
-        store.commit('UPDATE_LOADING', false)
-        Vue.$vux.toast.show({
-          type: 'warn',
-          position: 'default',
-          text: resp.status
-        })
-      }
-    })
-    .catch(err => {
-      store.commit('UPDATE_LOADING', false)
-      if (err.response && err.response.status === 401) {
-        Vue.$vux.toast.show({
-          type: 'warn',
-          position: 'default',
-          text: Vue.i18n.translate('Login validation failed')
-        })
-      } else {
-        Vue.$vux.toast.show({
-          type: 'warn',
-          position: 'default',
-          text: Vue.i18n.translate('Login exception')
-        })
-      }
-    })
 }
 
 const userInfo = () => localforage(window.localStorage.merNo).getItem('userInfo')
@@ -172,40 +173,50 @@ const subMer = () => {
     })
 }
 
-const pushList = (merNo, termNo, tranDate) => axios.get(termNo === '' ? `${urls.tranList}/${merNo}` : `${urls.termTranList}/${termNo}`, {params: {tranDate}})
+const pushList = (merNo, termNo, tranDate) => axios.get(termNo === '' ? `${urls.tranList}/${merNo}` : `${urls.termTranList}/${termNo}`, {
+  params: {
+    tranDate
+  }
+})
 
 const tranList = (merNo, tranDate) => {
   store.commit('UPDATE_LOADING', true)
-  return axios.get(`${urls.tranList}/${merNo}`, {params: {tranDate}})
-    .then(resp => {
-      if (resp.status === 200) {
-        return resp.data
-      } else {
-        store.commit('UPDATE_LOADING', false)
-        Vue.$vux.toast.show({
-          type: 'warn',
-          position: 'default',
-          text: Vue.i18n.translate('Transaction query failed')
-        })
-      }
-    })
+  return axios.get(`${urls.tranList}/${merNo}`, {
+    params: {
+      tranDate
+    }
+  }).then(resp => {
+    if (resp.status === 200) {
+      return resp.data
+    } else {
+      store.commit('UPDATE_LOADING', false)
+      Vue.$vux.toast.show({
+        type: 'warn',
+        position: 'default',
+        text: Vue.i18n.translate('Transaction query failed')
+      })
+    }
+  })
 }
 
 const termTranList = (termNo, tranDate) => {
   store.commit('UPDATE_LOADING', true)
-  return axios.get(`${urls.termTranList}/${termNo}`, {params: {tranDate}})
-    .then(resp => {
-      if (resp.status === 200) {
-        return resp.data
-      } else {
-        store.commit('UPDATE_LOADING', false)
-        Vue.$vux.toast.show({
-          type: 'warn',
-          position: 'default',
-          text: Vue.i18n.translate('Transaction query failed')
-        })
-      }
-    })
+  return axios.get(`${urls.termTranList}/${termNo}`, {
+    params: {
+      tranDate
+    }
+  }).then(resp => {
+    if (resp.status === 200) {
+      return resp.data
+    } else {
+      store.commit('UPDATE_LOADING', false)
+      Vue.$vux.toast.show({
+        type: 'warn',
+        position: 'default',
+        text: Vue.i18n.translate('Transaction query failed')
+      })
+    }
+  })
 }
 
 const tranInfo = (merNo, traceNo) => {
