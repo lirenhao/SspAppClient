@@ -8,25 +8,19 @@
       </div>
       <cell-form-preview :list="parserItem(info)"></cell-form-preview>
       <div class="state" v-if="info.respCode === '00'">
-        <x-icon style="margin-bottom: -7px; fill: #0BB20C; " type="android-checkmark-circle"/>
+        <x-icon style="margin-bottom: -7px; fill: #0BB20C; " type="android-checkmark-circle" />
         {{$t('Transaction successful')}}
       </div>
       <div class="state" v-else>
-        <x-icon style="margin: 0 4px -7px 0; fill: red; " type="close-circled"/>
+        <x-icon style="margin: 0 4px -7px 0; fill: red; " type="close-circled" />
         {{$t('Transaction failed')}}
       </div>
       <div class="state" v-if="'125'.indexOf(info.tranFlag) < 0 && info.debcreFlag === '1'">
         <x-button class="refund-btn" @click.native="showRefundPwd = true">Refund</x-button>
       </div>
-      <div class="state" v-if="'1' === info.tranFlag">
-        {{$t('已撤销')}}
-      </div>
-      <div class="state" v-if="'2' === info.tranFlag">
-        {{$t('已退货')}}
-      </div>
-      <div class="state" v-if="'5' === info.tranFlag">
-        {{$t('退货中')}}
-      </div>
+      <div class="state" v-if="'1' === info.tranFlag">{{$t('Voided')}}</div>
+      <div class="state" v-if="'2' === info.tranFlag">{{$t('Refunded')}}</div>
+      <div class="state" v-if="'5' === info.tranFlag">{{$t('Refunding')}}</div>
     </group>
     <div v-transfer-dom>
       <confirm
@@ -115,7 +109,7 @@ export default {
       else return dateFormat(new Date(), "YYYY-MM-DD HH:mm:ss");
     },
     goRefund(pwd) {
-      const regu = /^.{6,32}$/
+      const regu = /^.{6,32}$/;
       if (regu.test(pwd)) {
         api
           .refund(this.info.tranAmt, this.info.lsId, pwd)
@@ -238,7 +232,5 @@ export default {
 }
 .refund-btn {
   margin-top: 80px;
-
 }
-
 </style>

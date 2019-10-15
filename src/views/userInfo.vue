@@ -3,8 +3,8 @@
     <x-header :title="$t(title)" :left-options="{showBack}"></x-header>
     <div>
       <div class="vux-demo">
-        <img slot="icon" src="../assets/mine.png" class="mine">
-        <img slot="icon" src="../assets/merchants.png" class="merchants">
+        <img slot="icon" src="../assets/mine.png" class="mine" />
+        <img slot="icon" src="../assets/merchants.png" class="merchants" />
         <h4>{{userName}}</h4>
       </div>
       <div>
@@ -120,7 +120,7 @@ export default {
       this.$router.push({ name: "login", params: { isClear: false } });
     } else {
       api.userInfo().then(data => {
-        this.isAdmin = data.roles.indexOf("admin") > -1
+        this.isAdmin = data.roles.indexOf("admin") > -1;
         this.merNo = data.merNo;
         this.userName = data.userName;
         this.termNo = data.termNo;
@@ -169,8 +169,11 @@ export default {
         });
     },
     setRefund() {
-      api.setRefund()
-        .then(data => data ? this.showCloseRefund = true : this.showOpenRefund = true)
+      api
+        .setRefund()
+        .then(data =>
+          data ? (this.showCloseRefund = true) : (this.showOpenRefund = true)
+        )
         .catch(e => {
           if (!e.response || e.response.status !== 401) {
             this.$vux.alert.show({
@@ -178,12 +181,13 @@ export default {
               content: this.$t("Please check the network status")
             });
           }
-        })
+        });
     },
     openRefund(value) {
-      api.openRefund(value)
+      api
+        .openRefund(value)
         .then(data => {
-          if(data) {
+          if (data) {
             this.$vux.alert.show({
               title: this.$t("Refund settings success"),
               content: this.$t("Refund has been opened")
@@ -196,37 +200,40 @@ export default {
           }
         })
         .catch(e => {
-          console.log("Open refund", e)
+          console.log("Open refund", e);
           if (!e.response || e.response.status !== 401) {
             this.$vux.alert.show({
               title: this.$t("Refund settings faild"),
               content: this.$t("Please check the network status")
             });
           }
-        })
+        });
     },
     closeRefund() {
-      api.closeRefund().then(data => {
-        if(data) {
-          this.$vux.alert.show({
-            title: this.$t("Refund settings success"),
-            content: this.$t("Refund has been closed")
-          });
-        } else {
-          this.$vux.alert.show({
-            title: this.$t("Refund settings faild"),
-            content: this.$t("Please check the network status")
-          });
-        }
-      }).catch(e => {
-        console.log("Close refund", e)
-        if (!e.response || e.response.status !== 401) {
-          this.$vux.alert.show({
-            title: this.$t("Refund settings faild"),
-            content: e.message
-          });
-        }
-      })
+      api
+        .closeRefund()
+        .then(data => {
+          if (data) {
+            this.$vux.alert.show({
+              title: this.$t("Refund settings success"),
+              content: this.$t("Refund has been closed")
+            });
+          } else {
+            this.$vux.alert.show({
+              title: this.$t("Refund settings faild"),
+              content: this.$t("Please check the network status")
+            });
+          }
+        })
+        .catch(e => {
+          console.log("Close refund", e);
+          if (!e.response || e.response.status !== 401) {
+            this.$vux.alert.show({
+              title: this.$t("Refund settings faild"),
+              content: e.message
+            });
+          }
+        });
     },
     updatePwd() {
       this.$router.push({ name: "updatePwd" });

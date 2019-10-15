@@ -55,17 +55,17 @@ en:
   Login out faild: Log Out Unsuccessful
   Collecting money from customers: Please Collect Payment From Customer
   Countdown: Countdown
-  Amount input error: Amount Input Error 
+  Amount input error: Amount Input Error
   Transaction reminder: Transaction Reminder
   Load more: Loading
   Success: Successful
   Failed: Unsuccessful
-  Done: Done 
-  The payment code has expired: QR Code Expired 
+  Done: Done
+  The payment code has expired: QR Code Expired
   New generation again: Regenerate QR Code
   Payment is successful: Transaction Sucessful
   Payment is failed: Transaction Unsucessful
-  Transaction amount: Transaction Amount 
+  Transaction amount: Transaction Amount
   Transaction date: Transaction Date
   Transaction type: Transaction Type
   Merchant order: Merchant Order No.
@@ -74,7 +74,7 @@ en:
   Transaction failed: Transaction Unsucessful
   Today: Today
   Selected: Selected
-  Select Merchant: Select a Merchant 
+  Select Merchant: Select a Merchant
   Please try again later: Please Try Again Later
   Please check the network status: Please Check The Network Status
   Total: Total
@@ -83,6 +83,10 @@ en:
   Total Transaction for Today: Total Transaction for Today
   Transactions: Transactions
   Help Alert: Contact your Relationship Manager,send an email to msu_sg@mail.bank-of-singapore.com or call 64129779 for help during office hours.
+  Voided: Voided
+  Refunded: Refunded
+  Refunding: Refunding
+  Password Format Error Message: Password must contain both Upper and Lower case, and must be between 6-32 characters
 zh-CN:
   home: 首页
   userInfo: 个人中心
@@ -168,3 +172,7 @@ zh-CN:
   Total Transaction for Today: 今日总收入
   Transactions: 笔
   Help Alert: 请联系我们
+  Voided: 已撤销
+  Refunded: 已退货
+  Refunding: 退货中
+  Password Format Error Message: 密码必须是大小写数字组合,长度不能小于6位大于32位

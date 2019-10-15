@@ -1,40 +1,57 @@
 <template>
   <div>
-    <x-header :title="$t(title)" :left-options="{showBack}">
-    </x-header>
+    <x-header :title="$t(title)" :left-options="{showBack}"></x-header>
     <div class="Change-password">
-      <br/>
-      <br/>
-      <br/>
-      <x-input v-model="newPwd" type="password" :placeholder="$t('Fill in the new password')"
-        required :is-type="validPwd" :min="6" :max="32">
+      <br />
+      <br />
+      <br />
+      <x-input
+        v-model="newPwd"
+        type="password"
+        :placeholder="$t('Fill in the new password')"
+        required
+        :is-type="validPwd"
+        :min="6"
+        :max="32"
+      >
         <x-icon style="fill: #999; margin: 1px 4px 0 0" slot="label" type="android-lock" />
       </x-input>
-      <x-input v-model="valiPwd" type="password" :placeholder="$t('Fill in again to confirm')"
-        required :is-type="validPwd" :min="6" :max="32">
+      <x-input
+        v-model="valiPwd"
+        type="password"
+        :placeholder="$t('Fill in again to confirm')"
+        required
+        :is-type="validPwd"
+        :min="6"
+        :max="32"
+      >
         <x-icon style="fill: #999; margin: 1px 4px 0 0" slot="label" type="android-lock" />
       </x-input>
-      <br/>
-      <span class="Pwd-prompt">密码必须是大小写数字组合,长度不能小于6位大于32位</span>
-      <x-button class="general-btn" type="primary" @click.native="goUpdatePwd">{{$t('Confirm the changes')}}</x-button>
+      <br />
+      <span class="Pwd-prompt">{{$t('Password Format Error Message')}}</span>
+      <x-button
+        class="general-btn"
+        type="primary"
+        @click.native="goUpdatePwd"
+      >{{$t('Confirm the changes')}}</x-button>
     </div>
   </div>
 </template>
 <script>
-import {XHeader, Group, XInput, XButton} from 'vux';
-import api from '../api';
+import { XHeader, Group, XInput, XButton } from "vux";
+import api from "../api";
 
 export default {
-  name: 'updatePwd',
+  name: "updatePwd",
   components: {
     XHeader,
     Group,
     XInput,
-    XButton,
+    XButton
   },
   created: function() {
     if (!window.localStorage.token) {
-      this.$router.push({name: 'login', params: {isClear: false}});
+      this.$router.push({ name: "login", params: { isClear: false } });
     }
   },
   data: function() {
@@ -43,86 +60,89 @@ export default {
       isShowNav: this.$route.meta.isShowNav,
       title: this.$route.meta.title,
       showBack: this.$route.meta.showBack,
-      newPwd: '',
-      valiPwd: '',
+      newPwd: "",
+      valiPwd: ""
     };
   },
   methods: {
-    validPwd(value){
-      const regu = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,32}$/
-      return regu.test(value) ? {valid: true} : {valid: false, msg: this.$t('Input error')}
+    validPwd(value) {
+      const regu = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,32}$/;
+      return regu.test(value)
+        ? { valid: true }
+        : { valid: false, msg: this.$t("Input error") };
     },
     goUpdatePwd() {
-      if(!this.validPwd(this.newPwd).valid || !this.validPwd(this.valiPwd).valid){
+      if (
+        !this.validPwd(this.newPwd).valid ||
+        !this.validPwd(this.valiPwd).valid
+      ) {
         this.$vux.toast.show({
-          type: 'warn',
-          position: 'default',
-          text: this.$t('Input error')
-        })
-        return
+          type: "warn",
+          position: "default",
+          text: this.$t("Input error")
+        });
+        return;
       }
       if (this.newPwd === this.valiPwd)
-        api.userUpdatePwd('111111', this.newPwd)
-          .then(data => {
-            if(data) {
-              this.$vux.toast.show({
-                type: 'success',
-                position: 'default',
-                text: this.$t('Password modified successfully')
-              })
-              window.localStorage.removeItem('isResetPwd')
-              this.$router.go(-1)
-            } else
-              this.$vux.toast.show({
-                type: 'warn',
-                position: 'default',
-                text: this.$t('Old password failed')
-              })
-          })
+        api.userUpdatePwd("111111", this.newPwd).then(data => {
+          if (data) {
+            this.$vux.toast.show({
+              type: "success",
+              position: "default",
+              text: this.$t("Password modified successfully")
+            });
+            window.localStorage.removeItem("isResetPwd");
+            this.$router.go(-1);
+          } else
+            this.$vux.toast.show({
+              type: "warn",
+              position: "default",
+              text: this.$t("Old password failed")
+            });
+        });
       else
         this.$vux.toast.show({
-          type: 'warn',
-          position: 'default',
-          text: this.$t('New password two input mismatch')
-        })
-    },
-  },
+          type: "warn",
+          position: "default",
+          text: this.$t("New password two input mismatch")
+        });
+    }
+  }
 };
 </script>
 
 <style scoped>
-  .weui-cell:before {
-    border-top: none !important;
-  }
-  .general-btn {
-    width: 66%;
-    height: 38px;
-    margin-left: 17%;
-    color: #fff;
-    border: none;
-    font-size: 15px;
-    margin-top: 56px;
-    border-radius: 4px;
-    text-align: center;
-  }
-  .weui-btn:after {
-    border: none !important;
-  }
-  .Change-password .weui-cell {
-    font-size: 13px;
-    padding: 6px 15px 6px 0;
-    border-bottom: 1px solid #D9D9D9;
-    margin-left: 15px;
-  }
-  .weui-input {
-    height: 2.411765em !important;
-  }
+.weui-cell:before {
+  border-top: none !important;
+}
+.general-btn {
+  width: 66%;
+  height: 38px;
+  margin-left: 17%;
+  color: #fff;
+  border: none;
+  font-size: 15px;
+  margin-top: 56px;
+  border-radius: 4px;
+  text-align: center;
+}
+.weui-btn:after {
+  border: none !important;
+}
+.Change-password .weui-cell {
+  font-size: 13px;
+  padding: 6px 15px 6px 0;
+  border-bottom: 1px solid #d9d9d9;
+  margin-left: 15px;
+}
+.weui-input {
+  height: 2.411765em !important;
+}
 
-  .Pwd-prompt {
-    position: absolute;
-    right: 12px;
-    font-size: 12px;
-    color: #666;
-  }
-
+.Pwd-prompt {
+  position: absolute;
+  right: 12px;
+  font-size: 12px;
+  color: #666;
+}
 </style>
