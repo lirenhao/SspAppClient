@@ -143,6 +143,7 @@ export default {
   height: 2.411765em !important;
 }
 .Pwd-prompt {
+  padding: 0 30px;
   position: absolute;
   right: 12px;
   font-size: 12px;
