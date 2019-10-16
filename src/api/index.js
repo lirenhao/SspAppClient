@@ -68,7 +68,7 @@ const login = (userName, passWord) => {
     params: {
       grant_type: 'client_credentials'
     },
-    timeout: 60000
+    timeout: 15000
   }).then(resp => {
     if (resp.status === 200) {
       window.localStorage.setItem('token', resp.data.access_token)
