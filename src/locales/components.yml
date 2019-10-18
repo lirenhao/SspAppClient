@@ -4,7 +4,7 @@ en:
   updatePwd: Change Password
   tranSearch: Transaction Search
   tranList: Transaction List
-  tranInfo: Transcation Details
+  tranInfo: Transaction Details
   setAmt: Set Txn Amount
   createCode: Payment QR Code
   payResult: Transaction Result
