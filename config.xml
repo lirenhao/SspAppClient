@@ -45,6 +45,6 @@
     <plugin name="phonegap-plugin-push" spec="^2.2.3" />
     <plugin name="cordova-plugin-sqlite-2" spec="^1.0.5" />
     <plugin name="cordova-plugin-splashscreen" spec="^5.0.2" />
-    <engine name="android" spec="^7.1.1" />
+    <engine name="android" spec="^8.1.0" />
     <engine name="ios" spec="^5.0.1" />
 </widget>
